@@ -9,14 +9,14 @@ import {
   Button,
   Container,
   Divider,
-  Drawer,
+  SwipeableDrawer,
   Link,
   List,
   ListItemIcon,
   Paper,
   Typography,
 } from "@mui/material"
-import { useEffect, useState } from "react"
+import { SyntheticEvent, useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { Subscription } from "rxjs"
@@ -203,7 +203,7 @@ function Sidebar() {
   )
 
   return (
-    <Drawer
+    <SwipeableDrawer
       anchor="left"
       open={open}
       PaperProps={{
@@ -213,9 +213,11 @@ function Sidebar() {
         },
       }}
       variant="temporary"
+      onClose={() => handleExit()}
+      onOpen={() => handleExit()}
     >
       {content}
-    </Drawer>
+    </SwipeableDrawer>
   )
 }
 
