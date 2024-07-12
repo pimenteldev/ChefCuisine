@@ -1,1 +1,1 @@
-export * from './CardProduct.styled.component'
+export * from "./CardProduct.styled.component"

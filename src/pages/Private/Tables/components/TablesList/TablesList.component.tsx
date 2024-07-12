@@ -1,13 +1,13 @@
-import {Table} from '@/models'
-import {CardTable, CardTableGrid, useGetAllTables} from '@/pages'
-import {AppStore} from '@/redux/store'
-import {Alert} from '@mui/material'
-import {useEffect} from 'react'
-import {useSelector} from 'react-redux'
+import { Table } from "@/models"
+import { CardTableGrid, CardTable, useGetAllTables } from "@/pages"
+import { AppStore } from "@/redux/store"
+import { Alert } from "@mui/material"
+import { useEffect } from "react"
+import { useSelector } from "react-redux"
 
 function TablesList() {
-  const {callToEndPointsAndDispatchs} = useGetAllTables()
-  const {tables} = useSelector((store: AppStore) => store.tablesViewState)
+  const { callToEndPointsAndDispatchs } = useGetAllTables()
+  const { tables } = useSelector((store: AppStore) => store.tablesViewState)
 
   useEffect(() => {
     callToEndPointsAndDispatchs()

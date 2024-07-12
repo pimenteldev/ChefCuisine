@@ -1,1 +1,1 @@
-export * from "./TablesList.component"
+export { default as TablesList } from "./TablesList.component"
