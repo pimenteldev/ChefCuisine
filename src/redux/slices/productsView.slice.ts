@@ -1,4 +1,4 @@
-import {ItemProduct, Product, ProductsViewApi} from '@/models'
+import {ProductsViewApi} from '@/models'
 import {createSlice} from '@reduxjs/toolkit'
 
 export const productsKey = 'products'

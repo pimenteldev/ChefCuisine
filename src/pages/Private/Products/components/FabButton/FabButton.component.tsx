@@ -11,21 +11,19 @@ const FabButton = () => {
   }
 
   return (
-    <>
-      <Fab
-        size="medium"
-        color="primary"
-        aria-label="Agregar"
-        sx={{
-          position: 'fixed',
-          right: 20,
-          bottom: 20,
-        }}
-        onClick={handleClick}
-      >
-        <AddIcon />
-      </Fab>
-    </>
+    <Fab
+      size="medium"
+      color="primary"
+      aria-label="Agregar"
+      sx={{
+        position: 'fixed',
+        right: 20,
+        bottom: 20,
+      }}
+      onClick={handleClick}
+    >
+      <AddIcon />
+    </Fab>
   )
 }
 

@@ -3,18 +3,12 @@ import styled from 'styled-components'
 export interface HomeUserInterface {}
 
 const HomeUser: React.FC<HomeUserInterface> = () => {
-  return (
-    <HomeUserStyle>
-      HomeUser
-      <br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a
-    </HomeUserStyle>
-  )
+  return <HomeUserStyle>Ruta protegida por Guard para el Rol de Usuario</HomeUserStyle>
 }
 
 export const HomeUserStyle = styled.div`
   position: relative;
   width: 30%;
-  background-color: blue;
   padding: 20px;
 `
 

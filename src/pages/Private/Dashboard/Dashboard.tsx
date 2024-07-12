@@ -2,7 +2,6 @@ import {Container, Typography} from '@mui/material'
 
 function Dashboard() {
   return (
-    <>
       <Container>
         <Typography
           variant="h5"
@@ -16,7 +15,6 @@ function Dashboard() {
 
         <Typography variant="h6">Controla y administra tu negocio desde aquí</Typography>
       </Container>
-    </>
   )
 }
 

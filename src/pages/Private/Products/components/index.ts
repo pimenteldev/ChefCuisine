@@ -1,4 +1,5 @@
 export * from './AddProduct'
+export * from './CardProduct'
 export * from './DialogContainer'
 export * from './FabButton'
 export * from './ModifyProduct'

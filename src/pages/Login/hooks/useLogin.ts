@@ -1,16 +1,16 @@
-import {snackbarOpenSubject$} from '@/components/CustomSnackBar/CustomSnackBar.component'
-import {clearLocalStorage} from '@/helpers'
-import {BackendUser} from '@/models'
-import {UserKey, createUser, resetUser} from '@/redux/slices/user.slice'
-import {AppStore} from '@/redux/store'
-import {PrivateRoutes, PublicRoutes} from '@/routes'
-import {AlertColor} from '@mui/material'
-import {useEffect} from 'react'
-import {Resolver, useForm} from 'react-hook-form'
-import {useDispatch, useSelector} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
-import {FormValues} from '../models'
-import {authService} from '../services'
+import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar.component"
+import { clearLocalStorage } from "@/helpers"
+import { BackendUser } from "@/models"
+import { UserKey, createUser, resetUser } from "@/redux/slices/user.slice"
+import { AppStore } from "@/redux/store"
+import { PrivateRoutes, PublicRoutes } from "@/routes"
+import { AlertColor } from "@mui/material"
+import { useEffect } from "react"
+import { Resolver, useForm } from "react-hook-form"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { FormValues } from "../models"
+import { authService } from "../services"
 
 function useLogin() {
   const dispatch = useDispatch()
@@ -28,7 +28,7 @@ function useLogin() {
 
   useEffect(() => {
     if (userState.userName) {
-      navigate(`/${PrivateRoutes.PRIVATE}`, {replace: true})
+      navigate(`/${PrivateRoutes.PRIVATE}`, { replace: true })
     }
   }, [userState])
 
@@ -38,15 +38,15 @@ function useLogin() {
       errors: !values.user_id
         ? {
             user_id: {
-              type: 'required',
-              message: 'El campo Usuario es Requerido',
+              type: "required",
+              message: "El campo Usuario es Requerido",
             },
           }
         : !values.user_psw
         ? {
             user_psw: {
-              type: 'required',
-              message: 'El campo Contraseña es Requerido',
+              type: "required",
+              message: "El campo Contraseña es Requerido",
             },
           }
         : {},
@@ -56,8 +56,8 @@ function useLogin() {
   const {
     register,
     handleSubmit,
-    formState: {errors},
-  } = useForm<FormValues>({resolver})
+    formState: { errors },
+  } = useForm<FormValues>({ mode: "onChange", resolver })
 
   useEffect(() => {
     clearLocalStorage(UserKey)
@@ -65,37 +65,21 @@ function useLogin() {
     navigate(`/${PublicRoutes.LOGIN}`)
   }, [])
 
-  const adminMock: BackendUser = {
-    user_id: 'admin',
-    user_name: '',
-    user_photo: '',
-    user_psw: '1234',
-    user_rol: '',
-  }
-
-  const userMock: BackendUser = {
-    user_id: 'user',
-    user_name: '',
-    user_photo: '',
-    user_psw: '1234',
-    user_rol: '',
-  }
-
   const onSubmit = handleSubmit((data: Partial<BackendUser>) => {
     try {
       authService(data).then((response) => {
         response.userId
-          ? handleSnackBar(`Bienvenido al Sistema Phoenix`, 'success')
-          : handleSnackBar(`Usuario o Contraseña Invalidos`, 'error')
+          ? handleSnackBar(`Bienvenido al Sistema Phoenix`, "success")
+          : handleSnackBar(`Usuario o Contraseña Invalidos`, "error")
         dispatch(createUser(response))
       })
     } catch (error) {
       console.log(error)
-      handleSnackBar('Ups, algo ha salió mal. Intenta Nuevamente', 'error')
+      handleSnackBar("Ups, algo ha salió mal. Intenta Nuevamente", "error")
     }
   })
 
-  return {register, errors, onSubmit}
+  return { register, errors, onSubmit }
 }
 
 export default useLogin

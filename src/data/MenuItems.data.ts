@@ -11,7 +11,7 @@ export const menuItemsAdmin = [
   },
   {
     title: 'Mesas',
-    path: '/mesas',
+    path: `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.MESAS}`,
   },
   {
     title: 'Pedidos',
@@ -54,7 +54,7 @@ export const menuItemsUser = [
   },
   {
     title: 'Mesas',
-    path: '/mesas',
+    path: `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.MESAS}`,
   },
   {
     title: 'Pedidos',

@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import {Subscription} from 'rxjs'
 import {SubjectManager} from '@/models'
-import {AlertColor, Snackbar, Alert} from '@mui/material'
+import {Alert, AlertColor, Snackbar} from '@mui/material'
+import {useEffect, useState} from 'react'
+import {Subscription} from 'rxjs'
 
 interface AlertProps {
   open: boolean
@@ -55,7 +55,8 @@ const CustomSnackBar = () => {
       <Alert
         onClose={handleClose}
         severity={state.severity}
-        sx={{width: '100%'}}
+        variant="filled"
+        sx={{width: '100%', color: 'white'}}
       >
         {state.message}
       </Alert>

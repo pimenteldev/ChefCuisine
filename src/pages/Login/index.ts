@@ -1,5 +1,8 @@
 export {default as Login} from './Login'
 export * from './adapters'
+export * from './components/LoginCardFigure'
+export * from './components/LoginCardTitle'
 export * from './hooks'
 export * from './models'
 export * from './services'
+export * from './styled-components'

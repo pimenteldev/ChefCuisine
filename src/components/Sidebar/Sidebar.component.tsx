@@ -1,8 +1,8 @@
-import {menuItemsAdmin, menuItemsUser} from '@/data'
-import {Roles, SubjectManager} from '@/models'
-import {AppStore} from '@/redux/store'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import ArrowRightIcon from '@mui/icons-material/ArrowCircleRight'
+import { menuItemsAdmin, menuItemsUser } from "@/data"
+import { Roles, SubjectManager } from "@/models"
+import { AppStore } from "@/redux/store"
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"
+import ArrowRightIcon from "@mui/icons-material/ArrowCircleRight"
 import {
   Avatar,
   Box,
@@ -15,11 +15,11 @@ import {
   ListItemIcon,
   Paper,
   Typography,
-} from '@mui/material'
-import {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
-import {Subscription} from 'rxjs'
+} from "@mui/material"
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { Subscription } from "rxjs"
 
 export const sidebarOpenSubject$ = new SubjectManager<boolean>()
 export const sidebarCloseSubject$ = new SubjectManager<boolean>()
@@ -34,8 +34,12 @@ function Sidebar() {
   let closeSubject$ = new Subscription()
 
   useEffect(() => {
-    openSubject$ = sidebarOpenSubject$.getSubject.subscribe(() => handleClickOpen())
-    closeSubject$ = sidebarCloseSubject$.getSubject.subscribe(() => handleClose())
+    openSubject$ = sidebarOpenSubject$.getSubject.subscribe(() =>
+      handleClickOpen()
+    )
+    closeSubject$ = sidebarCloseSubject$.getSubject.subscribe(() =>
+      handleClose()
+    )
   }, [])
 
   const handleClickOpen = () => {
@@ -53,20 +57,20 @@ function Sidebar() {
   const handleNavigate = (itemPath: string) => {
     handleClose()
     setTimeout(() => {
-      navigate(itemPath, {replace: true})
+      navigate(itemPath, { replace: true })
     }, 400)
   }
 
   const content = (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
       }}
     >
       <Box>
-        <Box sx={{p: 1}}>
+        <Box sx={{ p: 1 }}>
           <Button
             onClick={() => handleExit()}
             size="medium"
@@ -80,18 +84,18 @@ function Sidebar() {
           elevation={0}
           sx={{
             p: 2,
-            bgcolor: 'primary.main',
-            color: 'primary.contrastText',
+            bgcolor: "primary.main",
+            color: "primary.contrastText",
             borderRadius: 0,
-            textAlign: 'center',
+            textAlign: "center",
           }}
         >
           <Container
             component="div"
             sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <Avatar
@@ -103,10 +107,7 @@ function Sidebar() {
               }}
             />
           </Container>
-          <Typography
-            variant="overline"
-            gutterBottom
-          >
+          <Typography variant="overline" gutterBottom>
             {userState.userName}
           </Typography>
         </Paper>
@@ -119,8 +120,8 @@ function Sidebar() {
       >
         <List
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           {userState.rol === Roles.ADMIN &&
@@ -131,11 +132,11 @@ function Sidebar() {
                 underline="hover"
                 onClick={() => handleNavigate(item.path)}
                 sx={{
-                  cursor: 'pointer',
+                  cursor: "pointer",
                 }}
               >
                 <ListItemIcon>
-                  <ArrowRightIcon color="primary" />
+                  <ArrowRightIcon color="primary" sx={{ mr: 1 }} />
                   {item.title}
                 </ListItemIcon>
               </Link>
@@ -148,7 +149,7 @@ function Sidebar() {
                 underline="hover"
                 onClick={() => handleNavigate(item.path)}
                 sx={{
-                  cursor: 'pointer',
+                  cursor: "pointer",
                 }}
               >
                 <ListItemIcon>
@@ -165,29 +166,23 @@ function Sidebar() {
         sx={{
           px: 2,
           py: 3,
-          textAlign: 'center',
+          textAlign: "center",
         }}
       >
-        <Typography
-          color="grey.700"
-          variant="subtitle2"
-        >
+        <Typography color="grey.700" variant="subtitle2">
           Opciones
         </Typography>
-        <Typography
-          color="grey.500"
-          variant="body2"
-        >
+        <Typography color="grey.500" variant="body2">
           Phoenix APP
         </Typography>
         <Box
           sx={{
-            display: 'flex',
+            display: "flex",
             mt: 2,
-            mx: 'auto',
-            width: '160px',
-            '& img': {
-              width: '100%',
+            mx: "auto",
+            width: "160px",
+            "& img": {
+              width: "100%",
             },
           }}
         ></Box>
@@ -201,7 +196,7 @@ function Sidebar() {
       open={open}
       PaperProps={{
         sx: {
-          backgroundColor: 'neutral.900',
+          backgroundColor: "neutral.900",
           width: 280,
         },
       }}

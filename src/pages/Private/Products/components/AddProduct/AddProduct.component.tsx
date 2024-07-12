@@ -33,16 +33,16 @@ const AddProduct: React.FC<AddProductInterface> = () => {
     file,
     handleChange,
     handleClick,
-    handleSelect,
     handleRemove,
+    handleSelect,
     handleSubmit,
-    setValue,
-    items,
     items_categories,
+    items,
     listItems,
     onSubmit,
     register,
     setFile,
+    setValue,
     units,
   } = useAddProduct()
 
@@ -119,49 +119,49 @@ const AddProduct: React.FC<AddProductInterface> = () => {
                 )}
               </Box>
               <CustomInput
-                register={register}
-                name="product_photo"
+                disabled={false}
                 errors={errors}
-                type="file"
-                required={true}
-                label=""
                 inputProps={{onChange: (e: any) => setFile(e.target.files[0])}}
-                disabled={false}
+                label=""
+                name="product_photo"
+                register={register}
+                required={true}
+                type="file"
               />
               <CustomInput
-                register={register}
-                name="product_name"
+                disabled={false}
                 errors={errors}
+                inputProps={{}}
                 label="Nombre"
-                type="text"
+                name="product_name"
+                register={register}
                 required={true}
-                inputProps={{}}
-                disabled={false}
+                type="text"
               />
               <CustomInput
-                register={register}
-                name="product_description"
-                errors={errors}
-                label="Descripción"
-                type="text"
-                required={true}
-                inputProps={{}}
                 disabled={false}
+                errors={errors}
+                inputProps={{}}
+                label="Descripción"
+                name="product_description"
+                register={register}
+                required={true}
+                type="text"
               />
 
               <FormControl
                 fullWidth
-                size="small"
                 margin="dense"
+                size="small"
               >
                 <TextField
-                  select
+                  defaultValue=""
                   fullWidth
-                  size="small"
+                  inputProps={register('product_category', {required: 'Seleccione una Categoría'})}
                   label="Categoría"
                   required
-                  defaultValue=""
-                  inputProps={register('product_category', {required: 'Seleccione una Categoría'})}
+                  select
+                  size="small"
                 >
                   {categories &&
                     categories.map((category: Category) => (
@@ -176,8 +176,8 @@ const AddProduct: React.FC<AddProductInterface> = () => {
 
                 {errors.product_category && errors.product_category.message && (
                   <Typography
-                    color="error"
                     align="center"
+                    color="error"
                     variant="overline"
                   >
                     Seleccione una Categoría
@@ -186,12 +186,12 @@ const AddProduct: React.FC<AddProductInterface> = () => {
               </FormControl>
 
               <CustomInput
-                register={register}
-                name="product_base_price"
                 errors={errors}
                 label="Precio Base"
-                type="number"
+                name="product_base_price"
+                register={register}
                 required={true}
+                type="number"
                 inputProps={{
                   min: 0.0,
                   inputMode: 'numeric',
@@ -203,17 +203,17 @@ const AddProduct: React.FC<AddProductInterface> = () => {
 
               <FormControl
                 fullWidth
-                size="small"
                 margin="dense"
+                size="small"
               >
                 <TextField
-                  select
+                  defaultValue=""
                   fullWidth
-                  size="small"
+                  inputProps={register('product_items', {required: 'Seleccione una Ingrediente'})}
                   label="Ingredientes"
                   required
-                  defaultValue=""
-                  inputProps={register('product_items', {required: 'Seleccione una Ingrediente'})}
+                  select
+                  size="small"
                 >
                   <MenuItem
                     key={0}
@@ -237,8 +237,8 @@ const AddProduct: React.FC<AddProductInterface> = () => {
 
                 {errors.product_items && errors.product_items.message && (
                   <Typography
-                    color="error"
                     align="center"
+                    color="error"
                     variant="overline"
                   >
                     Seleccione un Ingrediente
@@ -259,8 +259,8 @@ const AddProduct: React.FC<AddProductInterface> = () => {
                         key={item.item_id}
                         sx={{
                           backgroundColor: 'grey.100',
-                          color: 'primary.main',
                           borderRadius: 1,
+                          color: 'primary.main',
                           mb: 1,
                         }}
                       >
@@ -275,12 +275,12 @@ const AddProduct: React.FC<AddProductInterface> = () => {
                             secondary={`${itemCategory[0]?.category_name} - ${itemUnitMetric[0]?.unit_name}`}
                           />
                           <CustomInput
-                            register={register}
-                            name={`itemCountInput${item.item_id}`}
                             errors={errors}
                             label="Cantidad"
-                            type="number"
+                            name={`itemCountInput${item.item_id}`}
+                            register={register}
                             required={true}
+                            type="number"
                             inputProps={{
                               inputMode: 'numeric',
                               step: '0.01',
@@ -295,9 +295,9 @@ const AddProduct: React.FC<AddProductInterface> = () => {
 
                         <ListItemSecondaryAction sx={{mr: 1}}>
                           <IconButton
+                            aria-label="Borrar Ingrediente"
                             color="primary"
                             edge="end"
-                            aria-label="Borrar Ingrediente"
                             onClick={() => handleRemove(item)}
                           >
                             <DeleteRounded color="primary" />
@@ -314,23 +314,23 @@ const AddProduct: React.FC<AddProductInterface> = () => {
             xs={12}
           >
             <Stack
+              alignItems="baseline"
               direction="row"
               justifyContent="space-between"
-              alignItems="baseline"
               sx={{mb: 2}}
             >
               <Button
-                variant="contained"
                 color="error"
                 onClick={handleClick}
+                variant="contained"
               >
                 Cerrar
               </Button>
               {listItems?.length >= 1 && (
                 <Button
-                  variant="contained"
                   color="primary"
                   type="submit"
+                  variant="contained"
                 >
                   Añadir
                 </Button>
