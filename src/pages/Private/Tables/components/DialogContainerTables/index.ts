@@ -1,1 +1,1 @@
-export { default as DialogContainer } from "./DialogContainerTables.component"
+export * from "./DialogContainerTables.component"

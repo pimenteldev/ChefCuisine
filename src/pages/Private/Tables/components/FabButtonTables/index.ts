@@ -1,1 +1,1 @@
-export { default as FabButtonTables } from "./FabButtonTables.component"
+export * from "./FabButtonTables.component"
