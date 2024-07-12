@@ -1,4 +1,4 @@
-import {Table} from '@/models'
+import { Table } from "@/models"
 import {
   CardTableBase,
   CardTableFigure,
@@ -6,15 +6,15 @@ import {
   CardTableName,
   CardTableStatusOff,
   CardTableStatusOn,
-} from '@/pages'
-import mesa from '/mesa.jpg'
+} from "@/pages"
+import mesa from "/mesa.jpg"
 
 interface CardTableInterface {
   key: number
   table: Table
 }
 
-const CardTable = ({key, table}: CardTableInterface) => {
+const CardTable = ({ key, table }: CardTableInterface) => {
   return (
     <CardTableBase key={key}>
       <>

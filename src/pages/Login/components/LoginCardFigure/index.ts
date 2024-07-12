@@ -1,1 +1,1 @@
-export {default as LoginCardFigure} from './LoginCardFigure'
+export { default as LoginCardFigure } from "./LoginCardFigure"

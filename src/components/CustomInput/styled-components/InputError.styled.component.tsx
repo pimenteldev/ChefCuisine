@@ -1,5 +1,5 @@
-import {COLORS} from '@/constants'
-import styled from 'styled-components'
+import { COLORS } from "@/constants"
+import styled from "styled-components"
 
 export const InputError = styled.div`
   color: white;

@@ -1,5 +1,5 @@
-import {COLORS} from '@/constants'
-import styled from 'styled-components'
+import { COLORS } from "@/constants"
+import styled from "styled-components"
 
 export const CardTableGrid = styled.div`
   display: grid;

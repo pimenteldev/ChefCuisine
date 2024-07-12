@@ -1,8 +1,8 @@
-import {Login} from '@/pages'
-import {store} from '@/redux'
-import {Provider} from 'react-redux'
-import {BrowserRouter} from 'react-router-dom'
-import {cleanup, fireEvent, render, screen} from '@testing-library/react'
+import { Login } from "@/pages"
+import { store } from "@/redux"
+import { Provider } from "react-redux"
+import { BrowserRouter } from "react-router-dom"
+import { cleanup, fireEvent, render, screen } from "@testing-library/react"
 
 const LoginMock = () => {
   return (
@@ -14,22 +14,22 @@ const LoginMock = () => {
   )
 }
 
-jest.mock('fetch')
+jest.mock("fetch")
 
-describe('Login', () => {
+describe("Login", () => {
   afterEach(cleanup)
 
   beforeAll(() => {
     render(<LoginMock />)
   })
 
-  test('Should two input exist at the screen', async () => {
+  test("Should two input exist at the screen", async () => {
     const inputUser = screen.getByLabelText(/usuario/i)
     const inputPass = screen.getByLabelText(/contraseña/i)
-    const btnIngresar = screen.getByRole('button', {name: /Ingresar/i})
+    const btnIngresar = screen.getByRole("button", { name: /Ingresar/i })
 
-    fireEvent.change(inputUser, {target: {value: 'admin'}})
-    fireEvent.change(inputPass, {target: {value: '1234'}})
+    fireEvent.change(inputUser, { target: { value: "admin" } })
+    fireEvent.change(inputPass, { target: { value: "1234" } })
     fireEvent.click(btnIngresar)
 
     expect(fetch).toHaveBeenCalled()

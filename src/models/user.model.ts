@@ -1,4 +1,4 @@
-import {Roles} from './roles.model'
+import { Roles } from "./roles.model"
 
 export interface BackendUser {
   user_id: string
@@ -16,8 +16,8 @@ export interface User {
 }
 
 export const UserEmptyState: User = {
-  userId: '',
-  userName: '',
-  userPhoto: '',
+  userId: "",
+  userName: "",
+  userPhoto: "",
   rol: Roles.EMPTY,
 }

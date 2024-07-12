@@ -1,6 +1,6 @@
-import {Product} from '@/models'
+import { Product } from "@/models"
 
-type Action = 'add' | 'modify' | 'remove'
+type Action = "add" | "modify" | "remove"
 
 export interface DialogState {
   action: Action

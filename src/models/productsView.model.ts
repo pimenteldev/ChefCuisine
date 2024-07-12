@@ -46,19 +46,19 @@ export const ItemEmptyState: Item = {
   item_count: 0,
   item_category: 0,
   item_uni_metric: 0,
-  item_name: '',
-  item_create: '',
+  item_name: "",
+  item_create: "",
   item_status: 0,
 }
 
 export const ProductEmptyState: Product = {
-  product_id: '',
-  product_name: '',
-  product_description: '',
+  product_id: "",
+  product_name: "",
+  product_description: "",
   product_base_price: 0,
   product_category: 0,
   product_items: [ItemEmptyState],
-  product_photo: '',
-  product_photo_thumb: '',
+  product_photo: "",
+  product_photo_thumb: "",
   product_status: 0,
 }

@@ -1,7 +1,7 @@
-import {ProductsViewApi} from '@/models'
-import {createSlice} from '@reduxjs/toolkit'
+import { ProductsViewApi } from "@/models"
+import { createSlice } from "@reduxjs/toolkit"
 
-export const productsKey = 'products'
+export const productsKey = "products"
 
 const ProductsViewApiEmptyState: ProductsViewApi = {
   products: [],
@@ -12,13 +12,13 @@ const ProductsViewApiEmptyState: ProductsViewApi = {
 }
 
 export const productsViewSlice = createSlice({
-  name: 'productsViewState',
+  name: "productsViewState",
   initialState: ProductsViewApiEmptyState,
   reducers: {
     setDataInViewProducts: (state, action) => action.payload,
   },
 })
 
-export const {setDataInViewProducts} = productsViewSlice.actions
+export const { setDataInViewProducts } = productsViewSlice.actions
 
 export default productsViewSlice.reducer

@@ -47,7 +47,10 @@ const ModifyProduct = () => {
   } = useModifyProduct()
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      encType="multipart/form-data"
+    >
       <Container>
         <Typography
           color="primary"
@@ -63,7 +66,11 @@ const ModifyProduct = () => {
             borderColor: "primary.main",
           }}
         />
-        <Typography align="center" variant="body2" sx={{ mb: 1 }}>
+        <Typography
+          align="center"
+          variant="body2"
+          sx={{ mb: 1 }}
+        >
           {product.product_name}
         </Typography>
 
@@ -152,7 +159,11 @@ const ModifyProduct = () => {
                 disabled={false}
               />
 
-              <FormControl fullWidth size="small" margin="dense">
+              <FormControl
+                fullWidth
+                size="small"
+                margin="dense"
+              >
                 <TextField
                   select
                   fullWidth
@@ -176,7 +187,11 @@ const ModifyProduct = () => {
                 </TextField>
 
                 {errors.product_category && errors.product_category.message && (
-                  <Typography color="error" align="center" variant="overline">
+                  <Typography
+                    color="error"
+                    align="center"
+                    variant="overline"
+                  >
                     Seleccione una Categoría
                   </Typography>
                 )}
@@ -198,7 +213,11 @@ const ModifyProduct = () => {
                 disabled={false}
               />
 
-              <FormControl fullWidth size="small" margin="dense">
+              <FormControl
+                fullWidth
+                size="small"
+                margin="dense"
+              >
                 <TextField
                   select
                   fullWidth
@@ -209,7 +228,10 @@ const ModifyProduct = () => {
                     required: "Seleccione una Ingrediente",
                   })}
                 >
-                  <MenuItem key={0} value={""}>
+                  <MenuItem
+                    key={0}
+                    value={""}
+                  >
                     Seleccione
                   </MenuItem>
                   {items?.map((item: Item) => (
@@ -226,13 +248,20 @@ const ModifyProduct = () => {
                 </TextField>
 
                 {errors.product_items && errors.product_items.message && (
-                  <Typography color="error" align="center" variant="overline">
+                  <Typography
+                    color="error"
+                    align="center"
+                    variant="overline"
+                  >
                     Seleccione un Ingrediente
                   </Typography>
                 )}
               </FormControl>
 
-              <List dense={true} sx={{ width: "100%" }}>
+              <List
+                dense={true}
+                sx={{ width: "100%" }}
+              >
                 {listItems &&
                   listItems.map((item: Item) => {
                     let itemCategory = items_categories.filter(
@@ -300,14 +329,21 @@ const ModifyProduct = () => {
               </List>
             </Stack>
           </Grid>
-          <Grid item xs={12}>
+          <Grid
+            item
+            xs={12}
+          >
             <Stack
               direction="row"
               justifyContent="space-between"
               alignItems="baseline"
               sx={{ mb: 2 }}
             >
-              <Button variant="contained" color="warning" onClick={handleClick}>
+              <Button
+                variant="contained"
+                color="warning"
+                onClick={handleClick}
+              >
                 Cerrar
               </Button>
               <Button
@@ -320,7 +356,11 @@ const ModifyProduct = () => {
                 Eliminar
               </Button>
               {listItems?.length >= 1 && (
-                <Button variant="contained" color="primary" type="submit">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
                   Modificar
                 </Button>
               )}

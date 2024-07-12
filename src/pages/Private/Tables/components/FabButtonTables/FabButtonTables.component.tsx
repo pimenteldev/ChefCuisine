@@ -1,12 +1,12 @@
-import {useTablesViewContext} from '@/pages'
-import AddIcon from '@mui/icons-material/Add'
-import {Fab} from '@mui/material'
-import {dialogOpenSubject$} from '@/components/CustomDialog/CustomDialog.component'
+import { useTablesViewContext } from "@/pages"
+import AddIcon from "@mui/icons-material/Add"
+import { Fab } from "@mui/material"
+import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog.component"
 
 const FabButtonTables = () => {
-  const {setDialog} = useTablesViewContext()
+  const { setDialog } = useTablesViewContext()
   const handleClick = () => {
-    setDialog({action: 'add'})
+    setDialog({ action: "add" })
     dialogOpenSubject$.setSubject = true
   }
 
@@ -16,7 +16,7 @@ const FabButtonTables = () => {
       color="primary"
       aria-label="Agregar"
       sx={{
-        position: 'fixed',
+        position: "fixed",
         right: 20,
         bottom: 20,
       }}

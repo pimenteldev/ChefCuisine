@@ -1,26 +1,28 @@
-import {dialogCloseSubject$} from '@/components/CustomDialog/CustomDialog.component'
-import {snackbarOpenSubject$} from '@/components/CustomSnackBar/CustomSnackBar.component'
-import {Item, Product} from '@/models'
-import {useGetAllProducts} from '@/pages'
-import {AppStore} from '@/redux/store'
-import {AlertColor} from '@mui/material'
-import {useState} from 'react'
-import {useForm} from 'react-hook-form'
-import {useSelector} from 'react-redux'
-import {v4 as newId} from 'uuid'
-import AddProductService from '../services/addNewProduct.service'
+import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog.component"
+import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar.component"
+import { Item, Product } from "@/models"
+import { useGetAllProducts } from "@/pages"
+import { AppStore } from "@/redux/store"
+import { AlertColor } from "@mui/material"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { useSelector } from "react-redux"
+import { v4 as newId } from "uuid"
+import AddProductService from "../services/addNewProduct.service"
 
 function useAddProduct() {
   const [listItems, setListItems] = useState<Item[]>([])
   const [file, setFile] = useState()
-  const {items, items_categories, categories, units} = useSelector((store: AppStore) => store.productsViewState)
+  const { items, items_categories, categories, units } = useSelector(
+    (store: AppStore) => store.productsViewState
+  )
 
-  const {callToEndPointsAndDispatchs} = useGetAllProducts()
+  const { callToEndPointsAndDispatchs } = useGetAllProducts()
 
   const {
     register,
     handleSubmit,
-    formState: {errors},
+    formState: { errors },
     setValue,
   } = useForm()
 
@@ -37,23 +39,32 @@ function useAddProduct() {
   }
 
   const handleSelect = (itemSelect: Item) => {
-    const itemsFiltered = listItems.filter(({item_id}) => item_id === itemSelect.item_id)
+    const itemsFiltered = listItems.filter(
+      ({ item_id }) => item_id === itemSelect.item_id
+    )
     if (itemsFiltered.length === 0) {
-      setListItems([...listItems, {...itemSelect, item_count: 0}])
+      setListItems([...listItems, { ...itemSelect, item_count: 0 }])
     } else {
-      handleSnackBar(`${itemSelect.item_name} ya existe en la lista`, 'warning')
+      handleSnackBar(`${itemSelect.item_name} ya existe en la lista`, "warning")
     }
   }
 
   const handleRemove = (itemSelect: Item) => {
-    const newList = listItems.filter(({item_id}) => item_id !== itemSelect.item_id)
+    const newList = listItems.filter(
+      ({ item_id }) => item_id !== itemSelect.item_id
+    )
     setListItems(newList)
   }
 
-  const handleChange = (e: React.FormEvent<HTMLInputElement>, itemChange: Item) => {
+  const handleChange = (
+    e: React.FormEvent<HTMLInputElement>,
+    itemChange: Item
+  ) => {
     setListItems(
       listItems.map((item: Item) =>
-        item.item_id === itemChange.item_id ? {...item, item_count: parseFloat(e.currentTarget.value)} : item
+        item.item_id === itemChange.item_id
+          ? { ...item, item_count: parseFloat(e.currentTarget.value) }
+          : item
       )
     )
   }
@@ -74,25 +85,28 @@ function useAddProduct() {
       product_status: 1,
     }
 
-    const productFormatedForApi = {...newProduct, product_items: JSON.stringify(newProduct.product_items)}
+    const productFormatedForApi = {
+      ...newProduct,
+      product_items: JSON.stringify(newProduct.product_items),
+    }
 
-    formData.append('file', file || '')
-    formData.append('photo', newIdProduct)
-    formData.append('location', 'productos')
-    formData.append('product', JSON.stringify(productFormatedForApi))
+    formData.append("file", file || "")
+    formData.append("photo", newIdProduct)
+    formData.append("location", "productos")
+    formData.append("product", JSON.stringify(productFormatedForApi))
 
     await AddProductService(formData)
       .then((json) => {
         if (json.created === true) {
-          handleSnackBar(`Has registrado un Nuevo Producto`, 'success')
+          handleSnackBar(`Has registrado un Nuevo Producto`, "success")
           handleClick()
           callToEndPointsAndDispatchs()
         } else {
-          handleSnackBar(`${json.message}`, 'error')
+          handleSnackBar(`${json.message}`, "error")
         }
       })
       .catch((err) => {
-        handleSnackBar(`Ups, algo salió mal.`, 'error')
+        handleSnackBar(`Ups, algo salió mal.`, "error")
         console.error(err)
       })
   }

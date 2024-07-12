@@ -1,18 +1,18 @@
-import {Suspense, lazy} from 'react'
-import {Provider} from 'react-redux'
-import {Route} from 'react-router'
-import {BrowserRouter, Navigate} from 'react-router-dom'
-import {CustomSnackBar, Navbar, Sidebar, Spinner} from './components'
-import {AuthGuard, RolGuard} from './guards'
-import {RoutesWithNotFound} from './helpers'
-import {Roles} from './models'
-import {HomeUser} from './pages'
-import store from './redux/store'
-import {PrivateRoutes, PublicRoutes} from './routes'
-import {LayoutContainer} from './styled-components'
+import { Suspense, lazy } from "react"
+import { Provider } from "react-redux"
+import { Route } from "react-router"
+import { BrowserRouter, Navigate } from "react-router-dom"
+import { CustomSnackBar, Navbar, Sidebar, Spinner } from "./components"
+import { AuthGuard, RolGuard } from "./guards"
+import { RoutesWithNotFound } from "./helpers"
+import { Roles } from "./models"
+import { HomeUser } from "./pages"
+import store from "./redux/store"
+import { PrivateRoutes, PublicRoutes } from "./routes"
+import { LayoutContainer } from "./styled-components"
 
-const Login = lazy(() => import('./pages/Login/Login'))
-const Private = lazy(() => import('./pages/Private/Private'))
+const Login = lazy(() => import("./pages/Login/Login"))
+const Private = lazy(() => import("./pages/Private/Private"))
 
 function App() {
   return (

@@ -1,2 +1,2 @@
-export * from './layout.styled.component'
-export * from './truncateText.styled.component'
+export * from "./layout.styled.component"
+export * from "./truncateText.styled.component"

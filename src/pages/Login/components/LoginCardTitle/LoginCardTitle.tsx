@@ -1,6 +1,6 @@
-import {APP_NAME, APP_SUBNAME, COLORS} from '@/constants'
-import React from 'react'
-import styled from 'styled-components'
+import { APP_NAME, APP_SUBNAME, COLORS } from "@/constants"
+import React from "react"
+import styled from "styled-components"
 export interface LoginCardTitleInterface {}
 
 const LoginCardTitle: React.FC<LoginCardTitleInterface> = () => {

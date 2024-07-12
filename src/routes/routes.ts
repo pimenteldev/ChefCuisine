@@ -1,18 +1,18 @@
 export const PublicRoutes = {
-  LOGIN: 'login',
+  LOGIN: "login",
 }
 
 export const PrivateRoutes = {
-  PRIVATE: 'private',
+  PRIVATE: "private",
 
-  DASHBOARD: 'dashboard',
-  PRODUCTOS: 'productos',
-  MESAS: 'mesas',
-  PEDIDOS: 'pedidos',
-  REPORTES: 'reportes',
-  INVENTARIO: 'inventario',
-  EMPRESA: 'empresa',
-  PROVEEDORES: 'proveedores',
+  DASHBOARD: "dashboard",
+  PRODUCTOS: "productos",
+  MESAS: "mesas",
+  PEDIDOS: "pedidos",
+  REPORTES: "reportes",
+  INVENTARIO: "inventario",
+  EMPRESA: "empresa",
+  PROVEEDORES: "proveedores",
 
-  HOMEUSER: 'homeuser',
+  HOMEUSER: "homeuser",
 }

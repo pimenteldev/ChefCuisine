@@ -1,1 +1,1 @@
-export * from './InputError.styled.component'
+export * from "./InputError.styled.component"

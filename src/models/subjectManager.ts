@@ -1,4 +1,4 @@
-import {Subject} from 'rxjs'
+import { Subject } from "rxjs"
 
 export class SubjectManager<T> {
   private subject = new Subject<T>()

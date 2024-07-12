@@ -1,10 +1,10 @@
-import {clearLocalStorage} from '@/helpers'
-import {UserKey, resetUser} from '@/redux/slices/user.slice'
-import {AppStore} from '@/redux/store'
-import {PublicRoutes} from '@/routes'
-import {Avatar, Box, Button, Typography} from '@mui/material'
-import {useDispatch, useSelector} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
+import { clearLocalStorage } from "@/helpers"
+import { UserKey, resetUser } from "@/redux/slices/user.slice"
+import { AppStore } from "@/redux/store"
+import { PublicRoutes } from "@/routes"
+import { Avatar, Box, Button, Typography } from "@mui/material"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 function Logout() {
   const dispatch = useDispatch()
@@ -21,10 +21,10 @@ function Logout() {
   return (
     <Box
       sx={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'flex',
-        flexDirection: 'row',
+        alignItems: "center",
+        justifyContent: "center",
+        display: "flex",
+        flexDirection: "row",
       }}
     >
       <Avatar
@@ -32,14 +32,14 @@ function Logout() {
         sx={{
           height: 30,
           width: 30,
-          display: {xs: 'none', sm: 'block'},
+          display: { xs: "none", sm: "block" },
           mr: 1,
         }}
       />
       <Typography
         color="secondary"
         variant="overline"
-        sx={{display: {xs: 'none', sm: 'block'}}}
+        sx={{ display: { xs: "none", sm: "block" } }}
       >
         {userState.userName}
       </Typography>
@@ -47,7 +47,7 @@ function Logout() {
         color="secondary"
         size="small"
         variant="outlined"
-        sx={{ml: 1}}
+        sx={{ ml: 1 }}
         onClick={handleLogout}
       >
         Salir

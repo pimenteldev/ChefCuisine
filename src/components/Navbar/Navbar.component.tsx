@@ -1,10 +1,10 @@
-import {APP_NAME} from '@/constants'
-import {AppBar, Avatar, IconButton, Toolbar, Typography} from '@mui/material'
-import React from 'react'
-import {Logout} from '../Logout'
-import {sidebarOpenSubject$} from '../Sidebar/Sidebar.component'
-import {Menu} from './styled-component'
-import logo from '/icon.png'
+import { APP_NAME } from "@/constants"
+import { AppBar, Avatar, IconButton, Toolbar, Typography } from "@mui/material"
+import React from "react"
+import { Logout } from "../Logout"
+import { sidebarOpenSubject$ } from "../Sidebar/Sidebar.component"
+import { Menu } from "./styled-component"
+import logo from "/icon.png"
 
 export interface NavbarInterface {}
 
@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarInterface> = () => {
           color="secondary"
           aria-label="Menu"
           sx={{
-            mr: {xs: 0, sm: 1},
+            mr: { xs: 0, sm: 1 },
           }}
           onClick={handleClick}
         >
@@ -35,7 +35,7 @@ const Navbar: React.FC<NavbarInterface> = () => {
           sx={{
             height: 30,
             width: 30,
-            display: {xs: 'none', sm: 'block'},
+            display: { xs: "none", sm: "block" },
             mr: 1,
             borderRadius: 0,
           }}
@@ -44,7 +44,7 @@ const Navbar: React.FC<NavbarInterface> = () => {
         <Typography
           variant="h6"
           component="div"
-          sx={{flexGrow: 1, fontWeight: 900}}
+          sx={{ flexGrow: 1, fontWeight: 900 }}
         >
           {APP_NAME}
         </Typography>

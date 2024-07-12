@@ -1,1 +1,1 @@
-export * from './MenuItems.data'
+export * from "./MenuItems.data"

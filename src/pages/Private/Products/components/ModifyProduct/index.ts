@@ -1,1 +1,1 @@
-export {default as ModifyProduct} from './ModifyProduct.component'
+export { default as ModifyProduct } from "./ModifyProduct.component"

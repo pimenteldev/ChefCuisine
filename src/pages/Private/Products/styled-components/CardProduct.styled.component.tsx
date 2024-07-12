@@ -1,39 +1,13 @@
-import {COLORS} from '@/constants'
-import styled from 'styled-components'
+import { COLORS } from "@/constants"
+import styled from "styled-components"
 
 export const CardProductsGrid = styled.div`
   display: grid;
-  width: 100%;
-
-  @media screen and (max-width: 375px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  @media only screen and (min-width: 600px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media only screen and (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media only screen and (min-width: 992px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media only screen and (min-width: 1200px) {
-    grid-template-columns: repeat(5, 1fr);
-  }
+  grid-template-columns: repeat(auto-fill, minMax(200px, 1fr));
+  gap: 10px;
 `
 
-export const CardProductBase = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0.5rem;
-  width: 100%;
-`
+export const CardProductBase = styled.div``
 
 export const CardProductBody = styled.div`
   align-items: flex-start;
@@ -74,7 +48,7 @@ export const CardProductName = styled.div`
   color: ${COLORS.background};
   font-size: 1em;
   font-weight: 700;
-  padding: 1em;
+  padding: 0.5em;
   text-align: center;
   width: 100%;
 `
@@ -90,17 +64,12 @@ export const CardProductDescription = styled.div`
 export const CardProductPriceAndIngredient = styled.div`
   color: ${COLORS.dark};
   font-size: 14px;
-  padding: 0.5rem;
   text-align: center;
   width: 100%;
 `
 
 export const CardProductIngredients = styled.div`
   color: ${COLORS.dark};
-  font-size: 14px;
-  padding: 0.5rem;
-  text-align: center;
-  width: 100%;
 `
 
 export const CardProductPrice = styled.div`

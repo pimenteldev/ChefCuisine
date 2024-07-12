@@ -1,6 +1,6 @@
-import {FormControl, TextField} from '@mui/material'
-import {FieldErrors} from 'react-hook-form'
-import {InputError} from './styled-components'
+import { FormControl, TextField } from "@mui/material"
+import { FieldErrors } from "react-hook-form"
+import { InputError } from "./styled-components"
 
 interface InputProps {
   register: any
@@ -19,7 +19,7 @@ export const CustomInput = ({
   register,
   name,
   errors,
-  label = '',
+  label = "",
   type,
   inputProps,
   disabled = false,
@@ -40,9 +40,9 @@ export const CustomInput = ({
   return (
     <FormControl fullWidth>
       <TextField
-        {...(inputProps && {inputProps: inputProps})}
-        {...(required && {required: true})}
-        {...(step && {step: step})}
+        {...(inputProps && { inputProps: inputProps })}
+        {...(required && { required: true })}
+        {...(step && { step: step })}
         {...register(name)}
         disabled={disabled}
         error={errors && !!errors[name]}
@@ -52,7 +52,7 @@ export const CustomInput = ({
         margin="dense"
         size="small"
         type={type}
-        role={'textbox'}
+        role={"textbox"}
         variant="outlined"
       />
       {errors && formValidation(errors, name)}

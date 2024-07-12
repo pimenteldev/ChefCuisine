@@ -1,9 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react"
+import styled from "styled-components"
 export interface HomeUserInterface {}
 
 const HomeUser: React.FC<HomeUserInterface> = () => {
-  return <HomeUserStyle>Ruta protegida por Guard para el Rol de Usuario</HomeUserStyle>
+  return (
+    <HomeUserStyle>
+      Ruta protegida por Guard para el Rol de Usuario
+    </HomeUserStyle>
+  )
 }
 
 export const HomeUserStyle = styled.div`

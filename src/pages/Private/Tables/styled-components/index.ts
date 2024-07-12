@@ -1,1 +1,1 @@
-export * from './CardTable.styled.component'
+export * from "./CardTable.styled.component"

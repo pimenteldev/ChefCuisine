@@ -1,1 +1,1 @@
-export {default as CustomSnackBar} from './CustomSnackBar.component'
+export { default as CustomSnackBar } from "./CustomSnackBar.component"

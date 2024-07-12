@@ -1,1 +1,1 @@
-export {default as CardTable} from './CardTable.component'
+export { default as CardTable } from "./CardTable.component"

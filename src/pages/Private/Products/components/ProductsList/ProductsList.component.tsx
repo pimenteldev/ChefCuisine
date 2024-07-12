@@ -1,13 +1,13 @@
-import {Product} from '@/models'
-import {CardProduct, CardProductsGrid, useGetAllProducts} from '@/pages'
-import {AppStore} from '@/redux/store'
-import {Alert} from '@mui/material'
-import {useEffect} from 'react'
-import {useSelector} from 'react-redux'
+import { Product } from "@/models"
+import { CardProduct, CardProductsGrid, useGetAllProducts } from "@/pages"
+import { AppStore } from "@/redux/store"
+import { Alert } from "@mui/material"
+import { useEffect } from "react"
+import { useSelector } from "react-redux"
 
 function ProductsList() {
-  const {callToEndPointsAndDispatchs} = useGetAllProducts()
-  const {products} = useSelector((store: AppStore) => store.productsViewState)
+  const { callToEndPointsAndDispatchs } = useGetAllProducts()
+  const { products } = useSelector((store: AppStore) => store.productsViewState)
 
   useEffect(() => {
     callToEndPointsAndDispatchs()

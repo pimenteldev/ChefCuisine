@@ -1,1 +1,1 @@
-export {default as Sidebar} from './Sidebar.component'
+export { default as Sidebar } from "./Sidebar.component"

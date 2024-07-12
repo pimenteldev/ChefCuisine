@@ -1,13 +1,13 @@
-export {default as Products} from './Products'
-export * from './components/AddProduct'
-export * from './components/CardProduct'
-export * from './components/DialogContainer'
-export * from './components/FabButton'
-export * from './components/ModifyProduct'
-export * from './components/ProductsList'
-export * from './components'
-export * from './contexts'
-export * from './hooks'
-export * from './models'
-export * from './services'
-export * from './styled-components'
+export { default as Products } from "./Products"
+export * from "./components/AddProduct"
+export * from "./components/CardProduct"
+export * from "./components/DialogContainer"
+export * from "./components/FabButton"
+export * from "./components/ModifyProduct"
+export * from "./components/ProductsList"
+export * from "./components"
+export * from "./contexts"
+export * from "./hooks"
+export * from "./models"
+export * from "./services"
+export * from "./styled-components"

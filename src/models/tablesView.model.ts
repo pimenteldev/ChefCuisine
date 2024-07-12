@@ -11,7 +11,7 @@ export interface Table {
 
 export const TableEmptyState: Table = {
   table_id: 0,
-  table_name: '',
+  table_name: "",
   table_status: 0,
   table_active: 0,
 }

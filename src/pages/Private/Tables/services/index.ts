@@ -1,1 +1,1 @@
-export * from './getAllTables.service'
+export * from "./getAllTables.service"

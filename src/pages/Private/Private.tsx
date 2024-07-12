@@ -1,11 +1,11 @@
-import {PrivateRoutes} from '@/routes'
-import {Navigate, Route} from 'react-router-dom'
-import {RoutesWithNotFound} from '@/helpers'
-import {lazy} from 'react'
+import { PrivateRoutes } from "@/routes"
+import { Navigate, Route } from "react-router-dom"
+import { RoutesWithNotFound } from "@/helpers"
+import { lazy } from "react"
 
-const Dashboard = lazy(() => import('./Dashboard/Dashboard'))
-const Products = lazy(() => import('./Products/Products'))
-const Tables = lazy(() => import('./Tables/Tables'))
+const Dashboard = lazy(() => import("./Dashboard/Dashboard"))
+const Products = lazy(() => import("./Products/Products"))
+const Tables = lazy(() => import("./Tables/Tables"))
 
 function Private() {
   return (

@@ -1,1 +1,1 @@
-export {default as useGetAllTables} from './useGetAllTables.hook'
+export { default as useGetAllTables } from "./useGetAllTables.hook"

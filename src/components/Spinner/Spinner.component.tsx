@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import logo from '/logo.png'
-import {theme} from '@/helpers'
+import React from "react"
+import styled from "styled-components"
+import logo from "/logo.png"
+import { theme } from "@/helpers"
 
 export interface SpinnerInterface {}
 
@@ -11,12 +11,12 @@ const Spinner: React.FC<SpinnerInterface> = () => {
       <img
         src={logo}
         alt="Phoenix"
-        className={'spinImg'}
+        className={"spinImg"}
       />
-      <div className={'spin'}>
-        <div className={'c1'}></div>
-        <div className={'c2'}></div>
-        <div className={'c3'}></div>
+      <div className={"spin"}>
+        <div className={"c1"}></div>
+        <div className={"c2"}></div>
+        <div className={"c3"}></div>
       </div>
     </SpinnerStyle>
   )

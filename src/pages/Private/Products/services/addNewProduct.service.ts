@@ -1,8 +1,8 @@
-import {baseUrl} from '@/constants'
+import { baseUrl } from "@/constants"
 
 async function AddProductService(formData: FormData) {
   const response = await fetch(`${baseUrl}products.php`, {
-    method: 'POST',
+    method: "POST",
     body: formData,
   })
   const json = await response.json()

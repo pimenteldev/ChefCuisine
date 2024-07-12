@@ -21,5 +21,5 @@
     "types": ["vitest/globals", "node", "jest", "@testing-library/jest-dom"]
   },
   "include": ["src"],
-  "references": [{"path": "./tsconfig.node.json"}]
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

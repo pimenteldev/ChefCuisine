@@ -1,7 +1,7 @@
-import {useState} from 'react'
-import {useDispatch} from 'react-redux'
-import {getAllTables} from '../services'
-import {setDataInViewTable} from '@/redux/slices/tablesView.slice'
+import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { getAllTables } from "../services"
+import { setDataInViewTable } from "@/redux/slices/tablesView.slice"
 
 function useGetAllTables() {
   const dispatch = useDispatch()
@@ -19,7 +19,7 @@ function useGetAllTables() {
       .finally(() => setLoading(false))
   }
 
-  return {callToEndPointsAndDispatchs, loading}
+  return { callToEndPointsAndDispatchs, loading }
 }
 
 export default useGetAllTables

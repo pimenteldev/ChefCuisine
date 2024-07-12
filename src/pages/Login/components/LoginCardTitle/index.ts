@@ -1,1 +1,1 @@
-export { default as LoginCardTitle } from './LoginCardTitle';
+export { default as LoginCardTitle } from "./LoginCardTitle"

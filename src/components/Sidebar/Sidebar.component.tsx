@@ -107,7 +107,10 @@ function Sidebar() {
               }}
             />
           </Container>
-          <Typography variant="overline" gutterBottom>
+          <Typography
+            variant="overline"
+            gutterBottom
+          >
             {userState.userName}
           </Typography>
         </Paper>
@@ -136,7 +139,10 @@ function Sidebar() {
                 }}
               >
                 <ListItemIcon>
-                  <ArrowRightIcon color="primary" sx={{ mr: 1 }} />
+                  <ArrowRightIcon
+                    color="primary"
+                    sx={{ mr: 1 }}
+                  />
                   {item.title}
                 </ListItemIcon>
               </Link>
@@ -169,10 +175,16 @@ function Sidebar() {
           textAlign: "center",
         }}
       >
-        <Typography color="grey.700" variant="subtitle2">
+        <Typography
+          color="grey.700"
+          variant="subtitle2"
+        >
           Opciones
         </Typography>
-        <Typography color="grey.500" variant="body2">
+        <Typography
+          color="grey.500"
+          variant="body2"
+        >
           Phoenix APP
         </Typography>
         <Box

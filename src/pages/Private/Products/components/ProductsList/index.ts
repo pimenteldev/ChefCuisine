@@ -1,1 +1,1 @@
-export {default as ProductsList} from './ProductsList.component'
+export { default as ProductsList } from "./ProductsList.component"

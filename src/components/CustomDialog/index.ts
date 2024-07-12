@@ -1,1 +1,1 @@
-export {default as CustomDialog} from './CustomDialog.component'
+export { default as CustomDialog } from "./CustomDialog.component"
