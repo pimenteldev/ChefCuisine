@@ -3,27 +3,8 @@ import styled from "styled-components"
 
 export const CardTableGrid = styled.div`
   display: grid;
-  width: 100%;
-
-  @media screen and (max-width: 375px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  @media only screen and (min-width: 600px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media only screen and (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media only screen and (min-width: 992px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media only screen and (min-width: 1200px) {
-    grid-template-columns: repeat(5, 1fr);
-  }
+  grid-template-columns: repeat(auto-fill, minMax(200px, 1fr));
+  gap: 10px;
 `
 
 export const CardTableBase = styled.div`
