@@ -14,10 +14,10 @@ import {
   CardProductPrice,
   CardProductPriceAndIngredient,
   useProductsViewContext,
+  useSearchCategory,
 } from "@/pages"
 import { Alert, Badge } from "@mui/material"
 import { TruncateText } from "@/styled-components"
-import { useSearchCategory } from "../../hooks"
 
 interface CardProductInterface {
   product: Product

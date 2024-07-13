@@ -1,5 +1,6 @@
 import { Table } from "@/models"
 import {
+  CardTableLayout,
   CardTableBase,
   CardTableFigure,
   CardTableFigureImg,
@@ -8,31 +9,33 @@ import {
   CardTableStatusOn,
 } from "@/pages"
 import mesa from "/mesa.jpg"
+import { TruncateText } from "@/styled-components"
 
 interface CardTableInterface {
-  key: number
   table: Table
 }
 
-const CardTable = ({ key, table }: CardTableInterface) => {
+const CardTable = ({ table }: CardTableInterface) => {
   return (
-    <CardTableBase key={key}>
-      <>
-        {table.table_status === 0 ? (
-          <CardTableStatusOff>Inactiva</CardTableStatusOff>
-        ) : (
-          <CardTableStatusOn>Activa</CardTableStatusOn>
-        )}
-      </>
-      <CardTableName>{table.table_name}</CardTableName>
-      <CardTableFigure>
-        <CardTableFigureImg
-          src={mesa}
-          alt="Mesa"
-          loading="lazy"
-        />
-      </CardTableFigure>
-    </CardTableBase>
+    <CardTableLayout>
+      {table.table_status === 0 ? (
+        <CardTableStatusOff>Inactiva</CardTableStatusOff>
+      ) : (
+        <CardTableStatusOn>Activa</CardTableStatusOn>
+      )}
+      <CardTableBase>
+        <CardTableName>
+          <TruncateText>{table.table_name}</TruncateText>
+        </CardTableName>
+        <CardTableFigure>
+          <CardTableFigureImg
+            src={mesa}
+            alt="Mesa"
+            loading="lazy"
+          />
+        </CardTableFigure>
+      </CardTableBase>
+    </CardTableLayout>
   )
 }
 

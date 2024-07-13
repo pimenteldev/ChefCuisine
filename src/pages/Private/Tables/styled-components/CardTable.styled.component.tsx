@@ -16,7 +16,6 @@ export const CardTableBase = styled.div`
   padding: 0 0.5rem;
   cursor: pointer;
   gap: 1rem;
-  position: relative;
   &:hover > figure > img {
     transform: scale(1.1);
   }
@@ -56,6 +55,10 @@ export const CardTableName = styled.div`
   word-break: break-word;
 `
 
+export const CardTableLayout = styled.span`
+  position: relative;
+`
+
 export const CardTableStatusOn = styled.span`
   background-color: ${COLORS.primary};
   color: ${COLORS.background};
@@ -65,6 +68,8 @@ export const CardTableStatusOn = styled.span`
   right: 20px;
   font-weight: 800;
   border-radius: 5px;
+  opacity: 1;
+  z-index: 99;
 `
 
 export const CardTableStatusOff = styled.span`
