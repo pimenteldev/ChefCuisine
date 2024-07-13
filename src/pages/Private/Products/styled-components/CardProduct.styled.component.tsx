@@ -51,14 +51,7 @@ export const CardProductName = styled.div`
   padding: 0.5em;
   text-align: center;
   width: 100%;
-`
-
-export const CardProductDescription = styled.div`
-  color: ${COLORS.dark};
-  font-size: 14px;
-  padding: 0.5rem;
-  text-align: center;
-  width: 100%;
+  margin-bottom: 10px;
 `
 
 export const CardProductPriceAndIngredient = styled.div`

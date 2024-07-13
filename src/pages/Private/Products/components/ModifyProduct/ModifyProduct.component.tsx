@@ -228,12 +228,6 @@ const ModifyProduct = () => {
                     required: "Seleccione una Ingrediente",
                   })}
                 >
-                  <MenuItem
-                    key={0}
-                    value={""}
-                  >
-                    Seleccione
-                  </MenuItem>
                   {items?.map((item: Item) => (
                     <MenuItem
                       key={item.item_id}

@@ -7,7 +7,6 @@ import {
   CardProductBottom,
   CardProductBottomCategory,
   CardProductBottomStatus,
-  CardProductDescription,
   CardProductFigure,
   CardProductFigureImg,
   CardProductIngredients,
@@ -17,10 +16,8 @@ import {
   useProductsViewContext,
 } from "@/pages"
 import { Alert, Badge } from "@mui/material"
-
-import { AppStore } from "@/redux/store"
 import { TruncateText } from "@/styled-components"
-import { useSelector } from "react-redux"
+import { useSearchCategory } from "../../hooks"
 
 interface CardProductInterface {
   product: Product
@@ -29,12 +26,8 @@ interface CardProductInterface {
 const CardProduct = ({ product }: CardProductInterface) => {
   const { setDialog } = useProductsViewContext()
 
-  const { categories } = useSelector(
-    (store: AppStore) => store.productsViewState
-  )
-  let colorCategory = categories.filter(
-    ({ category_id }) => category_id === product.product_category
-  )
+  const { colorCategory } = useSearchCategory(product.product_category)
+
   let items = product.product_items?.length
 
   const handleClickModify = (product: Product) => {
@@ -53,15 +46,14 @@ const CardProduct = ({ product }: CardProductInterface) => {
             loading="lazy"
           />
         </CardProductFigure>
-        <CardProductName>{product.product_name}</CardProductName>
-        <CardProductDescription>
-          <TruncateText>{product.product_description}</TruncateText>
-        </CardProductDescription>
+        <CardProductName>
+          <TruncateText>{product.product_name}</TruncateText>
+        </CardProductName>
         <CardProductPriceAndIngredient>
           <CardProductIngredients>
             Ingredientes:
             <Badge
-              color="success"
+              color="primary"
               badgeContent={items}
               sx={{
                 ml: 2,
@@ -69,7 +61,10 @@ const CardProduct = ({ product }: CardProductInterface) => {
             />
           </CardProductIngredients>
           <CardProductPrice>
-            {product.product_base_price.toFixed(2)} Bs
+            {product.product_base_price.toLocaleString("es-VE", {
+              style: "currency",
+              currency: "VEF",
+            })}
           </CardProductPrice>
         </CardProductPriceAndIngredient>
 
