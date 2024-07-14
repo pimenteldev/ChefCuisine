@@ -15,27 +15,27 @@ export const menuItemsAdmin = [
   },
   {
     title: "Pedidos",
-    path: "/pedidos",
+    path: `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.PEDIDOS}`,
   },
   {
     title: "Reportes",
-    path: "/reportes",
+    path: `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.REPORTES}`,
   },
   {
     title: "Inventario",
-    path: "/inventario",
+    path: `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.INVENTARIO}`,
   },
   {
     title: "Empresa",
-    path: "/empresa",
+    path: `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.EMPRESA}`,
   },
   {
-    title: "Personal",
-    path: "/personal",
+    title: "Empleados",
+    path: `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.EMPLEADOS}`,
   },
   {
     title: "Proveedores",
-    path: "/proveedores",
+    path: `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.PROVEEDORES}`,
   },
 ]
 
@@ -58,7 +58,7 @@ export const menuItemsUser = [
   },
   {
     title: "Pedidos",
-    path: "/pedidos",
+    path: `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.PEDIDOS}`,
   },
   {
     title: "Reportes",
@@ -66,11 +66,11 @@ export const menuItemsUser = [
   },
   {
     title: "Inventario",
-    path: "/inventario",
+    path: `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.INVENTARIO}`,
   },
   {
     title: "Empresa",
-    path: "/empresa",
+    path: `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.EMPRESA}`,
   },
   {
     title: "Personal",
