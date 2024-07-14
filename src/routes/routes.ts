@@ -11,6 +11,7 @@ export const PrivateRoutes = {
   PEDIDOS: "pedidos",
   REPORTES: "reportes",
   INVENTARIO: "inventario",
+  EMPLEADOS: "empleados",
   EMPRESA: "empresa",
   PROVEEDORES: "proveedores",
 
