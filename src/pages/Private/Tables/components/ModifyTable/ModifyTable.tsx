@@ -1,6 +1,7 @@
 import { CustomInput } from "@/components"
 import { useModifyTable, useRemoveTable } from "@/pages"
 import {
+  Alert,
   Button,
   Container,
   Divider,
@@ -113,6 +114,18 @@ const ModifyTable: React.FC<ModifyTableInterface> = () => {
               </FormControl>
             </Stack>
           </Grid>
+          {table?.table_active !== 0 && (
+            <>
+              <Alert
+                severity={"info"}
+                variant="filled"
+                sx={{ width: "100%", color: "white" }}
+              >
+                Esta mesa no puede ser eliminada o modificada; posee un pedido
+                activo.
+              </Alert>
+            </>
+          )}
           <Grid
             item
             xs={12}
@@ -130,20 +143,24 @@ const ModifyTable: React.FC<ModifyTableInterface> = () => {
               >
                 Cerrar
               </Button>
-              <Button
-                variant="contained"
-                color="error"
-                onClick={() => handleClickRemove(table.table_id)}
-              >
-                Eliminar
-              </Button>
-              <Button
-                color="primary"
-                type="submit"
-                variant="contained"
-              >
-                Modificar
-              </Button>
+              {table?.table_active === 0 && (
+                <>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => handleClickRemove(table.table_id)}
+                  >
+                    Eliminar
+                  </Button>
+                  <Button
+                    color="primary"
+                    type="submit"
+                    variant="contained"
+                  >
+                    Modificar
+                  </Button>
+                </>
+              )}
             </Stack>
           </Grid>
         </Grid>
