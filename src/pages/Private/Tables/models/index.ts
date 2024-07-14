@@ -1,1 +1,1 @@
-export * from "./dialogStateTables.model"
+export * from "./dialogStateTables"

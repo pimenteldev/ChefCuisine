@@ -1,8 +1,7 @@
-import {CustomInput} from '@/components'
-import {Category, Item} from '@/models'
-import {useAddProduct} from '@/pages'
-import CheckCircleOutline from '@mui/icons-material/CheckCircleOutline'
-import DeleteRounded from '@mui/icons-material/DeleteRounded'
+import { CustomInput } from "@/components"
+import { Category, Item } from "@/models"
+import { useAddProduct } from "@/pages"
+import { CheckCircleOutline, DeleteRounded } from "@mui/icons-material"
 import {
   Avatar,
   Box,
@@ -21,8 +20,8 @@ import {
   Stack,
   TextField,
   Typography,
-} from '@mui/material'
-import React from 'react'
+} from "@mui/material"
+import React from "react"
 
 export interface AddProductInterface {}
 
@@ -56,20 +55,20 @@ const AddProduct: React.FC<AddProductInterface> = () => {
           color="primary"
           align="center"
           variant="h5"
-          sx={{my: 1, fontWeight: 700}}
+          sx={{ my: 1, fontWeight: 700 }}
         >
           Nuevo Producto
         </Typography>
         <Divider
           variant="middle"
           sx={{
-            borderColor: 'primary.main',
+            borderColor: "primary.main",
           }}
         />
         <Typography
           align="center"
           variant="body2"
-          sx={{mb: 1}}
+          sx={{ mb: 1 }}
         >
           Ingresa la foto y la información del nuevo Producto
         </Typography>
@@ -84,14 +83,14 @@ const AddProduct: React.FC<AddProductInterface> = () => {
             >
               <Box
                 sx={{
-                  width: '100%',
+                  width: "100%",
                   height: 250,
                   maxHeight: 250,
-                  backgroundColor: 'grey.100',
+                  backgroundColor: "grey.100",
                   borderRadius: 1,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
               >
                 {file ? (
@@ -101,12 +100,12 @@ const AddProduct: React.FC<AddProductInterface> = () => {
                     src={URL.createObjectURL(file)}
                     sx={{
                       width: 250,
-                      height: '100%',
+                      height: "100%",
                       p: 0,
                       m: 0,
-                      overflow: 'hidden',
-                      borderRadius: '1 1 0 0',
-                      objectFit: 'contain',
+                      overflow: "hidden",
+                      borderRadius: "1 1 0 0",
+                      objectFit: "contain",
                     }}
                   />
                 ) : (
@@ -121,7 +120,9 @@ const AddProduct: React.FC<AddProductInterface> = () => {
               <CustomInput
                 disabled={false}
                 errors={errors}
-                inputProps={{onChange: (e: any) => setFile(e.target.files[0])}}
+                inputProps={{
+                  onChange: (e: any) => setFile(e.target.files[0]),
+                }}
                 label=""
                 name="product_photo"
                 register={register}
@@ -157,7 +158,9 @@ const AddProduct: React.FC<AddProductInterface> = () => {
                 <TextField
                   defaultValue=""
                   fullWidth
-                  inputProps={register('product_category', {required: 'Seleccione una Categoría'})}
+                  inputProps={register("product_category", {
+                    required: "Seleccione una Categoría",
+                  })}
                   label="Categoría"
                   required
                   select
@@ -194,9 +197,9 @@ const AddProduct: React.FC<AddProductInterface> = () => {
                 type="number"
                 inputProps={{
                   min: 0.0,
-                  inputMode: 'numeric',
-                  step: '0.01',
-                  pattern: '[0-9]*',
+                  inputMode: "numeric",
+                  step: "0.01",
+                  pattern: "[0-9]*",
                 }}
                 disabled={false}
               />
@@ -209,7 +212,9 @@ const AddProduct: React.FC<AddProductInterface> = () => {
                 <TextField
                   defaultValue=""
                   fullWidth
-                  inputProps={register('product_items', {required: 'Seleccione una Ingrediente'})}
+                  inputProps={register("product_items", {
+                    required: "Seleccione una Ingrediente",
+                  })}
                   label="Ingredientes"
                   required
                   select
@@ -217,7 +222,7 @@ const AddProduct: React.FC<AddProductInterface> = () => {
                 >
                   <MenuItem
                     key={0}
-                    value={''}
+                    value={""}
                   >
                     Seleccione
                   </MenuItem>
@@ -226,7 +231,7 @@ const AddProduct: React.FC<AddProductInterface> = () => {
                       key={item.item_id}
                       value={item.item_id}
                       onClick={() => {
-                        setValue('product_items', '')
+                        setValue("product_items", "")
                         handleSelect(item)
                       }}
                     >
@@ -248,28 +253,34 @@ const AddProduct: React.FC<AddProductInterface> = () => {
 
               <List
                 dense={true}
-                sx={{width: '100%'}}
+                sx={{ width: "100%" }}
               >
                 {listItems &&
                   listItems.map((item: Item) => {
-                    let itemCategory = items_categories.filter(({category_id}) => category_id === item.item_category)
-                    let itemUnitMetric = units.filter(({unit_id}) => unit_id === item.item_uni_metric)
+                    let itemCategory = items_categories.filter(
+                      ({ category_id }) => category_id === item.item_category
+                    )
+                    let itemUnitMetric = units.filter(
+                      ({ unit_id }) => unit_id === item.item_uni_metric
+                    )
                     return (
                       <ListItem
                         key={item.item_id}
                         sx={{
-                          backgroundColor: 'grey.100',
+                          backgroundColor: "grey.100",
                           borderRadius: 1,
-                          color: 'primary.main',
+                          color: "primary.main",
                           mb: 1,
                         }}
                       >
                         <ListItemAvatar>
-                          <Avatar sx={{backgroundColor: 'primary.main'}}>
-                            <CheckCircleOutline sx={{color: 'primary.contrastText'}} />
+                          <Avatar sx={{ backgroundColor: "primary.main" }}>
+                            <CheckCircleOutline
+                              sx={{ color: "primary.contrastText" }}
+                            />
                           </Avatar>
                         </ListItemAvatar>
-                        <Box sx={{p: 0}}>
+                        <Box sx={{ p: 0 }}>
                           <ListItemText
                             primary={item.item_name}
                             secondary={`${itemCategory[0]?.category_name} - ${itemUnitMetric[0]?.unit_name}`}
@@ -282,18 +293,20 @@ const AddProduct: React.FC<AddProductInterface> = () => {
                             required={true}
                             type="number"
                             inputProps={{
-                              inputMode: 'numeric',
-                              step: '0.01',
+                              inputMode: "numeric",
+                              step: "0.01",
                               min: 0.1,
-                              pattern: '[0-9]*',
+                              pattern: "[0-9]*",
                               defaultValue: 0,
-                              onChange: (e: React.FormEvent<HTMLInputElement>) => handleChange(e, item),
+                              onChange: (
+                                e: React.FormEvent<HTMLInputElement>
+                              ) => handleChange(e, item),
                             }}
                             disabled={false}
                           />
                         </Box>
 
-                        <ListItemSecondaryAction sx={{mr: 1}}>
+                        <ListItemSecondaryAction sx={{ mr: 1 }}>
                           <IconButton
                             aria-label="Borrar Ingrediente"
                             color="primary"
@@ -317,7 +330,7 @@ const AddProduct: React.FC<AddProductInterface> = () => {
               alignItems="baseline"
               direction="row"
               justifyContent="space-between"
-              sx={{mb: 2}}
+              sx={{ my: 2 }}
             >
               <Button
                 color="error"

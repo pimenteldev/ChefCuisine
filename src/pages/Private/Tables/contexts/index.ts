@@ -1,1 +1,1 @@
-export * from "./TablesView.context"
+export * from "./TablesView"

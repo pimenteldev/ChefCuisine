@@ -1,1 +1,1 @@
-export { default as DialogContainer } from "./DialogContainer.component"
+export { default as DialogContainer } from "./DialogContainer"

@@ -1,1 +1,1 @@
-export * from "./loginform.model"
+export * from './loginform.model'

@@ -1,24 +1,17 @@
 import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog.component"
 import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar.component"
 import { Item, Product } from "@/models"
-import {
-  removeProduct,
-  useGetAllProducts,
-  useProductsViewContext,
-} from "@/pages"
+import { useGetAllProducts } from "@/pages"
 import { AppStore } from "@/redux/store"
 import { AlertColor } from "@mui/material"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useSelector } from "react-redux"
 import { v4 as newId } from "uuid"
-import AddProductService from "../services/addNewProduct.service"
-import ModifyProductService from "../services/modifyProduct.service"
+import AddProductService from "../services/addNewProduct"
 
-function useModifyProduct() {
-  const { dialog } = useProductsViewContext()
-  const { product } = dialog
-  const [listItems, setListItems] = useState<Item[]>(product.product_items)
+function useAddProduct() {
+  const [listItems, setListItems] = useState<Item[]>([])
   const [file, setFile] = useState()
   const { items, items_categories, categories, units } = useSelector(
     (store: AppStore) => store.productsViewState
@@ -31,17 +24,7 @@ function useModifyProduct() {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm({
-    defaultValues: product,
-  })
-
-  useEffect(() => {
-    setValue("product_name", product.product_name)
-    setValue("product_description", product.product_description)
-    setValue("product_category", product.product_category)
-    setValue("product_base_price", product.product_base_price)
-    setValue("product_status", product.product_status)
-  }, [product])
+  } = useForm()
 
   const handleClick = () => {
     dialogCloseSubject$.setSubject = false
@@ -88,9 +71,10 @@ function useModifyProduct() {
 
   const onSubmit = async (data: any) => {
     const formData = new FormData()
+
     const newIdProduct = newId()
-    const productModify: Product = {
-      product_id: product.product_id,
+    const newProduct: Product = {
+      product_id: newIdProduct,
       product_base_price: data.product_base_price,
       product_category: data.product_category,
       product_description: data.product_description,
@@ -102,41 +86,19 @@ function useModifyProduct() {
     }
 
     const productFormatedForApi = {
-      ...productModify,
-      product_items: JSON.stringify(productModify.product_items),
+      ...newProduct,
+      product_items: JSON.stringify(newProduct.product_items),
     }
 
     formData.append("file", file || "")
     formData.append("photo", newIdProduct)
-    formData.append("photo_prev", product.product_photo)
     formData.append("location", "productos")
     formData.append("product", JSON.stringify(productFormatedForApi))
-    formData.append("method", "PUT")
 
-    await ModifyProductService(formData)
+    await AddProductService(formData)
       .then((json) => {
-        if (json.modify === true) {
-          handleSnackBar(`Has Modificado un Producto`, "success")
-          handleClick()
-          callToEndPointsAndDispatchs()
-        } else {
-          handleSnackBar(`${json.message}`, "error")
-        }
-      })
-      .catch((err) => {
-        handleSnackBar(`Ups, algo salió mal.`, "error")
-        console.error(err)
-      })
-  }
-
-  const handleClickDelete = async (
-    product_id: string,
-    product_photo: string
-  ) => {
-    await removeProduct(product_id, product_photo)
-      .then((json) => {
-        if (json.delete === true) {
-          handleSnackBar(`Has Eliminado un Producto`, "success")
+        if (json.created === true) {
+          handleSnackBar(`Has registrado un Nuevo Producto`, "success")
           handleClick()
           callToEndPointsAndDispatchs()
         } else {
@@ -158,7 +120,7 @@ function useModifyProduct() {
     handleSelect,
     handleRemove,
     handleSubmit,
-    handleClickDelete,
+    setValue,
     items,
     items_categories,
     listItems,
@@ -166,8 +128,7 @@ function useModifyProduct() {
     register,
     setFile,
     units,
-    product,
   }
 }
 
-export default useModifyProduct
+export default useAddProduct

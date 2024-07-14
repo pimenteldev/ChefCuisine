@@ -13,7 +13,6 @@ export const CardTableBase = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 0.5rem;
   cursor: pointer;
   gap: 1rem;
   &:hover > figure > img {
@@ -50,6 +49,7 @@ export const CardTableName = styled.div`
   align-items: center;
   text-align: center;
   padding: 1rem;
+  width: 100%;
   font-size: 20px;
   font-weight: 800;
   word-break: break-word;
@@ -81,4 +81,6 @@ export const CardTableStatusOff = styled.span`
   right: 20px;
   font-weight: 800;
   border-radius: 5px;
+  opacity: 1;
+  z-index: 99;
 `

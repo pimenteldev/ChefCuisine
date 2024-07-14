@@ -7,26 +7,31 @@ import {
   CardTableName,
   CardTableStatusOff,
   CardTableStatusOn,
+  useTablesViewContext,
 } from "@/pages"
 import mesa from "/mesa.jpg"
-import { TruncateText } from "@/styled-components"
+import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog.component"
 
 interface CardTableInterface {
   table: Table
 }
 
 const CardTable = ({ table }: CardTableInterface) => {
+  const { setDialog } = useTablesViewContext()
+  const handleClickModify = (table: Table) => {
+    setDialog({ action: "modify", table })
+    dialogOpenSubject$.setSubject = true
+  }
+
   return (
-    <CardTableLayout>
+    <CardTableLayout onClick={() => handleClickModify(table)}>
       {table.table_status === 0 ? (
         <CardTableStatusOff>Inactiva</CardTableStatusOff>
       ) : (
         <CardTableStatusOn>Activa</CardTableStatusOn>
       )}
       <CardTableBase>
-        <CardTableName>
-          <TruncateText>{table.table_name}</TruncateText>
-        </CardTableName>
+        <CardTableName>{table.table_name}</CardTableName>
         <CardTableFigure>
           <CardTableFigureImg
             src={mesa}

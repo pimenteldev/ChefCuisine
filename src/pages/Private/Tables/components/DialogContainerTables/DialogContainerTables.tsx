@@ -1,5 +1,6 @@
 import { CustomDialog } from "@/components"
-import { ModifyProduct, useTablesViewContext } from "@/pages"
+import { AddTable, useTablesViewContext } from "@/pages"
+import { ModifyTable } from "../ModifyTable"
 
 function DialogContainerTables() {
   const { dialog } = useTablesViewContext()
@@ -7,9 +8,9 @@ function DialogContainerTables() {
   return (
     <CustomDialog>
       {dialog && action === "add" ? (
-        <>Div</>
+        <AddTable />
       ) : action === "modify" ? (
-        <ModifyProduct />
+        <ModifyTable />
       ) : (
         <>remove</>
       )}

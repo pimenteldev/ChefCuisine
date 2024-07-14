@@ -1,7 +1,7 @@
 import { PrivateRoutes } from "@/routes"
 import { Navigate, Route } from "react-router-dom"
-import { RoutesWithNotFound } from "@/helpers"
 import { lazy } from "react"
+import RoutesWithNotFound from "@/helpers/RoutesWithNotFound.utility"
 
 const Dashboard = lazy(() => import("./Dashboard/Dashboard"))
 const Products = lazy(() => import("./Products/Products"))

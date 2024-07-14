@@ -1,4 +1,4 @@
-import { NotFound } from "@/components/NotFound"
+import NotFound from "@/components/NotFound/NotFound.component"
 import { Route, Routes } from "react-router-dom"
 
 interface Props {

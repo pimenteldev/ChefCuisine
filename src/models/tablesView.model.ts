@@ -6,7 +6,7 @@ export interface Table {
   table_id: number
   table_name: string
   table_status: number
-  table_active: number
+  table_active?: number
 }
 
 export const TableEmptyState: Table = {

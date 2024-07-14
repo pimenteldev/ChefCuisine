@@ -1,4 +1,4 @@
-export * from "./adapters/user.adapter"
+export * from "./adapters/user"
 export { default as LoginCardFigure } from "./components/LoginCardFigure/LoginCardFigure"
 export { default as LoginCardTitle } from "./components/LoginCardTitle/LoginCardTitle"
 export { default as useLogin } from "./hooks/useLogin"
