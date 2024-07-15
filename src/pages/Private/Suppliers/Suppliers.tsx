@@ -10,7 +10,7 @@ function Suppliers() {
           mb: 0,
         }}
       >
-        Suppliers
+        Proveedores
       </Typography>
     </Container>
   )

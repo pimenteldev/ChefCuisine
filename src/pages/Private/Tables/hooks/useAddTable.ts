@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { getAllTables } from "../services"
-import { setDataInViewTable } from "@/redux/slices/tablesView.slice"
+import { setDataInTable } from "@/redux/slices/tables"
 import { useGetAllTables, addNewTable } from "@/pages"
 import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog.component"
 import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar.component"

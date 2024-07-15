@@ -10,7 +10,7 @@ function Employees() {
           mb: 0,
         }}
       >
-        Employees
+        Empleados
       </Typography>
     </Container>
   )

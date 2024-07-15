@@ -10,7 +10,7 @@ function Company() {
           mb: 0,
         }}
       >
-        Company
+        Empresa
       </Typography>
     </Container>
   )

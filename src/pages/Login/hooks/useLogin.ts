@@ -1,7 +1,7 @@
 import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar.component"
 import { clearLocalStorage } from "@/helpers"
 import { BackendUser } from "@/models"
-import { UserKey, createUser, resetUser } from "@/redux/slices/user.slice"
+import { UserKey, createUser, resetUser } from "@/redux/slices/user"
 import { AppStore } from "@/redux/store"
 import { PrivateRoutes, PublicRoutes } from "@/routes"
 import { AlertColor } from "@mui/material"
@@ -70,7 +70,7 @@ function useLogin() {
       authService(data).then((response) => {
         response.userId
           ? handleSnackBar(`Bienvenido al Sistema Phoenix`, "success")
-          : handleSnackBar(`Usuario o Contraseña Invalidos`, "error")
+          : handleSnackBar(`Usuario o Contraseña Inválidos`, "error")
         dispatch(createUser(response))
       })
     } catch (error) {

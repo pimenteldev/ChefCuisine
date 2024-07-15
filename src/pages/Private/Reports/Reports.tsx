@@ -10,7 +10,7 @@ function Reports() {
           mb: 0,
         }}
       >
-        Reports
+        Reportes
       </Typography>
     </Container>
   )

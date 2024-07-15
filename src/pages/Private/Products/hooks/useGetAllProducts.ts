@@ -1,5 +1,5 @@
 import { getAllProducts } from "@/pages"
-import { setDataInViewProducts } from "@/redux/slices/productsView.slice"
+import { setDataInProducts } from "@/redux/slices/products"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 
@@ -11,7 +11,7 @@ function useGetAllProducts() {
     setLoading(true)
     await getAllProducts()
       .then((json) => {
-        dispatch(setDataInViewProducts(json))
+        dispatch(setDataInProducts(json))
       })
       .catch((err) => {
         console.log(err)

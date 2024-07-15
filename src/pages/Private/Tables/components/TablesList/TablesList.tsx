@@ -7,7 +7,7 @@ import { useSelector } from "react-redux"
 
 function TablesList() {
   const { callToEndPointsAndDispatchs } = useGetAllTables()
-  const { tables } = useSelector((store: AppStore) => store.tablesViewState)
+  const { tables } = useSelector((store: AppStore) => store.tables)
 
   useEffect(() => {
     callToEndPointsAndDispatchs()
