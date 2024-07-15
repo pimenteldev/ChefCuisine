@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { getAllTables } from "../services"
-import { setDataInViewTable } from "@/redux/slices/tablesView.slice"
+import { setDataInTable } from "@/redux/slices/tables"
 
 function useGetAllTables() {
   const dispatch = useDispatch()
@@ -11,7 +11,7 @@ function useGetAllTables() {
     setLoading(true)
     await getAllTables()
       .then((json) => {
-        dispatch(setDataInViewTable(json))
+        dispatch(setDataInTable(json))
       })
       .catch((err) => {
         console.log(err)

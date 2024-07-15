@@ -7,7 +7,7 @@ import { useSelector } from "react-redux"
 
 function ProductsList() {
   const { callToEndPointsAndDispatchs } = useGetAllProducts()
-  const { products } = useSelector((store: AppStore) => store.productsViewState)
+  const { products } = useSelector((store: AppStore) => store.products)
 
   useEffect(() => {
     callToEndPointsAndDispatchs()

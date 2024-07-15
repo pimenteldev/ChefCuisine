@@ -21,7 +21,7 @@ function useModifyProduct() {
   const [listItems, setListItems] = useState<Item[]>(product.product_items)
   const [file, setFile] = useState()
   const { items, items_categories, categories, units } = useSelector(
-    (store: AppStore) => store.productsViewState
+    (store: AppStore) => store.products
   )
 
   const { callToEndPointsAndDispatchs } = useGetAllProducts()

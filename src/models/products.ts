@@ -1,4 +1,4 @@
-export interface ProductsViewApi {
+export interface ProductsApi {
   products: Product[]
   categories: Category[]
   items: Item[]

@@ -10,7 +10,7 @@ function Inventory() {
           mb: 0,
         }}
       >
-        Inventory
+        Inventario
       </Typography>
     </Container>
   )

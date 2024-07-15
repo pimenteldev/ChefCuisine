@@ -1,4 +1,4 @@
-import { Roles } from "./roles.model"
+import { Roles } from "./roles"
 
 export interface BackendUser {
   user_id: string

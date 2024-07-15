@@ -1,3 +1,3 @@
-export { default as tablesViewReducer } from "./tablesView.slice"
-export { default as productsViewReducer } from "./productsView.slice"
-export { default as userReducer } from "./user.slice"
+export { default as productsReducer } from "./products"
+export { default as tablesReducer } from "./tables"
+export { default as userReducer } from "./user"
