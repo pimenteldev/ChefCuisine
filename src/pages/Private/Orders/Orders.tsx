@@ -1,10 +1,20 @@
 import { Container, Typography } from "@mui/material"
 import { SelectedTable } from "./components"
-import useSelectTable from "./hooks/useSelectTable"
-
+import useInitialGetData from "./hooks/useInitialGetData"
+import { useEffect, useState } from "react"
 
 function Orders() {
-  const { isTableSelected } = useSelectTable()
+  const { dispatchGetData } = useInitialGetData()
+
+  const [isTableSelected, setIsTableSelected] = useState(true)
+
+  const handleSelectTable = () => {
+    setIsTableSelected(!isTableSelected)
+  }
+
+  useEffect(() => {
+    dispatchGetData()
+  }, [])
 
   return (
     <Container>
@@ -18,7 +28,9 @@ function Orders() {
         Pedidos
       </Typography>
 
-      {isTableSelected && <SelectedTable />}
+      {isTableSelected && (
+        <SelectedTable handleSelectTable={handleSelectTable} />
+      )}
       {!isTableSelected && <>isTableSelected</>}
     </Container>
   )

@@ -1,5 +1,4 @@
 export { default as SelectedTable } from "./components/SelectedTable/SelectedTable"
-export * from "./components/styled-components/CardTable.styled.component"
-export { default as useSelectTable } from "./hooks/useSelectTable"
+export { default as useInitialGetData } from "./hooks/useInitialGetData"
 export { default as Orders } from "./Orders"
 export { default as getAllOrders } from "./services/getAllOrders"

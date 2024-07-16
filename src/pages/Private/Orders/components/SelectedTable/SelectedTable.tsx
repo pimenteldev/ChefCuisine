@@ -1,4 +1,5 @@
-import { CardTableGrid, useSelectTable } from "@/pages/Private/Orders"
+import { useInitialGetData } from "@/pages/Private/Orders"
+import { CardTableGrid } from "@/pages/Private/Tables"
 import {
   Alert,
   Avatar,
@@ -12,8 +13,13 @@ import {
   Typography,
 } from "@mui/material"
 
-const SelectedTable = () => {
-  const { tables, orders, personal, handleSelectTable } = useSelectTable()
+interface Props {
+  handleSelectTable: () => void
+}
+
+const SelectedTable: React.FC<Props> = (props) => {
+  const { handleSelectTable } = props
+  const { tables, orders, personal } = useInitialGetData()
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
@@ -81,7 +87,7 @@ const SelectedTable = () => {
               }}
               key={table_id}
             >
-              <CardActionArea onClick={() => handleSelectTable()}>
+              <CardActionArea onClick={handleSelectTable}>
                 <CardHeader
                   sx={{
                     height: 60,

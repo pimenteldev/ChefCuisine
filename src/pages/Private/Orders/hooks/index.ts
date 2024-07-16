@@ -1,1 +1,1 @@
-export { default as useSelectTable } from "./useSelectTable"
+export { default as useInitialGetData } from "./useInitialGetData"
