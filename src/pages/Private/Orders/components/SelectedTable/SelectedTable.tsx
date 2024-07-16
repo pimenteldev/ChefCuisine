@@ -1,22 +1,16 @@
 import { CardTableGrid, useSelectTable } from "@/pages/Private/Orders"
 import {
   Alert,
-  AlertTitle,
   Avatar,
   Badge,
   Card,
   CardActionArea,
-  CardActions,
-  CardContent,
   CardHeader,
   CardMedia,
   Container,
-  IconButton,
   styled,
   Typography,
 } from "@mui/material"
-
-import ShoppingCartCheckoutOutlinedIcon from "@mui/icons-material/ShoppingCartCheckoutOutlined"
 
 const SelectedTable = () => {
   const { tables, orders, personal, handleSelectTable } = useSelectTable()
@@ -117,9 +111,6 @@ const SelectedTable = () => {
                   }
                   title={personalInfo[0]?.personal_name}
                   subheader={personalInfo[0]?.personal_name && "Cuenta Activa"}
-                  style={{
-                    fontWeight: "bold",
-                  }}
                 />
                 <div
                   style={{
@@ -144,12 +135,12 @@ const SelectedTable = () => {
 
                   <Typography
                     variant="h5"
-                    color={table_active ? "white" : "#10b981"}
+                    color={table_active ? "white" : "#4d4d4d"}
                     sx={{
                       position: "absolute",
                       opacity: "1",
-                      zIndex: 99,
                       fontWeight: "bold",
+                      zIndex: 99,
                     }}
                   >
                     {table_name}
