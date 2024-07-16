@@ -1,11 +1,13 @@
 import { baseUrl } from "@/constants"
-import { ProductsViewApi } from "@/models"
+import { ProductsApi } from "@/models"
+import { ProductsViewAdapter } from "../adapters"
 
-const getAllProducts = async (): Promise<ProductsViewApi> => {
-  const response = await fetch(`${baseUrl}products.php`, {
+const getAllProducts = async (): Promise<ProductsApi> => {
+  return await fetch(`${baseUrl}products.php`, {
     method: "GET",
   })
-
-  return response.json()
+    .then((response) => response.json())
+    .then((response) => ProductsViewAdapter(response))
 }
+
 export default getAllProducts

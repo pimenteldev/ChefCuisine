@@ -1,7 +1,7 @@
 import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar.component"
 import { clearLocalStorage } from "@/helpers"
 import { BackendUser } from "@/models"
-import { UserKey, createUser, resetUser } from "@/redux/slices/user"
+import { UserKey, createUser, resetUser } from "@/redux/slices/userSlice"
 import { AppStore } from "@/redux/store"
 import { PrivateRoutes, PublicRoutes } from "@/routes"
 import { AlertColor } from "@mui/material"

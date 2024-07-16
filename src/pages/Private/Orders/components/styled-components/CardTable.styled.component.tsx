@@ -7,6 +7,10 @@ export const CardTableGrid = styled.div`
   gap: 10px;
 `
 
+export const CardTableLayout = styled.span`
+  position: relative;
+`
+
 export const CardTableBase = styled.div`
   width: 100%;
   display: flex;
@@ -15,29 +19,13 @@ export const CardTableBase = styled.div`
   align-items: center;
   cursor: pointer;
   gap: 1rem;
+  opacity: 1;
   &:hover > figure > img {
     transform: scale(1.1);
   }
   &:hover > div {
     border-bottom: 5px solid ${COLORS.primary};
   }
-`
-
-export const CardTableFigure = styled.figure`
-  width: 100%;
-  height: 125px;
-  overflow: hidden;
-  border-radius: 5px;
-  position: relative;
-  opacity: 0.2;
-`
-
-export const CardTableFigureImg = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-  object-fit: cover;
-  transition: all 0.25s ease;
 `
 
 export const CardTableName = styled.div`
@@ -53,34 +41,19 @@ export const CardTableName = styled.div`
   font-size: 20px;
   font-weight: 800;
   word-break: break-word;
-`
-
-export const CardTableLayout = styled.span`
-  position: relative;
+  z-index: 9999;
+  text-shadow: 1px 1px 0px #212529a4;
 `
 
 export const CardTableStatusOn = styled.span`
-  background-color: ${COLORS.primary};
+  background-color: ${COLORS.warning};
   color: ${COLORS.background};
   position: absolute;
   padding: 0.2rem 0.5rem;
   top: 0px;
-  right: 20px;
+  right: 10px;
   font-weight: 800;
   border-radius: 5px;
   opacity: 1;
-  z-index: 99;
-`
-
-export const CardTableStatusOff = styled.span`
-  background-color: ${COLORS.danger};
-  color: ${COLORS.background};
-  position: absolute;
-  padding: 0.2rem 0.5rem;
-  top: 0px;
-  right: 20px;
-  font-weight: 800;
-  border-radius: 5px;
-  opacity: 1;
-  z-index: 99;
+  z-index: 9999;
 `

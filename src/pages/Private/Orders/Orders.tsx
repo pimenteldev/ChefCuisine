@@ -1,16 +1,10 @@
 import { Container, Typography } from "@mui/material"
 import { SelectedTable } from "./components"
 import useSelectTable from "./hooks/useSelectTable"
-import { useGetAllTables } from "@/pages"
-import { useEffect } from "react"
+
 
 function Orders() {
-  const { isTableSelected, tables } = useSelectTable()
-  const { callToEndPointsAndDispatchs } = useGetAllTables()
-
-  useEffect(() => {
-    callToEndPointsAndDispatchs()
-  }, [])
+  const { isTableSelected } = useSelectTable()
 
   return (
     <Container>
@@ -24,7 +18,8 @@ function Orders() {
         Pedidos
       </Typography>
 
-      {isTableSelected && <SelectedTable data={tables} />}
+      {isTableSelected && <SelectedTable />}
+      {!isTableSelected && <>isTableSelected</>}
     </Container>
   )
 }
