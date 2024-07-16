@@ -35,6 +35,10 @@ export interface Product {
   product_status: number
 }
 
+export interface ProductInOrder extends Product {
+  product_count?: number
+}
+
 export interface Unit {
   unit_id: number
   unit_name: string
