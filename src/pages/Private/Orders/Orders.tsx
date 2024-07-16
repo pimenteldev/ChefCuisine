@@ -5,6 +5,8 @@ import { SelectedPersonal, SelectedTable } from "./components"
 import useInitialGetData from "./hooks/useInitialGetData"
 import { useEffect, useState } from "react"
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
+import { Product, ProductInOrder } from "@/models"
+import { ProductsDash } from "./components/ProductsDash"
 interface OrderInProcess {
   isTableSelected: boolean
   tableSelectId: number | null
@@ -27,6 +29,7 @@ function Orders() {
   const { dispatchGetData } = useInitialGetData()
 
   const [state, setState] = useState<OrderInProcess>(INITIAL_ORDER_IN_PROCESS)
+  const [listProducts, setListProducts] = useState([])
 
   const handleSelectTable = (table_id: number, table_name: string) => {
     setState({
@@ -47,6 +50,29 @@ function Orders() {
       personalSelectDocument: personalSelectDocument,
       personalSelectName: personalSelectName,
     })
+  }
+
+  const handleSelectProduct = (productSelect: Product) => {
+    let count = listProducts.filter(
+      (li) => li.product_id === productSelect.product_id
+    )
+
+    let newProduct = {
+      ...productSelect,
+      product_count: 1,
+    }
+
+    if (count.length === 0) {
+      setListProducts([...listProducts, newProduct])
+    } else {
+      setListProducts(
+        listProducts.map((li) =>
+          li.product_id === productSelect.product_id
+            ? { ...li, product_count: li.product_count + 1 }
+            : li
+        )
+      )
+    }
   }
 
   useEffect(() => {
@@ -97,12 +123,18 @@ function Orders() {
         )}
       </Breadcrumbs>
 
+      {JSON.stringify(listProducts)}
+
       {!state.isTableSelected && (
         <SelectedTable handleSelectTable={handleSelectTable} />
       )}
 
       {state.isTableSelected && !state.isPersonalSelected && (
         <SelectedPersonal handleSelectPersonal={handleSelectPersonal} />
+      )}
+
+      {state.isTableSelected && state.isPersonalSelected && (
+        <ProductsDash handleSelectProduct={handleSelectProduct} />
       )}
     </Container>
   )
