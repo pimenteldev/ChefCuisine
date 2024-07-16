@@ -14,7 +14,7 @@ import {
 } from "@mui/material"
 
 interface Props {
-  handleSelectTable: () => void
+  handleSelectTable: (table_id: number, table_name: string) => void
 }
 
 const SelectedTable: React.FC<Props> = (props) => {
@@ -87,7 +87,9 @@ const SelectedTable: React.FC<Props> = (props) => {
               }}
               key={table_id}
             >
-              <CardActionArea onClick={handleSelectTable}>
+              <CardActionArea
+                onClick={() => handleSelectTable(table_id, table_name)}
+              >
                 <CardHeader
                   sx={{
                     height: 60,

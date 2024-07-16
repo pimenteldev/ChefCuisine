@@ -9,6 +9,7 @@ const useInitialGetData = () => {
   const tables = useSelector((store: AppStore) => store.orders.tables)
   const orders = useSelector((store: AppStore) => store.orders.orders)
   const personal = useSelector((store: AppStore) => store.orders.personal)
+  const role = useSelector((store: AppStore) => store.orders.role)
 
   const dispatchGetData = async () => {
     await getAllOrders()
@@ -24,6 +25,7 @@ const useInitialGetData = () => {
     tables,
     orders,
     personal,
+    role,
     dispatchGetData,
   }
 }
