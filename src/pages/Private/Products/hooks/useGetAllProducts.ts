@@ -1,5 +1,5 @@
 import { getAllProducts } from "@/pages"
-import { setDataInProducts } from "@/redux/slices/products"
+import { setDataInProducts } from "@/redux/slices/productsSlice"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 

@@ -1,12 +1,8 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
-import { getAllTables } from "../services"
-import { setDataInTable } from "@/redux/slices/tables"
-import { useGetAllTables, addNewTable } from "@/pages"
 import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog.component"
 import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar.component"
-import { useForm } from "react-hook-form"
+import { addNewTable, useGetAllTables } from "@/pages"
 import { AlertColor } from "@mui/material"
+import { useForm } from "react-hook-form"
 
 type FormValues = {
   table_name: string

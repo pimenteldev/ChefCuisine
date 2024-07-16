@@ -1,5 +1,5 @@
 import { clearLocalStorage } from "@/helpers"
-import { UserKey, resetUser } from "@/redux/slices/user"
+import { UserKey, resetUser } from "@/redux/slices/userSlice"
 import { AppStore } from "@/redux/store"
 import { PublicRoutes } from "@/routes"
 import { Avatar, Box, Button, Typography } from "@mui/material"

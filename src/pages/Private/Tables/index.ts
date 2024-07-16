@@ -1,3 +1,4 @@
+export * from "./adapters/tablesView"
 export { default as AddTable } from "./components/AddTable/AddTable"
 export { default as CardTable } from "./components/CardTable/CardTable"
 export { default as DialogContainerTables } from "./components/DialogContainerTables/DialogContainerTables"

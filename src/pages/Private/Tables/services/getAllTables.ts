@@ -1,12 +1,13 @@
 import { baseUrl } from "@/constants"
 import { TablesApi } from "@/models"
+import { TablesViewAdapter } from "../adapters"
 
 const getAllTables = async (): Promise<TablesApi> => {
-  const response = await fetch(`${baseUrl}tables.php`, {
+  return await fetch(`${baseUrl}tables.php`, {
     method: "GET",
   })
-
-  return response.json()
+    .then((response) => response.json())
+    .then((response) => TablesViewAdapter(response))
 }
 
 export default getAllTables

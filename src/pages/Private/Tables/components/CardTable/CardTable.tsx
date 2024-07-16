@@ -8,7 +8,7 @@ import {
   CardTableStatusOff,
   CardTableStatusOn,
   useTablesViewContext,
-} from "@/pages"
+} from "@/pages/Private/Tables"
 import mesa from "/mesa.jpg"
 import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog.component"
 

@@ -7,7 +7,6 @@ import { AlertColor } from "@mui/material"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useSelector } from "react-redux"
-import { v4 as newId } from "uuid"
 import AddProductService from "../services/addNewProduct"
 
 function useAddProduct() {
@@ -72,7 +71,7 @@ function useAddProduct() {
   const onSubmit = async (data: any) => {
     const formData = new FormData()
 
-    const newIdProduct = newId()
+    const newIdProduct = crypto.randomUUID()
     const newProduct: Product = {
       product_id: newIdProduct,
       product_base_price: data.product_base_price,

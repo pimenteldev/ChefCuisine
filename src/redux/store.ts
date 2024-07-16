@@ -1,17 +1,19 @@
-import { ProductsApi, TablesApi, User } from "@/models"
+import { OrdersApi, ProductsApi, TablesApi, User } from "@/models"
 import { configureStore } from "@reduxjs/toolkit"
-import { productsReducer, tablesReducer, userReducer } from "./slices"
+import { productsSlice, tablesSlice, userSlice, ordersSlice } from "./slices"
 
 export interface AppStore {
   user: User
   products: ProductsApi
   tables: TablesApi
+  orders: OrdersApi
 }
 
 export default configureStore<AppStore>({
   reducer: {
-    user: userReducer,
-    products: productsReducer,
-    tables: tablesReducer,
+    user: userSlice,
+    products: productsSlice,
+    tables: tablesSlice,
+    orders: ordersSlice,
   },
 })
