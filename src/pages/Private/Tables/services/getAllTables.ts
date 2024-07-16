@@ -1,6 +1,6 @@
-import { baseUrl } from "@/constants"
-import { TablesApi } from "@/models"
-import { TablesViewAdapter } from "../adapters"
+import { baseUrl } from "@/constants/utilitys"
+import { TablesApi } from "@/models/tables"
+import { TablesViewAdapter } from "../adapters/tablesView"
 
 const getAllTables = async (): Promise<TablesApi> => {
   return await fetch(`${baseUrl}tables.php`, {

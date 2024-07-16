@@ -1,8 +1,9 @@
 import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog.component"
-import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar.component"
-import { addNewTable, useGetAllTables } from "@/pages"
+import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar"
 import { AlertColor } from "@mui/material"
 import { useForm } from "react-hook-form"
+import addNewTable from "../services/addNewTable"
+import useGetAllTables from "./useGetAllTables"
 
 type FormValues = {
   table_name: string

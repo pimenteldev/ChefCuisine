@@ -1,4 +1,4 @@
-import { APP_NAME, APP_SUBNAME, COLORS } from "@/constants"
+import { APP_NAME, APP_SUBNAME, COLORS } from "@/constants/utilitys"
 import React from "react"
 import styled from "styled-components"
 export interface LoginCardTitleInterface {}

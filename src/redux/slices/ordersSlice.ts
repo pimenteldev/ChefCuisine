@@ -1,4 +1,4 @@
-import { OrdersEmptyState } from "@/models"
+import { OrdersEmptyState } from "@/models/orders"
 import { createSlice } from "@reduxjs/toolkit"
 
 export const tablesKey = "orders"

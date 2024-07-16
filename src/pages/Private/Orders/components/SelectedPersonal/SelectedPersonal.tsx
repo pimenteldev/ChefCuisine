@@ -1,18 +1,15 @@
-import { baseUrl } from "@/constants"
-import { useInitialGetData } from "@/pages/Private/Orders"
-import { CardTableGrid } from "@/pages/Private/Tables"
+import { baseUrl } from "@/constants/utilitys"
+import { CardTableGrid } from "@/pages/Private/Tables/styled-components/CardTable"
 import {
+  Container,
   Alert,
-  Avatar,
-  Badge,
   Card,
   CardActionArea,
   CardHeader,
+  Avatar,
   CardMedia,
-  Container,
-  styled,
-  Typography,
 } from "@mui/material"
+import useInitialGetData from "../../hooks/useInitialGetData"
 
 interface Props {
   handleSelectPersonal: (

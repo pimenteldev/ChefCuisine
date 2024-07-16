@@ -1,17 +1,16 @@
-import { useInitialGetData } from "@/pages/Private/Orders"
-import { CardTableGrid } from "@/pages/Private/Tables"
+import { CardTableGrid } from "@/pages/Private/Tables/styled-components/CardTable"
 import {
+  Container,
   Alert,
-  Avatar,
-  Badge,
   Card,
   CardActionArea,
   CardHeader,
-  CardMedia,
-  Container,
-  styled,
+  Avatar,
   Typography,
+  CardMedia,
 } from "@mui/material"
+import useInitialGetData from "../../hooks/useInitialGetData"
+import StyledBadge from "@/components/StyledBadge/StyledBadge"
 
 interface Props {
   handleSelectTable: (table_id: number, table_name: string) => void
@@ -20,35 +19,6 @@ interface Props {
 const SelectedTable: React.FC<Props> = (props) => {
   const { handleSelectTable } = props
   const { tables, orders, personal } = useInitialGetData()
-
-  const StyledBadge = styled(Badge)(({ theme }) => ({
-    "& .MuiBadge-badge": {
-      backgroundColor: "#44b700",
-      color: "#44b700",
-      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-      "&::after": {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        borderRadius: "50%",
-        animation: "ripple 1.2s infinite ease-in-out",
-        border: "1px solid currentColor",
-        content: '""',
-      },
-    },
-    "@keyframes ripple": {
-      "0%": {
-        transform: "scale(.8)",
-        opacity: 1,
-      },
-      "100%": {
-        transform: "scale(2.4)",
-        opacity: 0,
-      },
-    },
-  }))
 
   return (
     <Container sx={{ mb: 4 }}>
@@ -98,14 +68,7 @@ const SelectedTable: React.FC<Props> = (props) => {
                   }}
                   avatar={
                     personalInfo[0]?.personal_photo ? (
-                      <StyledBadge
-                        overlap="circular"
-                        anchorOrigin={{
-                          vertical: "bottom",
-                          horizontal: "right",
-                        }}
-                        variant="dot"
-                      >
+                      <StyledBadge>
                         <Avatar src="/staff.svg" />
                       </StyledBadge>
                     ) : (

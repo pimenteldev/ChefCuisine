@@ -2,14 +2,18 @@ import { Suspense, lazy } from "react"
 import { Provider } from "react-redux"
 import { Route } from "react-router"
 import { BrowserRouter, Navigate } from "react-router-dom"
-import { CustomSnackBar, Navbar, Sidebar, Spinner } from "./components"
-import { AuthGuard, RolGuard } from "./guards"
-import { RoutesWithNotFound } from "./helpers"
-import { Roles } from "./models"
-import { HomeUser } from "./pages"
+import Spinner from "./components/Spinner/Spinner"
 import store from "./redux/store"
-import { PrivateRoutes, PublicRoutes } from "./routes"
-import { LayoutContainer } from "./styled-components"
+import CustomSnackBar from "./components/CustomSnackBar/CustomSnackBar"
+import Navbar from "./components/Navbar/Navbar"
+import Sidebar from "./components/Sidebar/Sidebar"
+import AuthGuard from "./guards/AuthGuard"
+import RolGuard from "./guards/RolGuard"
+import RoutesWithNotFound from "./helpers/RoutesWithNotFound"
+import { Roles } from "./models/roles"
+import HomeUser from "./pages/Private/HomeUser/HomeUser"
+import { PrivateRoutes, PublicRoutes } from "./routes/routes"
+import { LayoutContainer } from "./styled-components/layout"
 
 const Login = lazy(() => import("./pages/Login/Login"))
 const Private = lazy(() => import("./pages/Private/Private"))
@@ -43,18 +47,7 @@ function App() {
                   }
                 />
               </Route>
-              <Route element={<RolGuard rol={Roles.ADMIN} />}>
-                <Route
-                  path={`${PrivateRoutes.DASHBOARD}`}
-                  element={
-                    <>
-                      <Navbar />
-                      <Sidebar />
-                      <Private />
-                    </>
-                  }
-                />
-              </Route>
+
               <Route element={<RolGuard rol={Roles.USER} />}>
                 <Route
                   path={`${PrivateRoutes.PRIVATE}/${PrivateRoutes.HOMEUSER}`}

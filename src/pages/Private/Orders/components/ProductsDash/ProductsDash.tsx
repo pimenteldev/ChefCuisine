@@ -1,20 +1,19 @@
-import { baseUrl } from "@/constants"
-import { Product } from "@/models"
-import { useInitialGetData } from "@/pages/Private/Orders"
+import { baseUrl } from "@/constants/utilitys"
+import { Product } from "@/models/products"
 import {
+  Container,
   Alert,
   Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Chip,
-  Container,
-  Tooltip,
-  Stack,
-  Button,
-  Typography,
   CardActionArea,
+  Stack,
+  Chip,
+  CardMedia,
+  Typography,
+  CardContent,
+  Tooltip,
+  Button,
 } from "@mui/material"
+import useInitialGetData from "../../hooks/useInitialGetData"
 
 interface Props {
   handleSelectProduct: (product: Product) => void

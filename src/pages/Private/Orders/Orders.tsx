@@ -1,12 +1,14 @@
 import { Breadcrumbs, Container, Link, Typography } from "@mui/material"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import TableRestaurantIcon from "@mui/icons-material/TableRestaurant"
-import { SelectedPersonal, SelectedTable } from "./components"
 import useInitialGetData from "./hooks/useInitialGetData"
 import { useEffect, useState } from "react"
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
-import { Product, ProductInOrder } from "@/models"
-import { ProductsDash } from "./components/ProductsDash"
+import { Product } from "@/models/products"
+import ProductsDash from "./components/ProductsDash/ProductsDash"
+import SelectedPersonal from "./components/SelectedPersonal/SelectedPersonal"
+import SelectedTable from "./components/SelectedTable/SelectedTable"
+
 interface OrderInProcess {
   isTableSelected: boolean
   tableSelectId: number | null

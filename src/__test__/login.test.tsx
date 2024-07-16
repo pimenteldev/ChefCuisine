@@ -1,8 +1,8 @@
-import { Login } from "@/pages"
-import { store } from "@/redux"
 import { Provider } from "react-redux"
 import { BrowserRouter } from "react-router-dom"
 import { cleanup, fireEvent, render, screen } from "@testing-library/react"
+import Login from "@/pages/Login/Login"
+import store from "@/redux/store"
 
 const LoginMock = () => {
   return (

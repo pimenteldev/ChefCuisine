@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { getAllTables } from "../services"
 import { setDataInTable } from "@/redux/slices/tablesSlice"
+import getAllTables from "../services/getAllTables"
 
 function useGetAllTables() {
   const dispatch = useDispatch()

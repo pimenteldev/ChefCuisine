@@ -1,6 +1,0 @@
-export { default as AddProduct } from "./AddProduct/AddProduct"
-export { default as CardProduct } from "./CardProduct/CardProduct"
-export { default as DialogContainer } from "./DialogContainer/DialogContainer"
-export { default as FabButton } from "./FabButton/FabButton"
-export { default as ModifyProduct } from "./ModifyProduct/ModifyProduct"
-export { default as ProductsList } from "./ProductsList/ProductsList"

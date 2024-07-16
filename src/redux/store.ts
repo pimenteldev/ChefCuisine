@@ -1,6 +1,12 @@
-import { OrdersApi, ProductsApi, TablesApi, User } from "@/models"
 import { configureStore } from "@reduxjs/toolkit"
-import { productsSlice, tablesSlice, userSlice, ordersSlice } from "./slices"
+import { OrdersApi } from "@/models/orders"
+import { ProductsApi } from "@/models/products"
+import { TablesApi } from "@/models/tables"
+import { User } from "@/models/user"
+import ordersSlice from "./slices/ordersSlice"
+import productsSlice from "./slices/productsSlice"
+import tablesSlice from "./slices/tablesSlice"
+import userSlice from "./slices/userSlice"
 
 export interface AppStore {
   user: User

@@ -34,7 +34,7 @@ export const OrdersEmptyState = {
   units: [],
   role: [],
   personal: [],
-  mesas: [],
+  tables: [],
   settings: [],
   orders: [],
 }

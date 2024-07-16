@@ -1,9 +1,11 @@
-import { CustomInput } from "@/components"
+import CustomInput from "@/components/CustomInput/CustomInput"
 import { Button } from "@mui/material"
-import { LoginCardFigure } from "./components/LoginCardFigure"
-import { LoginCardTitle } from "./components/LoginCardTitle"
-import { useLogin } from "./hooks"
-import { LoginCard, LoginContainer, LoginForm } from "./styled-components"
+import LoginCardFigure from "./components/LoginCardFigure/LoginCardFigure"
+import LoginCardTitle from "./components/LoginCardTitle/LoginCardTitle"
+import useLogin from "./hooks/useLogin"
+import { LoginCard } from "./styled-components/LoginCard"
+import { LoginContainer } from "./styled-components/LoginContainer"
+import { LoginForm } from "./styled-components/LoginForm"
 
 const Login = () => {
   const { register, errors, onSubmit } = useLogin()

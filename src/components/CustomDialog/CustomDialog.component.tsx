@@ -1,4 +1,4 @@
-import { SubjectManager } from "@/models"
+import { SubjectManager } from "@/models/subjectManager"
 import Dialog from "@mui/material/Dialog"
 import React, { useEffect, useState } from "react"
 import { Subscription } from "rxjs"

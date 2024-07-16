@@ -1,4 +1,4 @@
-import { TablesApi } from "@/models"
+import { TablesApi } from "@/models/tables"
 
 export const TablesViewAdapter = (tablesApi: TablesApi) => {
   return {

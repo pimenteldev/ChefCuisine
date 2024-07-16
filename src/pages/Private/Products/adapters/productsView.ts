@@ -1,4 +1,5 @@
-import { ProductsApi } from "@/models"
+import { ProductsApi } from "@/models/products"
+
 
 export const ProductsViewAdapter = (productsApi: ProductsApi) => {
   return {

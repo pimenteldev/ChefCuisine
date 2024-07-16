@@ -1,5 +1,5 @@
-import { clearLocalStorage, persistLocalStorage } from "@/helpers"
-import { User, UserEmptyState } from "@/models"
+import { clearLocalStorage, persistLocalStorage } from "@/helpers/localStorage"
+import { User, UserEmptyState } from "@/models/user"
 import { createSlice } from "@reduxjs/toolkit"
 
 export const UserKey = "user"

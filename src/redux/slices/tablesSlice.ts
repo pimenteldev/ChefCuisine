@@ -1,4 +1,4 @@
-import { TablesApi } from "@/models"
+import { TablesApi } from "@/models/tables"
 import { createSlice } from "@reduxjs/toolkit"
 
 export const tablesKey = "tables"

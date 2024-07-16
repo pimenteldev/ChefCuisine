@@ -1,5 +1,0 @@
-export { default as ordersSlice } from "./slices/ordersSlice"
-export { default as productsSlice } from "./slices/productsSlice"
-export { default as tablesSlice } from "./slices/tablesSlice"
-export { default as userSlice } from "./slices/userSlice"
-export { default as store } from "./store"

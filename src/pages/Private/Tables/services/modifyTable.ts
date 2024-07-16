@@ -1,4 +1,4 @@
-import { baseUrl } from "@/constants"
+import { baseUrl } from "@/constants/utilitys"
 
 async function ModifyTableService(formData: string) {
   const response = await fetch(`${baseUrl}tables.php`, {

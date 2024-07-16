@@ -1,7 +1,7 @@
 import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog.component"
-import { useProductsViewContext } from "@/pages"
 import AddIcon from "@mui/icons-material/Add"
 import { Fab } from "@mui/material"
+import { useProductsViewContext } from "../../contexts/ProductsView"
 
 const FabButton = () => {
   const { setDialog } = useProductsViewContext()

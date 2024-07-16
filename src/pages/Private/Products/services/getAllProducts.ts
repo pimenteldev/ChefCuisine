@@ -1,6 +1,6 @@
-import { baseUrl } from "@/constants"
-import { ProductsApi } from "@/models"
-import { ProductsViewAdapter } from "../adapters"
+import { baseUrl } from "@/constants/utilitys"
+import { ProductsApi } from "@/models/products"
+import { ProductsViewAdapter } from "../adapters/productsView"
 
 const getAllProducts = async (): Promise<ProductsApi> => {
   return await fetch(`${baseUrl}products.php`, {

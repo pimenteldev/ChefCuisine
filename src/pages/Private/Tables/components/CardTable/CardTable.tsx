@@ -1,14 +1,14 @@
-import { Table } from "@/models"
+import { Table } from "@/models/tables"
+import { useTablesViewContext } from "../../contexts/TablesView"
 import {
   CardTableLayout,
-  CardTableBase,
-  CardTableFigure,
-  CardTableFigureImg,
-  CardTableName,
   CardTableStatusOff,
   CardTableStatusOn,
-  useTablesViewContext,
-} from "@/pages/Private/Tables"
+  CardTableBase,
+  CardTableName,
+  CardTableFigure,
+  CardTableFigureImg,
+} from "../../styled-components/CardTable"
 import mesa from "/mesa.jpg"
 import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog.component"
 

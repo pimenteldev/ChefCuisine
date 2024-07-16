@@ -1,16 +1,16 @@
-import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar.component"
-import { clearLocalStorage } from "@/helpers"
-import { BackendUser } from "@/models"
+import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar"
+import { clearLocalStorage } from "@/helpers/localStorage"
+import { BackendUser } from "@/models/user"
 import { UserKey, createUser, resetUser } from "@/redux/slices/userSlice"
 import { AppStore } from "@/redux/store"
-import { PrivateRoutes, PublicRoutes } from "@/routes"
+import { PrivateRoutes, PublicRoutes } from "@/routes/routes"
 import { AlertColor } from "@mui/material"
 import { useEffect } from "react"
 import { Resolver, useForm } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { FormValues } from "../models"
-import { authService } from "../services"
+import { FormValues } from "../models/loginform"
+import { authService } from "../services/auth"
 
 function useLogin() {
   const dispatch = useDispatch()

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react"
-import { DialogStateTables } from "../models"
+import { DialogStateTables } from "../models/dialogStateTables"
 
 export const TablesContext = createContext<any>(null)
 

@@ -1,6 +1,0 @@
-export { default as AddTable } from "./AddTable/AddTable"
-export { default as CardTable } from "./CardTable/CardTable"
-export { default as DialogContainerTables } from "./DialogContainerTables/DialogContainerTables"
-export { default as FabButtonTables } from "./FabButtonTables/FabButtonTables"
-export { default as ModifyTable } from "./ModifyTable/ModifyTable"
-export { default as TablesList } from "./TablesList/TablesList"

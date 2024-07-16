@@ -1,7 +1,7 @@
-import { COLORS } from "@/constants"
 import React from "react"
 import styled from "styled-components"
 import logo from "/icon.png"
+import { COLORS } from "@/constants/utilitys"
 
 export interface LoginCardFigureInterface {}
 
