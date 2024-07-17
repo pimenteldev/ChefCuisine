@@ -1,23 +1,23 @@
 import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog.component"
-import { baseUrl } from "@/constants"
-import { Product } from "@/models"
+import { baseUrl } from "@/constants/utilitys"
+import { Product } from "@/models/products"
+import { TruncateText } from "@/styled-components/truncateText"
+import { Alert, Badge } from "@mui/material"
+import { useProductsViewContext } from "../../contexts/ProductsView"
+import useSearchCategory from "../../hooks/useSearchCategory"
 import {
   CardProductBase,
   CardProductBody,
+  CardProductFigure,
+  CardProductFigureImg,
+  CardProductName,
+  CardProductPriceAndIngredient,
+  CardProductIngredients,
+  CardProductPrice,
   CardProductBottom,
   CardProductBottomCategory,
   CardProductBottomStatus,
-  CardProductFigure,
-  CardProductFigureImg,
-  CardProductIngredients,
-  CardProductName,
-  CardProductPrice,
-  CardProductPriceAndIngredient,
-  useProductsViewContext,
-  useSearchCategory,
-} from "@/pages"
-import { Alert, Badge } from "@mui/material"
-import { TruncateText } from "@/styled-components"
+} from "../../styled-components/CardProduct"
 
 interface CardProductInterface {
   product: Product

@@ -1,25 +1,16 @@
-import React from "react"
+import CustomInput from "@/components/CustomInput/CustomInput"
 import {
-  Avatar,
-  Box,
-  Button,
   Container,
-  Divider,
-  FormControl,
-  Grid,
-  IconButton,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  ListItemText,
-  MenuItem,
-  Stack,
-  TextField,
   Typography,
+  Divider,
+  Grid,
+  Stack,
+  FormControl,
+  TextField,
+  MenuItem,
+  Button,
 } from "@mui/material"
-import { CustomInput } from "@/components"
-import { useAddTable } from "@/pages"
+import useAddTable from "../../hooks/useAddTable"
 
 export interface AddTableInterface {}
 

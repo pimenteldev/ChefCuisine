@@ -1,4 +1,4 @@
-import { TablesApi } from "@/models"
+import { TablesApi } from "@/models/tables"
 import { createSlice } from "@reduxjs/toolkit"
 
 export const tablesKey = "tables"
@@ -8,7 +8,7 @@ const TablesApiEmptyState: TablesApi = {
 }
 
 export const tablesSlice = createSlice({
-  name: "tables",
+  name: tablesKey,
   initialState: TablesApiEmptyState,
   reducers: {
     setDataInTable: (state, action) => action.payload,

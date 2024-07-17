@@ -1,29 +1,29 @@
-import { baseUrl } from "@/constants"
-import { useInitialGetData } from "@/pages/Private/Orders"
-import { CardTableGrid } from "@/pages/Private/Tables"
+import { baseUrl } from "@/constants/utilitys"
+import { CardTableGrid } from "@/pages/Private/Tables/styled-components/CardTable"
 import {
+  Container,
   Alert,
-  Avatar,
-  Badge,
   Card,
   CardActionArea,
   CardHeader,
+  Avatar,
   CardMedia,
-  Container,
-  styled,
-  Typography,
 } from "@mui/material"
+import useInitialGetData from "../../hooks/useInitialGetData"
+import { useDispatch } from "react-redux"
+import { addPersonalSelect } from "@/redux/slices/orderSlice"
 
-interface Props {
-  handleSelectPersonal: (
-    personalSelectDocument: string,
-    personalSelectName: string
-  ) => void
-}
-
-const SelectedPersonal: React.FC<Props> = (props) => {
-  const { handleSelectPersonal } = props
+const SelectedPersonal = () => {
   const { personal, role } = useInitialGetData()
+
+  const dispatch = useDispatch()
+
+  const handleSelectPersonal = (
+    personal_document: string,
+    personal_name: string
+  ) => {
+    dispatch(addPersonalSelect({personal_document, personal_name}))
+  }
 
   return (
     <Container sx={{ mb: 4 }}>

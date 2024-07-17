@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react"
-import { DialogState } from "../models"
+import { DialogState } from "../models/dialogState"
 
 export const ProductsContext = createContext<any>(null)
 

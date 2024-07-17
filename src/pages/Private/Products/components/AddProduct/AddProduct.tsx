@@ -1,6 +1,3 @@
-import { CustomInput } from "@/components"
-import { Category, Item } from "@/models"
-import { useAddProduct } from "@/pages"
 import { CheckCircleOutline, DeleteRounded } from "@mui/icons-material"
 import {
   Avatar,
@@ -22,6 +19,9 @@ import {
   Typography,
 } from "@mui/material"
 import React from "react"
+import useAddProduct from "../../hooks/useAddProduct"
+import CustomInput from "@/components/CustomInput/CustomInput"
+import { Category, Item } from "@/models/products"
 
 export interface AddProductInterface {}
 

@@ -1,6 +1,7 @@
-import { CustomDialog } from "@/components"
-import { AddTable, useTablesViewContext } from "@/pages"
-import { ModifyTable } from "../ModifyTable"
+import CustomDialog from "@/components/CustomDialog/CustomDialog.component"
+import { useTablesViewContext } from "../../contexts/TablesView"
+import AddTable from "../AddTable/AddTable"
+import ModifyTable from "../ModifyTable/ModifyTable"
 
 function DialogContainerTables() {
   const { dialog } = useTablesViewContext()

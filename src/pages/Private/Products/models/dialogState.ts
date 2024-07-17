@@ -1,4 +1,4 @@
-import { Product } from "@/models"
+import { Product } from "@/models/products"
 
 type Action = "add" | "modify" | "remove"
 

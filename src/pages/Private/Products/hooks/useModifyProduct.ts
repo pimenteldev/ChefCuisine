@@ -1,11 +1,4 @@
 import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog.component"
-import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar.component"
-import { Item, Product } from "@/models"
-import {
-  removeProduct,
-  useGetAllProducts,
-  useProductsViewContext,
-} from "@/pages"
 import { AppStore } from "@/redux/store"
 import { AlertColor } from "@mui/material"
 import { useEffect, useState } from "react"
@@ -13,6 +6,11 @@ import { useForm } from "react-hook-form"
 import { useSelector } from "react-redux"
 import AddProductService from "../services/addNewProduct"
 import ModifyProductService from "../services/modifyProduct"
+import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar"
+import { Item, Product } from "@/models/products"
+import { useProductsViewContext } from "../contexts/ProductsView"
+import removeProduct from "../services/removeProduct"
+import useGetAllProducts from "./useGetAllProducts"
 
 function useModifyProduct() {
   const { dialog } = useProductsViewContext()

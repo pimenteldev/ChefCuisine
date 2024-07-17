@@ -1,4 +1,4 @@
-import { ProductsApi } from "@/models"
+import { ProductsApi } from "@/models/products"
 import { createSlice } from "@reduxjs/toolkit"
 
 export const productsKey = "products"
@@ -12,7 +12,7 @@ const ProductsApiEmptyState: ProductsApi = {
 }
 
 export const productsSlice = createSlice({
-  name: "products",
+  name: productsKey,
   initialState: ProductsApiEmptyState,
   reducers: {
     setDataInProducts: (state, action) => action.payload,

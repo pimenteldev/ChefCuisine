@@ -22,7 +22,7 @@ export interface Order {
   order_table_id: number
   order_personal_document: string
   order_list_inventary: string
-  order_create: Date
+  order_create: Date | string
   order_status: number
 }
 
@@ -34,7 +34,16 @@ export const OrdersEmptyState = {
   units: [],
   role: [],
   personal: [],
-  mesas: [],
+  tables: [],
   settings: [],
   orders: [],
+}
+
+export const OrderEmptyState = {
+  order_id: 0,
+  order_table_id: 0,
+  order_personal_document: "",
+  order_list_inventary: "",
+  order_create: "",
+  order_status: 0,
 }

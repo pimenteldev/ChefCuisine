@@ -1,9 +1,10 @@
 import { Typography } from "@mui/material"
 import Container from "@mui/material/Container"
 import React from "react"
-import { DialogContainer, ProductsList } from "./components"
-import { FabButton } from "./components/FabButton"
-import { ProductsProvider } from "./contexts"
+import DialogContainer from "./components/DialogContainer/DialogContainer"
+import FabButton from "./components/FabButton/FabButton"
+import ProductsList from "./components/ProductsList/ProductsList"
+import { ProductsProvider } from "./contexts/ProductsView"
 
 export interface ProductsInterface {}
 

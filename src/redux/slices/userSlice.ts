@@ -1,11 +1,11 @@
-import { clearLocalStorage, persistLocalStorage } from "@/helpers"
-import { User, UserEmptyState } from "@/models"
+import { clearLocalStorage, persistLocalStorage } from "@/helpers/localStorage"
+import { User, UserEmptyState } from "@/models/user"
 import { createSlice } from "@reduxjs/toolkit"
 
 export const UserKey = "user"
 
 export const userSlice = createSlice({
-  name: "user",
+  name: UserKey,
   initialState: localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user") as string)
     : UserEmptyState,

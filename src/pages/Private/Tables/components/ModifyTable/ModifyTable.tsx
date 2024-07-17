@@ -1,5 +1,3 @@
-import { CustomInput } from "@/components"
-import { useModifyTable, useRemoveTable } from "@/pages"
 import {
   Alert,
   Button,
@@ -12,7 +10,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material"
-import React from "react"
+import useModifyTable from "../../hooks/useModifyTable"
+import CustomInput from "@/components/CustomInput/CustomInput"
+import useRemoveTable from "../../hooks/useRemoveTable"
 
 export interface ModifyTableInterface {}
 

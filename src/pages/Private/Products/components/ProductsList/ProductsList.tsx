@@ -1,9 +1,11 @@
-import { Product } from "@/models"
-import { CardProduct, CardProductsGrid, useGetAllProducts } from "@/pages"
+import { Product } from "@/models/products"
 import { AppStore } from "@/redux/store"
 import { Alert } from "@mui/material"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
+import useGetAllProducts from "../../hooks/useGetAllProducts"
+import { CardProductsGrid } from "../../styled-components/CardProduct"
+import CardProduct from "../CardProduct/CardProduct"
 
 function ProductsList() {
   const { callToEndPointsAndDispatchs } = useGetAllProducts()

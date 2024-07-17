@@ -1,11 +1,8 @@
 import { Container, Typography } from "@mui/material"
-import React from "react"
-import {
-  DialogContainerTables,
-  FabButtonTables,
-  TablesList,
-} from "./components"
-import { TablesProvider } from "./contexts"
+import DialogContainerTables from "./components/DialogContainerTables/DialogContainerTables"
+import FabButtonTables from "./components/FabButtonTables/FabButtonTables"
+import TablesList from "./components/TablesList/TablesList"
+import { TablesProvider } from "./contexts/TablesView"
 
 export interface TablesInterface {}
 

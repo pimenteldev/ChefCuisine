@@ -1,7 +1,8 @@
 import { setInitialData } from "@/redux/slices/ordersSlice"
 import { AppStore } from "@/redux/store"
 import { useDispatch, useSelector } from "react-redux"
-import { getAllOrders } from "../services"
+import getAllOrders from "../services/getAllOrders"
+
 
 const useInitialGetData = () => {
   const dispatch = useDispatch()

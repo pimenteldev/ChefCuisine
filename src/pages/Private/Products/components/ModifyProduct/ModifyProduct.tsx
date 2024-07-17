@@ -1,7 +1,3 @@
-import { CustomInput } from "@/components"
-import { baseUrl } from "@/constants"
-import { Category, Item } from "@/models"
-import { useModifyProduct } from "@/pages"
 import CheckCircleOutline from "@mui/icons-material/CheckCircleOutline"
 import DeleteRounded from "@mui/icons-material/DeleteRounded"
 import {
@@ -24,6 +20,10 @@ import {
   Typography,
 } from "@mui/material"
 import React from "react"
+import useModifyProduct from "../../hooks/useModifyProduct"
+import CustomInput from "@/components/CustomInput/CustomInput"
+import { baseUrl } from "@/constants/utilitys"
+import { Category, Item } from "@/models/products"
 
 const ModifyProduct = () => {
   const {

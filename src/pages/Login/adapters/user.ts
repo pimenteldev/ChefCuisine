@@ -1,5 +1,6 @@
-import { baseUrl } from "@/constants"
-import { BackendUser, Roles, User } from "@/models"
+import { baseUrl } from "@/constants/utilitys"
+import { Roles } from "@/models/roles"
+import { BackendUser, User } from "@/models/user"
 
 export const UserAdapter = (user: BackendUser): User => {
   return {

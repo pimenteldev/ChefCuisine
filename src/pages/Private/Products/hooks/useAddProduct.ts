@@ -1,13 +1,13 @@
 import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog.component"
-import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar.component"
-import { Item, Product } from "@/models"
-import { useGetAllProducts } from "@/pages"
 import { AppStore } from "@/redux/store"
 import { AlertColor } from "@mui/material"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useSelector } from "react-redux"
 import AddProductService from "../services/addNewProduct"
+import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar"
+import { Item, Product } from "@/models/products"
+import useGetAllProducts from "./useGetAllProducts"
 
 function useAddProduct() {
   const [listItems, setListItems] = useState<Item[]>([])

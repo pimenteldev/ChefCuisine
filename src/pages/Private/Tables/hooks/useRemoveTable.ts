@@ -1,7 +1,8 @@
 import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog.component"
-import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar.component"
-import { removeTable, useGetAllTables } from "@/pages"
+import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar"
 import { AlertColor } from "@mui/material"
+import removeTable from "../services/removeTable"
+import useGetAllTables from "./useGetAllTables"
 
 function useRemoveTable() {
   const { callToEndPointsAndDispatchs } = useGetAllTables()

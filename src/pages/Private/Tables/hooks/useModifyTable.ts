@@ -1,15 +1,13 @@
 import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog.component"
-import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar.component"
-import { Table } from "@/models"
-import {
-  modifyTable,
-  removeProduct,
-  useGetAllTables,
-  useTablesViewContext,
-} from "@/pages"
+import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar"
+import { Table } from "@/models/tables"
 import { AlertColor } from "@mui/material"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
+import removeProduct from "../../Products/services/removeProduct"
+import { useTablesViewContext } from "../contexts/TablesView"
+import modifyTable from "../services/modifyTable"
+import useGetAllTables from "./useGetAllTables"
 
 function useModifyTable() {
   const { dialog } = useTablesViewContext()

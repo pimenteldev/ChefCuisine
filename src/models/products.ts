@@ -39,6 +39,10 @@ export interface ProductInOrder extends Product {
   product_count?: number
 }
 
+export interface ProductsInOrderList {
+  order: ProductInOrder[]
+}
+
 export interface Unit {
   unit_id: number
   unit_name: string
@@ -65,4 +69,17 @@ export const ProductEmptyState: Product = {
   product_photo: "",
   product_photo_thumb: "",
   product_status: 0,
+}
+
+export const ProductInOrderEmptyState: ProductInOrder = {
+  product_id: "",
+  product_name: "",
+  product_description: "",
+  product_base_price: 0,
+  product_category: 0,
+  product_items: [ItemEmptyState],
+  product_photo: "",
+  product_photo_thumb: "",
+  product_status: 0,
+  product_count: 0,
 }
