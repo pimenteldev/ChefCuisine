@@ -12,7 +12,7 @@ const ProductsApiEmptyState: ProductsApi = {
 }
 
 export const productsSlice = createSlice({
-  name: "products",
+  name: productsKey,
   initialState: ProductsApiEmptyState,
   reducers: {
     setDataInProducts: (state, action) => action.payload,

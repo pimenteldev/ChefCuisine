@@ -8,7 +8,7 @@ const TablesApiEmptyState: TablesApi = {
 }
 
 export const tablesSlice = createSlice({
-  name: "tables",
+  name: tablesKey,
   initialState: TablesApiEmptyState,
   reducers: {
     setDataInTable: (state, action) => action.payload,

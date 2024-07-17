@@ -11,14 +11,17 @@ import {
 } from "@mui/material"
 import useInitialGetData from "../../hooks/useInitialGetData"
 import StyledBadge from "@/components/StyledBadge/StyledBadge"
+import { useDispatch } from "react-redux"
+import { addTableSelect } from "@/redux/slices/orderSlice"
 
-interface Props {
-  handleSelectTable: (table_id: number, table_name: string) => void
-}
-
-const SelectedTable: React.FC<Props> = (props) => {
-  const { handleSelectTable } = props
+const SelectedTable = () => {
   const { tables, orders, personal } = useInitialGetData()
+
+  const dispatch = useDispatch()
+
+  const handleAddTableSelect = (table_id: number, table_name: string) => {
+    dispatch(addTableSelect({ table_id, table_name }))
+  }
 
   return (
     <Container sx={{ mb: 4 }}>
@@ -58,7 +61,7 @@ const SelectedTable: React.FC<Props> = (props) => {
               key={table_id}
             >
               <CardActionArea
-                onClick={() => handleSelectTable(table_id, table_name)}
+                onClick={() => handleAddTableSelect(table_id, table_name)}
               >
                 <CardHeader
                   sx={{

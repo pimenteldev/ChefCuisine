@@ -1,23 +1,20 @@
 import { baseUrl } from "@/constants/utilitys"
-import { Product } from "@/models/products"
+import { currencyPrice } from "@/helpers/currencyPrice"
+import { ProductInOrder } from "@/models/products"
+import { addToOrder } from "@/redux/slices/orderSlice"
 import {
-  Container,
-  Alert,
   Card,
   CardActionArea,
-  Stack,
-  Chip,
-  CardMedia,
-  Typography,
   CardContent,
-  Tooltip,
-  Button,
+  CardMedia,
+  Chip,
+  Container,
+  Stack,
+  Typography
 } from "@mui/material"
+import { useDispatch } from "react-redux"
 import useInitialGetData from "../../hooks/useInitialGetData"
-
-interface Props {
-  handleSelectProduct: (product: Product) => void
-}
+import Cart from "../Cart/Cart"
 
 const CardProductsGrid = {
   display: "grid",
@@ -25,24 +22,19 @@ const CardProductsGrid = {
   gap: "10px",
 }
 
-const ProductsDash: React.FC<Props> = (props) => {
-  const { handleSelectProduct } = props
+const ProductsDash = () => {
   const { products, categories, items, settings } = useInitialGetData()
+
+  const dispatch = useDispatch()
+
+  const handleSelectProduct = (productSelect: ProductInOrder) => {
+    dispatch(addToOrder(productSelect))
+  }
 
   return (
     <Container sx={{ mb: 4 }}>
-      <Alert
-        variant="standard"
-        severity={"info"}
-        sx={{
-          px: 1,
-          py: 0,
-          mt: 1,
-          mb: 2,
-        }}
-      >
-        Agrega productos al pedido
-      </Alert>
+      <Cart />
+
       <div style={CardProductsGrid}>
         {products?.length === 0 && <>No existen Productos en el Sistema</>}
 
@@ -54,7 +46,6 @@ const ProductsDash: React.FC<Props> = (props) => {
             <Card
               sx={{ maxWidth: 345 }}
               key={product.product_id}
-              onClick={() => handleSelectProduct(product)}
             >
               <CardActionArea onClick={() => handleSelectProduct(product)}>
                 <Stack
@@ -112,17 +103,8 @@ const ProductsDash: React.FC<Props> = (props) => {
                       variant="h6"
                       color="text.secondary"
                     >
-                      {product.product_base_price.toLocaleString("es-VE", {
-                        style: "currency",
-                        currency: "BSF",
-                      })}
+                      {currencyPrice(product.product_base_price)}
                     </Typography>
-                    <Tooltip
-                      title={product.product_description}
-                      arrow
-                    >
-                      <Button>Descripción</Button>
-                    </Tooltip>
                   </Stack>
                 </CardContent>
               </CardActionArea>

@@ -1,16 +1,16 @@
 import { OrdersEmptyState } from "@/models/orders"
 import { createSlice } from "@reduxjs/toolkit"
 
-export const tablesKey = "orders"
+export const ordersKey = "orders"
 
-export const orderSlice = createSlice({
-  name: "orders",
+export const ordersSlice = createSlice({
+  name: ordersKey,
   initialState: OrdersEmptyState,
   reducers: {
     setInitialData: (state, action) => action.payload,
   },
 })
 
-export const { setInitialData } = orderSlice.actions
+export const { setInitialData } = ordersSlice.actions
 
-export default orderSlice.reducer
+export default ordersSlice.reducer
