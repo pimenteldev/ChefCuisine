@@ -1,5 +1,5 @@
 import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog.component"
-import { AppStore } from "@/redux/store"
+import { AppStore } from "@/redux/models/store"
 import { AlertColor } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"

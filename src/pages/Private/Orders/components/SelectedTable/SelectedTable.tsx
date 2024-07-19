@@ -9,7 +9,7 @@ import {
   Typography,
   CardMedia,
 } from "@mui/material"
-import useInitialGetData from "../../hooks/useInitialGetData"
+import useInitialGetData from "../../hooks/useSelectors"
 import StyledBadge from "@/components/StyledBadge/StyledBadge"
 import { useDispatch } from "react-redux"
 import { addTableSelect } from "@/redux/slices/orderSlice"

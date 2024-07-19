@@ -17,8 +17,10 @@ import logo from "/icon.png"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
 import { cartOpenSubject$ } from "@/pages/Private/Orders/components/Cart/Cart"
 import { useSelector } from "react-redux"
-import { AppStore } from "@/redux/store"
+import { AppStore } from "@/redux/models/store"
 import { useLocation } from "react-router-dom"
+import { PrivateRoutes } from "@/routes/routes"
+import useSelectors from "@/pages/Private/Orders/hooks/useSelectors"
 
 export interface NavbarInterface {}
 
@@ -32,7 +34,12 @@ const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
 }))
 
 const Navbar: React.FC<NavbarInterface> = () => {
-  const currentOrder = useSelector((store: AppStore) => store.currentOrder)
+  const {
+    products,
+    isTableSelected,
+    isPersonalSelected,
+    countProductsInOrder,
+  } = useSelectors()
 
   const handleClick = () => {
     sidebarOpenSubject$.setSubject = true
@@ -42,6 +49,7 @@ const Navbar: React.FC<NavbarInterface> = () => {
   }
 
   const location = useLocation()
+  const path = `/${PrivateRoutes.PRIVATE}/${PrivateRoutes.PEDIDOS}`
 
   return (
     <AppBar
@@ -80,10 +88,10 @@ const Navbar: React.FC<NavbarInterface> = () => {
         >
           {APP_NAME}
         </Typography>
-        {currentOrder.products.length >= 1 &&
-          currentOrder.isTableSelected === true &&
-          currentOrder.isPersonalSelected === true &&
-          location.pathname === "/private/pedidos" && (
+        {products.length >= 1 &&
+          isTableSelected === true &&
+          isPersonalSelected === true &&
+          location.pathname === path && (
             <div onClick={handleClickCart}>
               <IconButton
                 size="medium"
@@ -95,7 +103,7 @@ const Navbar: React.FC<NavbarInterface> = () => {
                 }}
               >
                 <StyledBadge
-                  badgeContent={currentOrder.products.length}
+                  badgeContent={countProductsInOrder}
                   color="secondary"
                 >
                   <ShoppingCartIcon />

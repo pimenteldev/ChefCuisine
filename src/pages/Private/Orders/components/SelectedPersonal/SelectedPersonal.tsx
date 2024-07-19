@@ -9,7 +9,7 @@ import {
   Avatar,
   CardMedia,
 } from "@mui/material"
-import useInitialGetData from "../../hooks/useInitialGetData"
+import useInitialGetData from "../../hooks/useSelectors"
 import { useDispatch } from "react-redux"
 import { addPersonalSelect } from "@/redux/slices/orderSlice"
 
@@ -22,7 +22,7 @@ const SelectedPersonal = () => {
     personal_document: string,
     personal_name: string
   ) => {
-    dispatch(addPersonalSelect({personal_document, personal_name}))
+    dispatch(addPersonalSelect({ personal_document, personal_name }))
   }
 
   return (

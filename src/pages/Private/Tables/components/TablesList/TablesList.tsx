@@ -1,5 +1,5 @@
 import { Table } from "@/models/tables"
-import { AppStore } from "@/redux/store"
+import { AppStore } from "@/redux/models/store"
 import { Alert } from "@mui/material"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"

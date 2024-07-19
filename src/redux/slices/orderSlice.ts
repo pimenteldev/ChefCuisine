@@ -1,63 +1,189 @@
-import { ProductInOrder } from "@/models/products"
+import { parserDecimals } from "@/helpers/math"
+import { OrdersApi, OrdersEmptyState } from "@/models/orders"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 export const orderKey = "order"
-const initialState = {
-  products: [],
-  isTableSelected: false,
-  tableSelectId: 0,
-  tableSelectName: "",
-  isPersonalSelected: false,
-  personalSelectDocument: "",
-  personalSelectName: "",
-}
+
+const updateItemsCounts = () => {}
 
 export const orderSlice = createSlice({
   name: orderKey,
-  initialState,
+  initialState: OrdersEmptyState,
   reducers: {
-    addToOrder: (state, action: PayloadAction<ProductInOrder>) => {
-      const productInOrder = state.products.find(
-        (product) => product.product_id === action.payload.product_id
+    setInitialDataOrder: (state, action: PayloadAction<OrdersApi>) => {
+      const {
+        categories,
+        items,
+        items_categories,
+        orders,
+        personal,
+        products,
+        role,
+        settings,
+        tables,
+        units,
+      } = action.payload
+
+      const filteredOrders = []
+
+      orders.forEach((order) =>
+        order.order_list_inventary.forEach((item) => filteredOrders.push(item))
       )
-      if (productInOrder) {
-        if (productInOrder.product_count !== undefined) {
-          productInOrder.product_count++
+
+      const list = state.currentOrder.products || []
+      let newListItems = items || []
+
+      filteredOrders.forEach((product) => {
+        const countItemsInProduct = product.product_items.length
+        const productCount = product.product_count || 1
+        for (let i = 0; i < countItemsInProduct; i++) {
+          newListItems = newListItems.map((li) => {
+            if (li.item_id === product.product_items[i].item_id) {
+              return {
+                ...li,
+                item_count:
+                  li.item_count -
+                  product.product_items[i].item_count * productCount,
+              }
+            }
+            return li
+          })
         }
-      } else {
-        state.products.push({ ...action.payload, product_count: 1 })
+      })
+
+      list.forEach((product) => {
+        const countItemsInProduct = product.product_items.length
+        const productCount = product.product_count || 1
+
+        for (let i = 0; i < countItemsInProduct; i++) {
+          newListItems = newListItems.map((li) => {
+            return li.item_id === product.product_items[i].item_id
+              ? {
+                  ...li,
+                  item_count:
+                    li.item_count -
+                    product.product_items[i].item_count * productCount,
+                }
+              : li
+          })
+        }
+      })
+
+      return {
+        ...state,
+        categories,
+        items: newListItems,
+        items_categories,
+        orders,
+        personal,
+        products,
+        role,
+        settings,
+        tables,
+        units,
       }
     },
+
+    addToOrder: (state, action) => {
+      const { product_items, product_id } = action.payload
+      const productIndex = state.currentOrder.products.findIndex(
+        (product) => product.product_id === product_id
+      )
+      if (productIndex !== -1) {
+        state.currentOrder.products[productIndex].product_count++
+      } else {
+        state.currentOrder.products.push({
+          ...action.payload,
+          product_count: 1,
+        })
+      }
+
+      //UPDATE ITEMS IN STATE
+      for (let index = 0; index < product_items.length; index++) {
+        const element = product_items[index]
+        let itemCurrent = state.items.findIndex(
+          (i) => i.item_id === element.item_id
+        )
+        state.items[itemCurrent].item_count = parserDecimals(
+          state.items[itemCurrent].item_count - element.item_count
+        )
+      }
+    },
+
     incrementQuantity: (state, action) => {
-      const currentProduct = state.products.find(
-        (product) => product.product_id === action.payload
+      const { product_items, product_id } = action.payload
+      const productIndex = state.currentOrder.products.findIndex(
+        (product) => product.product_id === product_id
       )
-      currentProduct.product_count++
-    },
-    decrementQuantity: (state, action) => {
-      const currentProduct = state.products.find(
-        (product) => product.product_id === action.payload
-      )
-      if (currentProduct.product_count === 1) {
-        currentProduct.product_count = 1
-      } else {
-        currentProduct.product_count--
+      if (productIndex !== -1) {
+        state.currentOrder.products[productIndex].product_count++
+
+        //UPDATE ITEMS IN STATE
+        for (let index = 0; index < product_items.length; index++) {
+          const element = product_items[index]
+          let itemCurrent = state.items.findIndex(
+            (i) => i.item_id === element.item_id
+          )
+          state.items[itemCurrent].item_count = parserDecimals(
+            state.items[itemCurrent].item_count - element.item_count
+          )
+        }
       }
     },
-    removeItem: (state, action) => {
-      const removeItem = state.products.filter(
-        (item) => item.id !== action.payload
+
+    decrementQuantity: (state, action) => {
+      const { product_items, product_id } = action.payload
+      const productIndex = state.currentOrder.products.findIndex(
+        (product) => product.product_id === product_id
       )
-      state.products = removeItem
+      if (productIndex !== -1) {
+        state.currentOrder.products[productIndex].product_count = Math.max(
+          1,
+          state.currentOrder.products[productIndex].product_count - 1
+        )
+
+        //UPDATE ITEMS IN STATE
+        for (let index = 0; index < product_items.length; index++) {
+          const element = product_items[index]
+          let itemCurrent = state.items.findIndex(
+            (i) => i.item_id === element.item_id
+          )
+          state.items[itemCurrent].item_count = parserDecimals(
+            state.items[itemCurrent].item_count + element.item_count
+          )
+        }
+      }
     },
+
+    removeItem: (state, action) => {
+      const { product_items, product_id } = action.payload
+      const index = state.currentOrder.products.findIndex(
+        (item) => item.product_id === product_id
+      )
+      if (index !== -1) {
+        state.currentOrder.products.splice(index, 1)
+
+        //UPDATE ITEMS IN STATE
+        for (let index = 0; index < product_items.length; index++) {
+          const element = product_items[index]
+          let itemCurrent = state.items.findIndex(
+            (i) => i.item_id === element.item_id
+          )
+          state.items[itemCurrent].item_count = parserDecimals(
+            state.items[itemCurrent].item_count + element.item_count
+          )
+        }
+      }
+    },
+
     addTableSelect: (
       state,
       action: PayloadAction<{ table_id: number; table_name: string }>
     ) => {
       const { table_id, table_name } = action.payload
-      state.isTableSelected = true
-      state.tableSelectId = table_id
-      state.tableSelectName = table_name
+      state.currentOrder.isTableSelected = true
+      state.currentOrder.tableSelectId = table_id
+      state.currentOrder.tableSelectName = table_name
     },
     addPersonalSelect: (
       state,
@@ -68,14 +194,15 @@ export const orderSlice = createSlice({
     ) => {
       const { personal_document, personal_name } = action.payload
 
-      state.isPersonalSelected = true
-      state.personalSelectDocument = personal_document
-      state.personalSelectName = personal_name
+      state.currentOrder.isPersonalSelected = true
+      state.currentOrder.personalSelectDocument = personal_document
+      state.currentOrder.personalSelectName = personal_name
     },
   },
 })
 
 export const {
+  setInitialDataOrder,
   addToOrder,
   incrementQuantity,
   decrementQuantity,
