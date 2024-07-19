@@ -1,7 +1,7 @@
 import { menuItemsAdmin, menuItemsUser } from "@/data/MenuItems"
 import { Roles } from "@/models/roles"
 import { SubjectManager } from "@/models/subjectManager"
-import { AppStore } from "@/redux/store"
+import { AppStore } from "@/redux/models/store"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import ArrowRightIcon from "@mui/icons-material/ArrowCircleRight"
 import {

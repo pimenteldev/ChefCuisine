@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { AppStore } from "@/redux/store"
+import { AppStore } from "@/redux/models/store"
 
 function useSearchCategory(currentCategoryId: Number) {
   const { categories } = useSelector((store: AppStore) => store.products)

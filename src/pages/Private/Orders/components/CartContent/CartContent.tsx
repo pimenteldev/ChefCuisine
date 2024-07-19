@@ -1,10 +1,19 @@
+import React from "react"
 import { baseUrl } from "@/constants/utilitys"
 import { currencyPrice } from "@/helpers/currencyPrice"
-import { decrementQuantity, incrementQuantity } from "@/redux/slices/orderSlice"
-import { AppStore } from "@/redux/store"
+import {
+  decrementQuantity,
+  incrementQuantity,
+  removeItem,
+} from "@/redux/slices/orderSlice"
+import { AppStore } from "@/redux/models/store"
+import Add from "@mui/icons-material/Add"
+import Remove from "@mui/icons-material/Remove"
 import {
   Alert,
+  AlertColor,
   Avatar,
+  Box,
   Button,
   Container,
   Divider,
@@ -16,16 +25,33 @@ import {
   Typography,
 } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
+import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar"
 const CartContent = () => {
-  const currentOrder = useSelector((store: AppStore) => store.currentOrder)
+  const orders = useSelector((store: AppStore) => store.orders)
+  const { currentOrder } = orders
+  const { products } = currentOrder
+
   const dispatch = useDispatch()
 
-  const handleIncrement = (product_id: string) => {
-    dispatch(incrementQuantity(product_id))
+  const handleSnackBar = (message: string, severity: AlertColor) => {
+    snackbarOpenSubject$.setSubject = {
+      open: true,
+      message: message,
+      severity: severity,
+    }
   }
 
-  const handleDecrement = (product_id: string) => {
-    dispatch(decrementQuantity(product_id))
+  const handleIncrement = (product) => {
+    dispatch(incrementQuantity(product))
+  }
+
+  const handleDecrement = (product) => {
+    if (product.product_count === 1) {
+      dispatch(removeItem(product))
+      handleSnackBar(`Has Eliminado un Producto del Pedido`, "warning")
+    } else {
+      dispatch(decrementQuantity(product))
+    }
   }
 
   return (
@@ -33,15 +59,13 @@ const CartContent = () => {
       sx={{ width: "100%", bgcolor: "background.paper" }}
       style={{ padding: "0px" }}
     >
-      {currentOrder.products.length === 0 && (
-        <Alert severity="info">Sin Productos</Alert>
-      )}
-      {currentOrder.products.length >= 1 &&
-        currentOrder.products.map((product) => (
-          <>
+      {products.length === 0 && <Alert severity="info">Sin Productos</Alert>}
+      {products.length >= 1 &&
+        products.map((product) => (
+          <React.Fragment key={product.product_id}>
             <ListItem
               alignItems="flex-start"
-              style={{ padding: "0px" }}
+              style={{ padding: "10px 0px" }}
             >
               <ListItemAvatar>
                 <Avatar
@@ -49,86 +73,83 @@ const CartContent = () => {
                   src={baseUrl + product.product_photo}
                 />
               </ListItemAvatar>
-              <ListItemText
-                primary={
+              <Box>
+                <Typography
+                  sx={{ display: "inline" }}
+                  component="h6"
+                  variant="inherit"
+                  color="text.primary"
+                >
+                  <strong>{product.product_name.toLocaleUpperCase()}</strong>
+                </Typography>
+                <Stack
+                  justifyContent={"space-between"}
+                  display={"inline-flex"}
+                >
                   <Typography
                     sx={{ display: "inline" }}
-                    component="h6"
+                    component="span"
                     variant="inherit"
                     color="text.primary"
                   >
-                    <strong>{product.product_name.toLocaleUpperCase()}</strong>
+                    <small>P/Unitario:</small>{" "}
+                    {currencyPrice(product.product_base_price)}
                   </Typography>
-                }
-                secondary={
-                  <Stack
-                    justifyContent={"space-between"}
-                    display={"inline-flex"}
+                  <Typography
+                    sx={{ display: "inline" }}
+                    component="span"
+                    variant="inherit"
+                    color="text.primary"
                   >
-                    <Typography
-                      sx={{ display: "inline" }}
-                      component="span"
-                      variant="inherit"
-                      color="text.primary"
+                    <small>Total:</small>{" "}
+                    {currencyPrice(
+                      product.product_count * product.product_base_price
+                    )}
+                  </Typography>
+                  <Stack
+                    style={{
+                      padding: "10px 0px",
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginLeft: "-30px",
+                    }}
+                  >
+                    <Button
+                      size="small"
+                      color="primary"
+                      variant="contained"
+                      onClick={() => handleDecrement(product)}
                     >
-                      <small>P/Unitario:</small>{" "}
-                      {currencyPrice(product.product_base_price)}
-                    </Typography>
-                    <Typography
-                      sx={{ display: "inline" }}
-                      component="span"
-                      variant="inherit"
-                      color="text.primary"
-                    >
-                      <small>Total:</small>{" "}
-                      {currencyPrice(
-                        product.product_count * product.product_base_price
-                      )}
-                    </Typography>
-                    <Stack
-                      style={{
-                        padding: "0px",
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Button
-                        size="small"
-                        color="primary"
-                        variant="contained"
-                        onClick={() => handleDecrement(product.product_id)}
-                      >
-                        <strong>-</strong>
-                      </Button>
+                      <Remove />
+                    </Button>
 
-                      <Button
-                        size="small"
-                        color="primary"
-                        variant="text"
-                      >
-                        <strong>{product.product_count}</strong>
-                      </Button>
+                    <Button
+                      size="small"
+                      color="primary"
+                      variant="text"
+                    >
+                      <strong>{product.product_count}</strong>
+                    </Button>
 
-                      <Button
-                        size="small"
-                        color="primary"
-                        variant="contained"
-                        onClick={() => handleIncrement(product.product_id)}
-                      >
-                        <strong>+</strong>
-                      </Button>
-                    </Stack>
+                    <Button
+                      size="small"
+                      color="primary"
+                      variant="contained"
+                      onClick={() => handleIncrement(product)}
+                    >
+                      <Add />
+                    </Button>
                   </Stack>
-                }
-              />
+                </Stack>
+              </Box>
             </ListItem>
             <Divider
               variant="fullWidth"
               component="li"
             />
-          </>
+          </React.Fragment>
         ))}
     </List>
   )

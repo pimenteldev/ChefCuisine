@@ -1,29 +1,26 @@
-import { AppStore } from "@/redux/store"
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import TableRestaurantIcon from "@mui/icons-material/TableRestaurant"
 import { Breadcrumbs, Container, Link, Typography } from "@mui/material"
 import { useEffect } from "react"
-import { useSelector } from "react-redux"
 import ProductsDash from "./components/ProductsDash/ProductsDash"
 import SelectedPersonal from "./components/SelectedPersonal/SelectedPersonal"
 import SelectedTable from "./components/SelectedTable/SelectedTable"
-import useInitialGetData from "./hooks/useInitialGetData"
+import useSelectors from "./hooks/useSelectors"
 
 function Orders() {
-  const { dispatchGetData } = useInitialGetData()
-
-  useEffect(() => {
-    dispatchGetData()
-  }, [])
-
-  const currentOrder = useSelector((store: AppStore) => store.currentOrder)
   const {
+    dispatchGetData,
     isTableSelected,
     tableSelectName,
     isPersonalSelected,
     personalSelectName,
-  } = currentOrder
+    currentOrder,
+  } = useSelectors()
+
+  useEffect(() => {
+    dispatchGetData()
+  }, [])
 
   return (
     <Container>
@@ -39,6 +36,9 @@ function Orders() {
       <Breadcrumbs
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
+        style={{
+          padding: "10px",
+        }}
       >
         {isTableSelected && (
           <Link
@@ -47,8 +47,14 @@ function Orders() {
             color="inherit"
           >
             <TableRestaurantIcon
-              fontSize="inherit"
-              sx={{ mr: 0.5 }}
+              fontSize="large"
+              color="secondary"
+              sx={{
+                backgroundColor: "#10b981",
+                borderRadius: "100%",
+                padding: "5px",
+                marginRight: "5px",
+              }}
             />
             Mesa: {tableSelectName}
           </Link>
@@ -60,8 +66,14 @@ function Orders() {
             color="inherit"
           >
             <AccountCircleIcon
-              fontSize="inherit"
-              sx={{ mr: 0.5 }}
+              fontSize="large"
+              color="secondary"
+              sx={{
+                backgroundColor: "#10b981",
+                borderRadius: "100%",
+                padding: "5px",
+                marginRight: "5px",
+              }}
             />
             Mesonero: {personalSelectName}
           </Link>

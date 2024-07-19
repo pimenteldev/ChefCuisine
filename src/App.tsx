@@ -14,6 +14,7 @@ import HomeUser from "./pages/Private/HomeUser/HomeUser"
 import store from "./redux/store"
 import { PrivateRoutes, PublicRoutes } from "./routes/routes"
 import { LayoutContainer } from "./styled-components/layout"
+import Cart from "./pages/Private/Orders/components/Cart/Cart"
 
 const Login = lazy(() => import("./pages/Login/Login"))
 const Private = lazy(() => import("./pages/Private/Private"))
@@ -43,6 +44,7 @@ function App() {
                       <Navbar />
                       <Sidebar />
                       <Private />
+                      <Cart />
                     </>
                   }
                 />

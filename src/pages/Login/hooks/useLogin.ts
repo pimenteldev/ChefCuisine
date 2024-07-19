@@ -2,7 +2,7 @@ import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar
 import { clearLocalStorage } from "@/helpers/localStorage"
 import { BackendUser } from "@/models/user"
 import { UserKey, createUser, resetUser } from "@/redux/slices/userSlice"
-import { AppStore } from "@/redux/store"
+import { AppStore } from "@/redux/models/store"
 import { PrivateRoutes, PublicRoutes } from "@/routes/routes"
 import { AlertColor } from "@mui/material"
 import { useEffect } from "react"

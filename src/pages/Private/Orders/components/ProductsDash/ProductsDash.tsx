@@ -1,7 +1,5 @@
 import { baseUrl } from "@/constants/utilitys"
 import { currencyPrice } from "@/helpers/currencyPrice"
-import { ProductInOrder } from "@/models/products"
-import { addToOrder } from "@/redux/slices/orderSlice"
 import {
   Card,
   CardActionArea,
@@ -10,58 +8,91 @@ import {
   Chip,
   Container,
   Stack,
-  Typography
+  Typography,
 } from "@mui/material"
-import { useDispatch } from "react-redux"
-import useInitialGetData from "../../hooks/useInitialGetData"
-import Cart from "../Cart/Cart"
+import useSelectors from "../../hooks/useSelectors"
 
-const CardProductsGrid = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minMax(200px, 1fr))",
-  gap: "10px",
-}
+import { CardProductsGrid } from "@/pages/Private/Products/styled-components/CardProduct"
+import { AppStore } from "@/redux/models/store"
+import { useMemo } from "react"
+import { useSelector } from "react-redux"
 
 const ProductsDash = () => {
-  const { products, categories, items, settings } = useInitialGetData()
+  const {
+    categories,
+    currentOrder,
+    items_categories,
+    orders,
+    personal,
+    products,
+    role,
+    settings,
+    tables,
+    units,
+    items,
+    handleSelectProduct,
+  } = useSelectors()
 
-  const dispatch = useDispatch()
-
-  const handleSelectProduct = (productSelect: ProductInOrder) => {
-    dispatch(addToOrder(productSelect))
-  }
+  const state = useSelector((state: AppStore) => state)
 
   return (
     <Container sx={{ mb: 4 }}>
-      <Cart />
+      {JSON.stringify(state.orders.items.filter((i) => i.item_id === 22))}
 
-      <div style={CardProductsGrid}>
+      <CardProductsGrid>
         {products?.length === 0 && <>No existen Productos en el Sistema</>}
 
         {products?.map((product) => {
-          const colorCategory = categories.filter(
-            (cate) => product.product_category === cate.category_id
+          const itemsById = useMemo(
+            () =>
+              items.reduce((map, item) => {
+                map[item.item_id] = item.item_count
+                return map
+              }, {}),
+            [items]
           )
+
+          const product_items_disponibles = product.product_items.map(
+            (product_item) =>
+              Math.floor(
+                itemsById[product_item.item_id] / product_item.item_count
+              )
+          )
+
+          const minDisp = Math.min(...product_items_disponibles)
+
+          const colorCategory = categories.find(
+            (cate) => cate.category_id === product.product_category
+          )
+
           return (
             <Card
-              sx={{ maxWidth: 345 }}
+              sx={{ maxWidth: 345, position: "relative", cursor: "pointer" }}
               key={product.product_id}
             >
               <CardActionArea onClick={() => handleSelectProduct(product)}>
                 <Stack
                   direction="row"
                   spacing={2}
-                  justifyContent={"center"}
+                  justifyContent={"space-between"}
                   alignItems={"center"}
                   style={{
-                    backgroundColor: colorCategory[0]?.category_color,
+                    backgroundColor: colorCategory.category_color,
                     padding: "10px",
                   }}
                 >
                   <Chip
-                    label={colorCategory[0]?.category_name}
+                    label={colorCategory.category_name}
                     style={{
                       color: "white",
+                    }}
+                  />
+                  <Chip
+                    label={minDisp}
+                    variant="filled"
+                    style={{
+                      color: "white",
+                      fontWeight: "bolder",
                     }}
                   />
                 </Stack>
@@ -111,7 +142,7 @@ const ProductsDash = () => {
             </Card>
           )
         })}
-      </div>
+      </CardProductsGrid>
     </Container>
   )
 }

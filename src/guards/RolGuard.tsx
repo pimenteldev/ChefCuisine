@@ -1,5 +1,5 @@
 import { Roles } from "@/models/roles"
-import { AppStore } from "@/redux/store"
+import { AppStore } from "@/redux/models/store"
 import { PrivateRoutes } from "@/routes/routes"
 import { useSelector } from "react-redux"
 import { Navigate, Outlet } from "react-router-dom"
