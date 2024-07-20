@@ -60,12 +60,7 @@ const CardProduct = ({ product }: CardProductInterface) => {
               }}
             />
           </CardProductIngredients>
-          <CardProductPrice>
-            {product.product_base_price.toLocaleString("es-VE", {
-              style: "currency",
-              currency: "VEF",
-            })}
-          </CardProductPrice>
+          <CardProductPrice>{product.product_base_price}</CardProductPrice>
         </CardProductPriceAndIngredient>
 
         <CardProductBottom>

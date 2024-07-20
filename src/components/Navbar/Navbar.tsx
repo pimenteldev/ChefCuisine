@@ -24,7 +24,7 @@ import useSelectors from "@/pages/Private/Orders/hooks/useSelectors"
 
 export interface NavbarInterface {}
 
-const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+export const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
     right: -3,
     top: 13,

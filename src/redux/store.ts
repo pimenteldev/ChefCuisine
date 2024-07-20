@@ -13,3 +13,12 @@ export default configureStore<AppStore>({
     orders: orderSlice,
   },
 })
+
+export const mockStore = (initialState = {}) => {
+  return configureStore({
+    reducer: {
+      orders: orderSlice,
+    },
+    preloadedState: initialState,
+  })
+}

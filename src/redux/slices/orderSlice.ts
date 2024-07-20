@@ -1,10 +1,14 @@
 import { parserDecimals } from "@/helpers/math"
-import { OrdersApi, OrdersEmptyState } from "@/models/orders"
+import {
+  currentOrderEmptyState,
+  Order,
+  OrdersApi,
+  OrdersEmptyState,
+} from "@/models/orders"
+import { ProductInOrder } from "@/models/products"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 export const orderKey = "order"
-
-const updateItemsCounts = () => {}
 
 export const orderSlice = createSlice({
   name: orderKey,
@@ -46,6 +50,7 @@ export const orderSlice = createSlice({
                   product.product_items[i].item_count * productCount,
               }
             }
+
             return li
           })
         }
@@ -83,7 +88,6 @@ export const orderSlice = createSlice({
         units,
       }
     },
-
     addToOrder: (state, action) => {
       const { product_items, product_id } = action.payload
       const productIndex = state.currentOrder.products.findIndex(
@@ -109,7 +113,6 @@ export const orderSlice = createSlice({
         )
       }
     },
-
     incrementQuantity: (state, action) => {
       const { product_items, product_id } = action.payload
       const productIndex = state.currentOrder.products.findIndex(
@@ -130,7 +133,6 @@ export const orderSlice = createSlice({
         }
       }
     },
-
     decrementQuantity: (state, action) => {
       const { product_items, product_id } = action.payload
       const productIndex = state.currentOrder.products.findIndex(
@@ -154,7 +156,6 @@ export const orderSlice = createSlice({
         }
       }
     },
-
     removeItem: (state, action) => {
       const { product_items, product_id } = action.payload
       const index = state.currentOrder.products.findIndex(
@@ -181,6 +182,7 @@ export const orderSlice = createSlice({
       action: PayloadAction<{ table_id: number; table_name: string }>
     ) => {
       const { table_id, table_name } = action.payload
+      state.currentOrder.orderId = crypto.randomUUID()
       state.currentOrder.isTableSelected = true
       state.currentOrder.tableSelectId = table_id
       state.currentOrder.tableSelectName = table_name
@@ -198,6 +200,51 @@ export const orderSlice = createSlice({
       state.currentOrder.personalSelectDocument = personal_document
       state.currentOrder.personalSelectName = personal_name
     },
+
+    addOrderToCurrentOrder: (state, action: PayloadAction<Order>) => {
+      const {
+        order_id,
+        order_table_id,
+        order_personal_document,
+        order_list_inventary,
+      } = action.payload
+
+      const tableInfo = state.tables.find((t) => t.table_id === order_table_id)
+      const personalInfo = state.personal.find(
+        (p) => p.personal_document === order_personal_document
+      )
+
+      const productsInOrder = order_list_inventary.map((p): ProductInOrder => {
+        const { product, product_count } = p
+        return {
+          product_id: product.product_id,
+          product_name: product.product_name,
+          product_description: product.product_description,
+          product_base_price: product.product_base_price,
+          product_category: product.product_category,
+          product_items: product.product_items,
+          product_photo: product.product_photo,
+          product_photo_thumb: product.product_photo_thumb,
+          product_status: product.product_status,
+          product_count: product_count,
+        }
+      })
+
+      state.currentOrder.orderId = order_id
+      state.currentOrder.isTableSelected = true
+      state.currentOrder.tableSelectId = order_table_id
+      state.currentOrder.tableSelectName = tableInfo.table_name
+      state.currentOrder.isPersonalSelected = true
+      state.currentOrder.personalSelectDocument = order_personal_document
+      state.currentOrder.personalSelectName = personalInfo.personal_name
+      state.currentOrder.products = productsInOrder
+    },
+    clearCurrentOrder: (state, action: PayloadAction<Order>) => {
+      state.currentOrder = currentOrderEmptyState
+    },
+    cleanProductsInCurrentOrder: (state, action) => {
+      state.currentOrder.products = []
+    },
   },
 })
 
@@ -209,6 +256,9 @@ export const {
   removeItem,
   addTableSelect,
   addPersonalSelect,
+  addOrderToCurrentOrder,
+  clearCurrentOrder,
+  cleanProductsInCurrentOrder,
 } = orderSlice.actions
 
 export default orderSlice.reducer

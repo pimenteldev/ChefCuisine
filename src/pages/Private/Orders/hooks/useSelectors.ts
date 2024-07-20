@@ -4,32 +4,29 @@ import getAllOrders from "../services/getAllOrders"
 
 import { ProductInOrder } from "@/models/products"
 import {
-  setInitialDataOrder,
   addToOrder,
   incrementQuantity,
+  setInitialDataOrder,
+  clearCurrentOrder,
 } from "@/redux/slices/orderSlice"
-import { useEffect, useMemo } from "react"
-import { AlertColor } from "@mui/material"
-import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar"
 
 const useSelectors = () => {
   const dispatch = useDispatch()
 
-  const categories = useSelector((state: AppStore) => state.orders.categories)
-  const currentOrder = useSelector(
-    (state: AppStore) => state.orders.currentOrder
-  )
-  const items = useSelector((state: AppStore) => state.orders.items)
-  const items_categories = useSelector(
-    (state: AppStore) => state.orders.items_categories
-  )
-  const orders = useSelector((state: AppStore) => state.orders.orders)
-  const personal = useSelector((state: AppStore) => state.orders.personal)
-  const products = useSelector((state: AppStore) => state.orders.products)
-  const role = useSelector((state: AppStore) => state.orders.role)
-  const settings = useSelector((state: AppStore) => state.orders.settings)
-  const tables = useSelector((state: AppStore) => state.orders.tables)
-  const units = useSelector((state: AppStore) => state.orders.units)
+  const {
+    categories,
+    currentOrder,
+    items,
+    items_categories,
+    orders,
+    personal,
+    products,
+    role,
+    settings,
+    tables,
+    units,
+  } = useSelector((state: AppStore) => state.orders)
+  const state = useSelector((state: AppStore) => state)
 
   const {
     isTableSelected,
@@ -48,15 +45,15 @@ const useSelectors = () => {
       })
   }
 
-  const handleSelectProduct = (productSelect: ProductInOrder) => {
-    const productFilter = currentOrder.products.filter(
-      (product) => product.product_id === productSelect.product_id
+  const handleSelectProduct = (selectedProduct: ProductInOrder) => {
+    const isProductAlreadyInOrder = currentOrder.products.some(
+      (product) => product.product_id === selectedProduct.product_id
     )
 
-    if (productFilter.length === 0) {
-      dispatch(addToOrder(productSelect))
+    if (!isProductAlreadyInOrder) {
+      dispatch(addToOrder(selectedProduct))
     } else {
-      dispatch(incrementQuantity(productSelect))
+      dispatch(incrementQuantity(selectedProduct))
     }
   }
 
@@ -64,6 +61,12 @@ const useSelectors = () => {
     (acumulador, { product_count }) => acumulador + product_count,
     0
   )
+
+  const handleClearOrder = () => {
+    dispatch(clearCurrentOrder())
+  }
+
+  
 
   return {
     categories,
@@ -84,10 +87,9 @@ const useSelectors = () => {
     dispatchGetData,
     handleSelectProduct,
     countProductsInOrder,
+    handleClearOrder,
+    state,
   }
 }
 
 export default useSelectors
-function updateDataOrder(): any {
-  throw new Error("Function not implemented.")
-}
