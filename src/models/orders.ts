@@ -1,7 +1,7 @@
 import { Personal } from "./personal"
 import { Category, Item, Product, ProductInOrder, Unit } from "./products"
 import { Role } from "./roles"
-import { Setting } from "./setting"
+import { Setting, settingEmptyStat } from "./setting"
 import { Table } from "./tables"
 
 export interface OrdersApi {
@@ -13,30 +13,23 @@ export interface OrdersApi {
   role: Role[]
   personal: Personal[]
   tables: Table[]
-  settings: Setting[]
+  settings: Setting
   orders: Order[]
   currentOrder: CurrentOrder
 }
 export interface CurrentOrder {
   products: ProductInOrder[]
+  orderId: string
   isTableSelected: boolean
   tableSelectId: number
   tableSelectName: string
   isPersonalSelected: boolean
   personalSelectDocument: string
   personalSelectName: string
-  totals: Totals
-}
-
-export interface Totals {
-  sub_total: number
-  total_iva: number
-  total_bs: number
-  total_dolar: number
 }
 
 export interface Order {
-  order_id: number
+  order_id: string
   order_table_id: number
   order_personal_document: string
   order_list_inventary: OrderListInventory[]
@@ -46,9 +39,20 @@ export interface Order {
 
 export interface OrderListInventory {
   product_id: string
-  product: Product
+  product: ProductInOrder
   product_count: number
   product_items: Item[]
+}
+
+export const currentOrderEmptyState = {
+  products: [],
+  orderId: "",
+  isTableSelected: false,
+  tableSelectId: 0,
+  tableSelectName: "",
+  isPersonalSelected: false,
+  personalSelectDocument: "",
+  personalSelectName: "",
 }
 
 export const OrdersEmptyState = {
@@ -60,23 +64,9 @@ export const OrdersEmptyState = {
   role: [],
   personal: [],
   tables: [],
-  settings: [],
+  settings: settingEmptyStat,
   orders: [],
-  currentOrder: {
-    products: [],
-    isTableSelected: false,
-    tableSelectId: 0,
-    tableSelectName: "",
-    isPersonalSelected: false,
-    personalSelectDocument: "",
-    personalSelectName: "",
-    totals: {
-      sub_total: 0,
-      total_iva: 0,
-      total_bs: 0,
-      total_dolar: 0,
-    },
-  },
+  currentOrder: currentOrderEmptyState,
 }
 
 export const OrderEmptyState = {

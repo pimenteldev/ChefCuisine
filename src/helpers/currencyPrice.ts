@@ -1,6 +1,7 @@
-export const currencyPrice = (product_base_price: number) => {
-  return product_base_price.toLocaleString("es-VE", {
-    style: "currency",
-    currency: "BSF",
-  })
+export const currencyPrice = (number: number) => {
+  const formated = new Intl.NumberFormat("es-VE", {
+    maximumSignificantDigits: 20,
+  }).format(number)
+
+  return formated
 }

@@ -1,71 +1,74 @@
-import React from "react"
 import { baseUrl } from "@/constants/utilitys"
-import { currencyPrice } from "@/helpers/currencyPrice"
-import {
-  decrementQuantity,
-  incrementQuantity,
-  removeItem,
-} from "@/redux/slices/orderSlice"
+import React from "react"
+
 import { AppStore } from "@/redux/models/store"
 import Add from "@mui/icons-material/Add"
 import Remove from "@mui/icons-material/Remove"
+import DeleteIcon from "@mui/icons-material/Delete"
 import {
   Alert,
-  AlertColor,
   Avatar,
   Box,
   Button,
-  Container,
   Divider,
+  Grid,
+  IconButton,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
+  Paper,
   Stack,
   Typography,
 } from "@mui/material"
-import { useDispatch, useSelector } from "react-redux"
-import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar"
+import { useSelector } from "react-redux"
+import useCartOrder from "../../hooks/useCartOrder"
+import { currencyPrice } from "@/helpers/currencyPrice"
+
 const CartContent = () => {
   const orders = useSelector((store: AppStore) => store.orders)
   const { currentOrder } = orders
   const { products } = currentOrder
 
-  const dispatch = useDispatch()
-
-  const handleSnackBar = (message: string, severity: AlertColor) => {
-    snackbarOpenSubject$.setSubject = {
-      open: true,
-      message: message,
-      severity: severity,
-    }
-  }
-
-  const handleIncrement = (product) => {
-    dispatch(incrementQuantity(product))
-  }
-
-  const handleDecrement = (product) => {
-    if (product.product_count === 1) {
-      dispatch(removeItem(product))
-      handleSnackBar(`Has Eliminado un Producto del Pedido`, "warning")
-    } else {
-      dispatch(decrementQuantity(product))
-    }
-  }
+  const {
+    calculateTotalPrice,
+    calculateSubTotalPrice,
+    handleCleanProductsInOrder,
+    handleIncrement,
+    handleDecrement,
+  } = useCartOrder()
 
   return (
     <List
       sx={{ width: "100%", bgcolor: "background.paper" }}
-      style={{ padding: "0px" }}
+      style={{ padding: "10px 0" }}
     >
-      {products.length === 0 && <Alert severity="info">Sin Productos</Alert>}
+      {products.length === 0 ? (
+        <Alert
+          severity="info"
+          style={{ margin: "10px 0px" }}
+        >
+          Sin Productos
+        </Alert>
+      ) : (
+        <Button
+          variant="outlined"
+          startIcon={<DeleteIcon />}
+          color="error"
+          onClick={handleCleanProductsInOrder}
+          style={{
+            width: "100%",
+          }}
+        >
+          Vaciar Pedido
+        </Button>
+      )}
       {products.length >= 1 &&
         products.map((product) => (
           <React.Fragment key={product.product_id}>
             <ListItem
+              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
               alignItems="flex-start"
-              style={{ padding: "10px 0px" }}
             >
               <ListItemAvatar>
                 <Avatar
@@ -73,39 +76,38 @@ const CartContent = () => {
                   src={baseUrl + product.product_photo}
                 />
               </ListItemAvatar>
-              <Box>
+              <Box
+                style={{
+                  width: "100%",
+                  padding: "5px",
+                }}
+              >
                 <Typography
                   sx={{ display: "inline" }}
                   component="h6"
                   variant="inherit"
                   color="text.primary"
                 >
-                  <strong>{product.product_name.toLocaleUpperCase()}</strong>
+                  <strong>{product.product_name}</strong>
                 </Typography>
-                <Stack
-                  justifyContent={"space-between"}
-                  display={"inline-flex"}
-                >
+                <Stack>
                   <Typography
                     sx={{ display: "inline" }}
                     component="span"
                     variant="inherit"
                     color="text.primary"
                   >
-                    <small>P/Unitario:</small>{" "}
-                    {currencyPrice(product.product_base_price)}
+                    <small>P/Unitario:</small> {product.product_base_price}
                   </Typography>
-                  <Typography
+                  {/* <Typography
                     sx={{ display: "inline" }}
                     component="span"
                     variant="inherit"
                     color="text.primary"
                   >
                     <small>Total:</small>{" "}
-                    {currencyPrice(
-                      product.product_count * product.product_base_price
-                    )}
-                  </Typography>
+                    {product.product_count * product.product_base_price}
+                  </Typography> */}
                   <Stack
                     style={{
                       padding: "10px 0px",
@@ -116,31 +118,34 @@ const CartContent = () => {
                       marginLeft: "-30px",
                     }}
                   >
-                    <Button
-                      size="small"
+                    <IconButton
+                      aria-label="delete"
                       color="primary"
-                      variant="contained"
+                      classes={{ root: "button" }}
                       onClick={() => handleDecrement(product)}
                     >
                       <Remove />
-                    </Button>
+                    </IconButton>
 
-                    <Button
-                      size="small"
-                      color="primary"
-                      variant="text"
+                    <Paper
+                      elevation={0}
+                      style={{
+                        backgroundColor: "rgba(16, 185, 129, 0.04)",
+                        padding: "5px 10px",
+                        color: "#10b981",
+                        margin: "0px 5px",
+                      }}
                     >
                       <strong>{product.product_count}</strong>
-                    </Button>
-
-                    <Button
-                      size="small"
+                    </Paper>
+                    <IconButton
+                      aria-label="delete"
                       color="primary"
-                      variant="contained"
+                      classes={{ root: "button" }}
                       onClick={() => handleIncrement(product)}
                     >
                       <Add />
-                    </Button>
+                    </IconButton>
                   </Stack>
                 </Stack>
               </Box>
@@ -151,6 +156,83 @@ const CartContent = () => {
             />
           </React.Fragment>
         ))}
+      <Stack>
+        <ListItem
+          style={{
+            padding: "0px",
+          }}
+        >
+          <Paper
+            elevation={0}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              alignContent: "center",
+              flexWrap: "wrap",
+              flexDirection: "row",
+              width: "100%",
+              backgroundColor: "#f5f5f5",
+              padding: "10px",
+            }}
+          >
+            <Typography
+              component="span"
+              variant="overline"
+              color="GrayText"
+              fontWeight="bold"
+            >
+              Subtotal
+            </Typography>
+            <Typography
+              component="span"
+              variant="h6"
+              color="GrayText"
+            >
+              Bs {currencyPrice(calculateSubTotalPrice())}
+            </Typography>{" "}
+          </Paper>
+        </ListItem>
+        <ListItem
+          style={{
+            marginTop: "5px",
+            padding: "0px",
+          }}
+        >
+          <Paper
+            elevation={0}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              alignContent: "center",
+              flexWrap: "wrap",
+              flexDirection: "row",
+              width: "100%",
+              backgroundColor: "#f5f5f5",
+              padding: "10px",
+            }}
+          >
+            <Typography
+              component="span"
+              variant="overline"
+              color="GrayText"
+              fontWeight="bold"
+            >
+              Total
+            </Typography>
+            <Typography
+              component="span"
+              variant="h5"
+              style={{
+                color: "#10b981",
+              }}
+            >
+              Bs {currencyPrice(calculateTotalPrice())}
+            </Typography>{" "}
+          </Paper>
+        </ListItem>
+      </Stack>
     </List>
   )
 }

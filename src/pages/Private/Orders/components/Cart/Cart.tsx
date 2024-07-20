@@ -13,11 +13,15 @@ import {
 import { useEffect, useState } from "react"
 import { Subscription } from "rxjs"
 import CartContent from "../CartContent/CartContent"
+import useSelectors from "../../hooks/useSelectors"
+import { StyledBadge } from "@/components/Navbar/Navbar"
 
 export const cartOpenSubject$ = new SubjectManager<boolean>()
 export const cartCloseSubject$ = new SubjectManager<boolean>()
 
 function Cart() {
+  const { countProductsInOrder } = useSelectors()
+
   const [open, setOpen] = useState(false)
 
   let openSubject$ = new Subscription()
@@ -79,7 +83,12 @@ function Cart() {
               alignItems: "center",
             }}
           >
-            <ShoppingCartIcon fontSize="large" />
+            <StyledBadge
+              badgeContent={countProductsInOrder}
+              color="secondary"
+            >
+              <ShoppingCartIcon fontSize="large" />
+            </StyledBadge>
           </Container>
           <Typography
             variant="overline"
@@ -96,33 +105,6 @@ function Cart() {
         }}
       >
         <CartContent />
-      </Box>
-
-      <Divider />
-      <Box
-        sx={{
-          px: 2,
-          py: 3,
-          textAlign: "center",
-        }}
-      >
-        <Typography
-          color="grey.500"
-          variant="body2"
-        >
-          Phoenix APP
-        </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            mt: 2,
-            mx: "auto",
-            width: "160px",
-            "& img": {
-              width: "100%",
-            },
-          }}
-        ></Box>
       </Box>
     </Box>
   )

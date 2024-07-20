@@ -12,15 +12,26 @@ import {
 import useInitialGetData from "../../hooks/useSelectors"
 import StyledBadge from "@/components/StyledBadge/StyledBadge"
 import { useDispatch } from "react-redux"
-import { addTableSelect } from "@/redux/slices/orderSlice"
+import {
+  addTableSelect,
+  addOrderToCurrentOrder,
+} from "@/redux/slices/orderSlice"
+import { Table } from "@/models/tables"
+import { Order } from "@/models/orders"
 
 const SelectedTable = () => {
   const { tables, orders, personal } = useInitialGetData()
 
   const dispatch = useDispatch()
 
-  const handleAddTableSelect = (table_id: number, table_name: string) => {
-    dispatch(addTableSelect({ table_id, table_name }))
+  const handleAddTableSelect = (table: Table, order: Order) => {
+    const { table_id, table_name, table_active } = table
+
+    if (table_active) {
+      dispatch(addOrderToCurrentOrder(order))
+    } else {
+      dispatch(addTableSelect({ table_id, table_name }))
+    }
   }
 
   return (
@@ -40,12 +51,13 @@ const SelectedTable = () => {
       <CardTableGrid>
         {tables?.length === 0 && <>No existen Mesas en el Sistema</>}
 
-        {tables?.map(({ table_id, table_name, table_active }) => {
-          const orderActive = [...orders].filter(
+        {tables?.map((table) => {
+          const { table_id, table_name, table_active } = table
+          const orderActive = orders.filter(
             (order) => order.order_table_id === table_id
           )
 
-          const personalInfo = [...personal].filter(
+          const personalInfo = personal.filter(
             (person) =>
               orderActive[0]?.order_personal_document ===
               person.personal_document
@@ -61,7 +73,7 @@ const SelectedTable = () => {
               key={table_id}
             >
               <CardActionArea
-                onClick={() => handleAddTableSelect(table_id, table_name)}
+                onClick={() => handleAddTableSelect(table, orderActive[0])}
               >
                 <CardHeader
                   sx={{
