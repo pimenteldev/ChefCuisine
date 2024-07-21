@@ -13,14 +13,15 @@ import { useDispatch, useSelector } from "react-redux"
 const useCartOrder = () => {
   const dispatch = useDispatch()
 
-  const currentOrder = useSelector(
+  const { products } = useSelector(
     (store: AppStore) => store.orders.currentOrder
   )
 
-  const settings = useSelector((store: AppStore) => store.orders.settings)
-  const percent_iva = settings[0].percent_iva
-  const { products } = currentOrder
+  const { percent_iva, price_dollar } = useSelector(
+    (store: AppStore) => store.orders.settings
+  )
 
+  console.log(percent_iva)
   const handleSnackBar = (message: string, severity: AlertColor) => {
     snackbarOpenSubject$.setSubject = {
       open: true,
@@ -49,8 +50,8 @@ const useCartOrder = () => {
   const calculateSubTotalPrice = () => {
     let priceTotal = 0
 
-    products.forEach((product) => {
-      priceTotal += product.product_count * product.product_base_price
+    products.forEach(({ product_base_price, product_count }) => {
+      priceTotal += product_count * product_base_price
     })
 
     return priceTotal
@@ -59,11 +60,23 @@ const useCartOrder = () => {
   const calculateTotalPrice = () => {
     let priceTotal = 0
 
-    products.forEach((product) => {
-      priceTotal += product.product_count * product.product_base_price
+    products.forEach(({ product_base_price, product_count }) => {
+      priceTotal += product_count * product_base_price
     })
 
     return (priceTotal * percent_iva) / 100 + priceTotal
+  }
+
+  const calculateTotalPriceDolar = () => {
+    let priceTotal = 0
+
+    products.forEach(({ product_base_price, product_count }) => {
+      priceTotal += product_count * product_base_price
+    })
+
+    const totalPriceBase = (priceTotal * percent_iva) / 100 + priceTotal
+
+    return totalPriceBase / price_dollar
   }
 
   return {
@@ -73,6 +86,7 @@ const useCartOrder = () => {
     handleCleanProductsInOrder,
     calculateTotalPrice,
     calculateSubTotalPrice,
+    calculateTotalPriceDolar,
   }
 }
 
