@@ -15,6 +15,7 @@ export const orderSlice = createSlice({
   initialState: OrdersEmptyState,
   reducers: {
     setInitialDataOrder: (state, action: PayloadAction<OrdersApi>) => {
+      const { payload } = action
       const {
         categories,
         items,
@@ -26,28 +27,25 @@ export const orderSlice = createSlice({
         settings,
         tables,
         units,
-      } = action.payload
+      } = payload || {}
 
-      const filteredOrders = []
-
-      orders.forEach((order) =>
-        order.order_list_inventary.forEach((item) => filteredOrders.push(item))
-      )
+      const filteredOrders =
+        orders?.flatMap((order) => order.order_list_inventary || []) || []
 
       const list = state.currentOrder.products || []
       let newListItems = items || []
 
       filteredOrders.forEach((product) => {
-        const countItemsInProduct = product.product_items.length
-        const productCount = product.product_count || 1
+        const countItemsInProduct = product?.product_items?.length || 0
+        const productCount = product?.product_count || 1
         for (let i = 0; i < countItemsInProduct; i++) {
           newListItems = newListItems.map((li) => {
-            if (li.item_id === product.product_items[i].item_id) {
+            if (li?.item_id === product?.product_items?.[i]?.item_id) {
               return {
                 ...li,
                 item_count:
                   li.item_count -
-                  product.product_items[i].item_count * productCount,
+                  (product?.product_items?.[i]?.item_count || 0) * productCount,
               }
             }
 
@@ -57,17 +55,18 @@ export const orderSlice = createSlice({
       })
 
       list.forEach((product) => {
-        const countItemsInProduct = product.product_items.length
-        const productCount = product.product_count || 1
+        const countItemsInProduct = product?.product_items?.length || 0
+        const productCount = product?.product_count || 1
 
         for (let i = 0; i < countItemsInProduct; i++) {
           newListItems = newListItems.map((li) => {
-            return li.item_id === product.product_items[i].item_id
+            return li?.item_id === product?.product_items?.[i]?.item_id
               ? {
                   ...li,
                   item_count:
                     li.item_count -
-                    product.product_items[i].item_count * productCount,
+                    (product?.product_items?.[i]?.item_count || 0) *
+                      productCount,
                 }
               : li
           })

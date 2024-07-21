@@ -23,7 +23,7 @@ import {
 } from "@mui/material"
 import { useSelector } from "react-redux"
 import useCartOrder from "../../hooks/useCartOrder"
-import { currencyPrice } from "@/helpers/currencyPrice"
+import { currencyPrice, currencyPriceDolar } from "@/helpers/currencyPrice"
 
 const CartContent = () => {
   const orders = useSelector((store: AppStore) => store.orders)
@@ -36,6 +36,7 @@ const CartContent = () => {
     handleCleanProductsInOrder,
     handleIncrement,
     handleDecrement,
+    calculateTotalPriceDolar,
   } = useCartOrder()
 
   return (
@@ -181,6 +182,7 @@ const CartContent = () => {
               variant="overline"
               color="GrayText"
               fontWeight="bold"
+              fontSize="10px"
             >
               Subtotal
             </Typography>
@@ -188,8 +190,9 @@ const CartContent = () => {
               component="span"
               variant="h6"
               color="GrayText"
+              fontSize="18px"
             >
-              Bs {currencyPrice(calculateSubTotalPrice())}
+              Bs {currencyPrice.format(calculateSubTotalPrice())}
             </Typography>{" "}
           </Paper>
         </ListItem>
@@ -218,6 +221,7 @@ const CartContent = () => {
               variant="overline"
               color="GrayText"
               fontWeight="bold"
+              fontSize="10px"
             >
               Total
             </Typography>
@@ -227,8 +231,50 @@ const CartContent = () => {
               style={{
                 color: "#10b981",
               }}
+              fontSize="18px"
             >
-              Bs {currencyPrice(calculateTotalPrice())}
+              Bs {currencyPrice.format(calculateTotalPrice())}
+            </Typography>{" "}
+          </Paper>
+        </ListItem>
+        <ListItem
+          style={{
+            marginTop: "5px",
+            padding: "0px",
+          }}
+        >
+          <Paper
+            elevation={0}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              alignContent: "center",
+              flexWrap: "wrap",
+              flexDirection: "row",
+              width: "100%",
+              backgroundColor: "#f5f5f5",
+              padding: "10px",
+            }}
+          >
+            <Typography
+              component="span"
+              variant="overline"
+              color="GrayText"
+              fontWeight="bold"
+              fontSize="10px"
+            >
+              Total en Dólares
+            </Typography>
+            <Typography
+              component="span"
+              variant="h5"
+              style={{
+                color: "#10b981",
+              }}
+              fontSize="18px"
+            >
+              {currencyPriceDolar.format(calculateTotalPriceDolar())}
             </Typography>{" "}
           </Paper>
         </ListItem>

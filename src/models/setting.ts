@@ -1,10 +1,10 @@
 export interface Setting {
-  price_dollar: number
-  percent_iva: number
   count_items_inventary: number
+  facturation_initial: number
   num_control: string
   num_last_facture: number
-  facturation_initial: number
+  percent_iva: number
+  price_dollar: number
 }
 
 export const settingEmptyStat = {

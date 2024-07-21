@@ -1,7 +1,9 @@
-export const currencyPrice = (number: number) => {
-  const formated = new Intl.NumberFormat("es-VE", {
-    maximumSignificantDigits: 20,
-  }).format(number)
+export const currencyPrice = new Intl.NumberFormat("es-VE", {
+  maximumSignificantDigits: 4,
+})
 
-  return formated
-}
+export const currencyPriceDolar = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumSignificantDigits: 4,
+})
