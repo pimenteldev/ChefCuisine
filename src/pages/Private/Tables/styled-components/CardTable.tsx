@@ -4,7 +4,7 @@ import styled from "styled-components"
 export const CardTableGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minMax(200px, 1fr));
-  gap: 10px;
+  gap: 20px;
 `
 
 export const CardTableBase = styled.div`
@@ -19,7 +19,7 @@ export const CardTableBase = styled.div`
     transform: scale(1.1);
   }
   &:hover > div {
-    border-bottom: 5px solid ${COLORS.primary};
+    border-bottom: 5px solid var(--primary-color);
   }
 `
 
@@ -42,7 +42,7 @@ export const CardTableFigureImg = styled.img`
 
 export const CardTableName = styled.div`
   position: absolute;
-  color: ${COLORS.primary};
+  color: var(--primary-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,8 +60,8 @@ export const CardTableLayout = styled.span`
 `
 
 export const CardTableStatusOn = styled.span`
-  background-color: ${COLORS.primary};
-  color: ${COLORS.background};
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
   position: absolute;
   padding: 0.2rem 0.5rem;
   top: -15px;
@@ -73,12 +73,12 @@ export const CardTableStatusOn = styled.span`
 `
 
 export const CardTableStatusOff = styled.span`
-  background-color: ${COLORS.danger};
-  color: ${COLORS.background};
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
   position: absolute;
   padding: 0.2rem 0.5rem;
-  top: 0px;
-  right: 20px;
+  top: -15px;
+  right: 15px;
   font-weight: 800;
   border-radius: 5px;
   opacity: 1;

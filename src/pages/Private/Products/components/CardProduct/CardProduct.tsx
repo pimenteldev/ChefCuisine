@@ -17,6 +17,7 @@ import {
   CardProductBottomCategory,
   CardProductBottomStatus,
 } from "../../styled-components/CardProduct"
+import { currencyPrice } from "@/helpers/currencyPrice"
 
 interface CardProductInterface {
   product: Product
@@ -59,7 +60,9 @@ const CardProduct = ({ product }: CardProductInterface) => {
               }}
             />
           </CardProductIngredients>
-          <CardProductPrice>{product.product_base_price}</CardProductPrice>
+          <CardProductPrice>
+            {currencyPrice.format(product.product_base_price)}
+          </CardProductPrice>
         </CardProductPriceAndIngredient>
 
         <CardProductBottom>

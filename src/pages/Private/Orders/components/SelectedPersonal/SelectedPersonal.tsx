@@ -82,7 +82,7 @@ const SelectedPersonal = () => {
                     <CardHeader
                       sx={{
                         height: 60,
-                        backgroundColor: "#f7f7f7",
+                        backgroundColor: "var(--secondary-color)",
                         padding: "10px",
                       }}
                       avatar={<Avatar src={baseUrl + personal_photo} />}

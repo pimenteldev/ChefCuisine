@@ -89,8 +89,8 @@ const SelectedTable = () => {
                   <CardHeader
                     sx={{
                       height: 60,
-                      backgroundColor: "#f7f7f7",
                       padding: "10px",
+                      backgroundColor: "var(--secondary-color)",
                     }}
                     avatar={
                       personalInfo[0]?.personal_photo ? (
@@ -99,25 +99,42 @@ const SelectedTable = () => {
                         </StyledBadge>
                       ) : (
                         <Typography
-                          variant="overline"
-                          color="text.secondary"
+                          variant="inherit"
+                          fontWeight="bold"
                         >
                           Mesa Disponible
                         </Typography>
                       )
                     }
-                    title={personalInfo[0]?.personal_name}
+                    title={
+                      <Typography
+                        component="span"
+                        fontWeight="bold"
+                      >
+                        {personalInfo[0]?.personal_name}
+                      </Typography>
+                    }
                     subheader={
-                      personalInfo[0]?.personal_name && "Cuenta Activa"
+                      personalInfo[0]?.personal_name && (
+                        <Typography
+                          variant="inherit"
+                          fontWeight="bold"
+                        >
+                          Cuenta Activa
+                        </Typography>
+                      )
                     }
                   />
+
                   <div
                     style={{
                       width: "100%",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      backgroundColor: table_active ? "#10b981" : "#ffffff",
+                      backgroundColor: table_active
+                        ? "var(--primary-color)"
+                        : "#ffffff",
                     }}
                   >
                     <CardMedia
@@ -134,7 +151,11 @@ const SelectedTable = () => {
 
                     <Typography
                       variant="h5"
-                      color={table_active ? "white" : "#4d4d4d"}
+                      color={
+                        table_active
+                          ? "var(--secondary-color)"
+                          : "var(--primary-color)"
+                      }
                       sx={{
                         position: "absolute",
                         opacity: "1",

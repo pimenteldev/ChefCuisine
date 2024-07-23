@@ -11,7 +11,7 @@ export const CardProductBase = styled.div``
 
 export const CardProductBody = styled.div`
   align-items: flex-start;
-  background-color: ${COLORS.background};
+  background-color: var(--background-color);
   border-radius: 5px;
   box-shadow: 1px 1px 5px 0.1rem hsla(0, 0%, 0%, 0.112);
   cursor: pointer;
@@ -44,8 +44,8 @@ export const CardProductFigureImg = styled.img`
 `
 
 export const CardProductName = styled.div`
-  background-color: ${COLORS.primary};
-  color: ${COLORS.background};
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
   font-size: 1em;
   font-weight: 700;
   padding: 0.5em;
@@ -55,18 +55,18 @@ export const CardProductName = styled.div`
 `
 
 export const CardProductPriceAndIngredient = styled.div`
-  color: ${COLORS.dark};
+  color: var(--text-color);
   font-size: 14px;
   text-align: center;
   width: 100%;
 `
 
 export const CardProductIngredients = styled.div`
-  color: ${COLORS.dark};
+  color: var(--text-color);
 `
 
 export const CardProductPrice = styled.div`
-  color: ${COLORS.dark};
+  color: var(--primary-color);
   font-size: 1.5rem;
   font-weight: 700;
   opacity: 0.8;
