@@ -13,19 +13,19 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material"
-import React from "react"
 import { useLocation } from "react-router-dom"
 import Logout from "../Logout/Logout"
 import { sidebarOpenSubject$ } from "../Sidebar/Sidebar"
-import logo from "/icon.png"
 import { Menu } from "./Menu/Menu"
+import logo from "/logo.svg"
 
 export const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
     right: -3,
     top: 13,
-    border: `2px solid ${theme.palette.background.paper}`,
+    border: `2px solid ${theme.palette.primary.main}`,
     padding: "0 4px",
+    color: theme.palette.primary.main,
   },
 }))
 
@@ -69,11 +69,9 @@ const Navbar = () => {
         <Avatar
           src={logo}
           sx={{
-            height: 30,
-            width: 30,
+            height: 60,
+            width: 60,
             display: { xs: "none", sm: "block" },
-            mr: 1,
-            borderRadius: 0,
           }}
         />
 

@@ -1,7 +1,7 @@
 import CustomInput from "@/components/CustomInput/CustomInput"
 import { Button } from "@mui/material"
 import useLogin from "./hooks/useLogin"
-import logo from "/icon.png"
+import logo from "/logo.svg"
 import { APP_NAME, APP_SUBNAME } from "@/constants/utilitys"
 import "./styles/login.css"
 

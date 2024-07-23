@@ -80,7 +80,7 @@ const ProductCard = ({ product, colorCategory, minimumQuantity }) => {
             fontWeight={"bold"}
             noWrap
           >
-            Bs {currencyPrice.format(product.product_base_price)}
+            {currencyPrice.format(product.product_base_price)}
           </Typography>
         </Box>
         <Box

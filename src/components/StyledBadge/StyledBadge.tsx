@@ -4,18 +4,18 @@ import { Badge } from "@mui/material"
 export const StyledBadge = ({ children }) => {
   const StyledBadge = styled(Badge)(({}) => ({
     "& .MuiBadge-badge": {
-      backgroundColor: "#10b981",
-      color: "#10b981",
-      boxShadow: `0 0 0 2px #fff`,
+      backgroundColor: "var(--primary-color)",
+      color: "var(--primary-color)",
+      boxShadow: `0 0 0 2px var(--background-color)`,
       "&::after": {
         position: "absolute",
-        top: 0,
-        left: 0,
+        left: "-1px",
+        bottom: "-1px",
         width: "100%",
         height: "100%",
         borderRadius: "50%",
         animation: "ripple 1.2s infinite ease-in-out",
-        border: "1px solid currentColor",
+        border: "5px solid currentColor",
         content: '""',
       },
     },

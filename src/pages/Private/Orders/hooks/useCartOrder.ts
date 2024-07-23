@@ -95,7 +95,7 @@ const useCartOrder = () => {
     const subTotalPrice = priceTotal
     const totalPrice = (priceTotal * percent_iva) / 100 + priceTotal
     const totalPriceDolar = totalPrice / price_dollar
-
+    console.log(totalPrice, price_dollar)
     return {
       subTotalPrice,
       totalPrice,

@@ -34,6 +34,9 @@ function OrderModule() {
       <Breadcrumbs
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
+        style={{
+          marginTop: "5px",
+        }}
       >
         {isTableSelected && (
           <Link
@@ -43,10 +46,11 @@ function OrderModule() {
             onClick={() => handleProductActions("cleanOrder")}
           >
             <TableRestaurantIcon
-              fontSize="small"
+              fontSize="medium"
               color="secondary"
               sx={{
-                backgroundColor: "#10b981",
+                backgroundColor: "var(--primary-color)",
+                color: "var(--secondary-color)",
                 borderRadius: "100%",
                 padding: "5px",
                 marginRight: "5px",
@@ -63,10 +67,11 @@ function OrderModule() {
             onClick={() => handleProductActions("cleanOrder")}
           >
             <AccountCircleIcon
-              fontSize="small"
+              fontSize="medium"
               color="secondary"
               sx={{
-                backgroundColor: "#10b981",
+                backgroundColor: "var(--primary-color)",
+                color: "var(--secondary-color)",
                 borderRadius: "100%",
                 padding: "5px",
                 marginRight: "5px",

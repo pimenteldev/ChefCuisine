@@ -1,9 +1,11 @@
 export const currencyPrice = new Intl.NumberFormat("es-VE", {
-  maximumSignificantDigits: 4,
+  style: "currency",
+  currency: "VES",
+  minimumFractionDigits: 2,
 })
 
 export const currencyPriceDolar = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
-  maximumSignificantDigits: 4,
+  minimumFractionDigits: 2,
 })

@@ -1,5 +1,4 @@
 import { baseUrl } from "@/constants/utilitys"
-import React from "react"
 import { currencyPrice, currencyPriceDolar } from "@/helpers/currencyPrice"
 import { AppStore } from "@/redux/models/store"
 import Add from "@mui/icons-material/Add"
@@ -19,10 +18,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material"
+import React from "react"
 import { useSelector } from "react-redux"
 import useCartOrder from "../../hooks/useCartOrder"
-import { useOrderViewContext } from "../../Context/ContextProvider"
-import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog"
 
 const CartContent = () => {
   const { currentOrder, settings } = useSelector(
@@ -41,7 +39,7 @@ const CartContent = () => {
 
   return (
     <List
-      sx={{ width: "100%", bgcolor: "background.paper" }}
+      sx={{ width: "100%" }}
       style={{ padding: "10px 0" }}
     >
       {products.length === 0 ? (
@@ -122,7 +120,7 @@ const CartContent = () => {
                     variant="overline"
                     color="GrayText"
                   >
-                    <small>Precio:</small> Bs{" "}
+                    <small>Precio:</small>
                     {currencyPrice.format(product.product_base_price)}
                   </Typography>
                 </Stack>
@@ -151,10 +149,10 @@ const CartContent = () => {
                   <Paper
                     elevation={0}
                     style={{
-                      backgroundColor: "rgba(16, 185, 129, 0.04)",
                       padding: "5px 10px",
-                      color: "#10b981",
+                      color: "var(--secondary-color)",
                       margin: "0px 5px",
+                      backgroundColor: "var(--primary-color)",
                     }}
                   >
                     <strong>{product.product_count}</strong>
@@ -179,144 +177,130 @@ const CartContent = () => {
             />
           </React.Fragment>
         ))}
-      <Stack>
-        <ListItem
-          style={{
-            padding: "0px",
-          }}
-        >
-          <Paper
-            elevation={0}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              alignContent: "center",
-              flexWrap: "wrap",
-              flexDirection: "row",
-              width: "100%",
-              backgroundColor: "#f5f5f5",
-              padding: "10px",
-            }}
-          >
-            <Typography
-              component="span"
-              variant="overline"
-              color="GrayText"
-              fontWeight="bold"
-              fontSize="10px"
-            >
-              Subtotal
-            </Typography>
-            <Typography
-              component="span"
-              variant="h6"
-              color="GrayText"
-              fontSize="18px"
-            >
-              Bs {currencyPrice.format(subTotalPrice)}
-            </Typography>{" "}
-          </Paper>
-        </ListItem>
-        <ListItem
-          style={{
-            marginTop: "5px",
-            padding: "0px",
-          }}
-        >
-          <Paper
-            elevation={0}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              alignContent: "center",
-              flexWrap: "wrap",
-              flexDirection: "row",
-              width: "100%",
-              backgroundColor: "#f5f5f5",
-              padding: "10px",
-            }}
-          >
-            <Typography
-              component="span"
-              variant="overline"
-              color="GrayText"
-              fontWeight="bold"
-              fontSize="10px"
-            >
-              Total({percent_iva})
-            </Typography>
-            <Typography
-              component="span"
-              variant="h5"
+      {products.length >= 1 && (
+        <Stack>
+          <ListItem>
+            <Paper
+              elevation={0}
               style={{
-                color: "#10b981",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                alignContent: "center",
+                flexWrap: "wrap",
+                flexDirection: "row",
+                width: "100%",
               }}
-              fontSize="18px"
             >
-              Bs {currencyPrice.format(totalPrice)}
-            </Typography>{" "}
-          </Paper>
-        </ListItem>
-        <ListItem
-          style={{
-            marginTop: "5px",
-            padding: "0px",
-          }}
-        >
-          <Paper
-            elevation={0}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              alignContent: "center",
-              flexWrap: "wrap",
-              flexDirection: "row",
-              width: "100%",
-              backgroundColor: "#f5f5f5",
-              padding: "10px",
-            }}
-          >
-            <Typography
-              component="span"
-              variant="overline"
-              color="GrayText"
-              fontWeight="bold"
-              fontSize="10px"
-            >
-              Total en Dólares
-            </Typography>
-            <Typography
-              component="span"
-              variant="h5"
+              <Typography
+                component="span"
+                variant="overline"
+                color="GrayText"
+                fontWeight="bold"
+                fontSize="10px"
+              >
+                Subtotal
+              </Typography>
+              <Typography
+                component="span"
+                variant="h6"
+                color="GrayText"
+                fontSize="18px"
+              >
+                {currencyPrice.format(subTotalPrice)}
+              </Typography>{" "}
+            </Paper>
+          </ListItem>
+          <ListItem>
+            <Paper
+              elevation={0}
               style={{
-                color: "#10b981",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                alignContent: "center",
+                flexWrap: "wrap",
+                flexDirection: "row",
+                width: "100%",
               }}
-              fontSize="18px"
             >
-              {currencyPriceDolar.format(totalPriceDolar)}
-            </Typography>{" "}
-          </Paper>
-        </ListItem>
-        <ListItem>
-          <Button
-            aria-label="delete"
-            color="primary"
-            variant="contained"
-            size="small"
-            classes={{ root: "button" }}
-            onClick={() => handleProductActions("toggleModalPreview")}
-            style={{
-              marginTop: "5px",
-              width: "100%",
-            }}
-          >
-            Previsualizar Orden
-          </Button>
-        </ListItem>
-      </Stack>
+              <Typography
+                component="span"
+                variant="overline"
+                color="GrayText"
+                fontWeight="bold"
+                fontSize="10px"
+              >
+                Total
+              </Typography>
+              <Typography
+                component="span"
+                variant="h5"
+                style={{
+                  color: "var(--primary-color)",
+                  fontWeight: "bold",
+                }}
+                fontSize="18px"
+              >
+                {currencyPrice.format(totalPrice)}
+              </Typography>{" "}
+            </Paper>
+          </ListItem>
+          <ListItem>
+            <Paper
+              elevation={0}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                alignContent: "center",
+                flexWrap: "wrap",
+                flexDirection: "row",
+                width: "100%",
+              }}
+            >
+              <Typography
+                component="span"
+                variant="overline"
+                color="GrayText"
+                fontWeight="bold"
+                fontSize="10px"
+              >
+                Total en Dólares
+              </Typography>
+              <Typography
+                component="span"
+                variant="h5"
+                style={{
+                  color: "var(--primary-color)",
+                  fontWeight: "bold",
+                }}
+                fontSize="18px"
+              >
+                {currencyPriceDolar.format(totalPriceDolar)}
+              </Typography>{" "}
+            </Paper>
+          </ListItem>
+
+          <ListItem>
+            <Button
+              aria-label="delete"
+              color="primary"
+              variant="contained"
+              size="small"
+              classes={{ root: "button" }}
+              onClick={() => handleProductActions("toggleModalPreview")}
+              style={{
+                marginTop: "5px",
+                width: "100%",
+                fontWeight: "bold",
+              }}
+            >
+              Previsualizar Orden
+            </Button>
+          </ListItem>
+        </Stack>
+      )}
     </List>
   )
 }
