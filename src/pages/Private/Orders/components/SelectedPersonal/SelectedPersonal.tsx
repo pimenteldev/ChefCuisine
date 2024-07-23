@@ -1,5 +1,4 @@
 import { baseUrl } from "@/constants/utilitys"
-import { CardTableGrid } from "@/pages/Private/Tables/styled-components/CardTable"
 import {
   Container,
   Alert,
@@ -8,6 +7,7 @@ import {
   CardHeader,
   Avatar,
   CardMedia,
+  Grid,
 } from "@mui/material"
 import useInitialGetData from "../../hooks/useSelectors"
 import { useDispatch } from "react-redux"
@@ -39,7 +39,10 @@ const SelectedPersonal = () => {
       >
         Selecciona un Mesonero
       </Alert>
-      <CardTableGrid>
+      <Grid
+        container
+        columns={12}
+      >
         {personal?.length === 0 && <>No existen Mesoneros en el Sistema</>}
 
         {personal?.map(
@@ -55,50 +58,59 @@ const SelectedPersonal = () => {
             )
 
             return (
-              <Card
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
                 sx={{
-                  maxWidth: 345,
-                  position: "relative",
-                  cursor: "pointer",
+                  p: "5px",
                 }}
                 key={personal_document}
               >
-                <CardActionArea
-                  onClick={() =>
-                    handleSelectPersonal(personal_document, personal_name)
-                  }
+                <Card
+                  sx={{
+                    cursor: "pointer",
+                  }}
                 >
-                  <CardHeader
-                    sx={{
-                      height: 60,
-                      backgroundColor: "#f7f7f7",
-                      padding: "10px",
-                    }}
-                    avatar={<Avatar src={baseUrl + personal_photo} />}
-                    title={personal_name}
-                    subheader={personal_alias}
-                  />
-                  <div
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
+                  <CardActionArea
+                    onClick={() =>
+                      handleSelectPersonal(personal_document, personal_name)
+                    }
                   >
-                    <CardMedia
-                      component="img"
-                      height="194"
-                      image={baseUrl + personal_photo}
-                      alt={personal_alias}
+                    <CardHeader
+                      sx={{
+                        height: 60,
+                        backgroundColor: "#f7f7f7",
+                        padding: "10px",
+                      }}
+                      avatar={<Avatar src={baseUrl + personal_photo} />}
+                      title={personal_name}
+                      subheader={personal_alias}
                     />
-                  </div>
-                </CardActionArea>
-              </Card>
+                    <div
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <CardMedia
+                        component="img"
+                        height="194"
+                        image={baseUrl + personal_photo}
+                        alt={personal_alias}
+                      />
+                    </div>
+                  </CardActionArea>
+                </Card>
+              </Grid>
             )
           }
         )}
-      </CardTableGrid>
+      </Grid>
     </Container>
   )
 }

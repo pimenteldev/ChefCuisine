@@ -1,6 +1,6 @@
 import AddIcon from "@mui/icons-material/Add"
 import { Fab } from "@mui/material"
-import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog.component"
+import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog"
 import { useTablesViewContext } from "../../contexts/TablesView"
 
 const FabButtonTables = () => {

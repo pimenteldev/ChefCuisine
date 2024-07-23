@@ -26,6 +26,9 @@ export interface CurrentOrder {
   isPersonalSelected: boolean
   personalSelectDocument: string
   personalSelectName: string
+  isModalPreview: boolean
+  isModalFacture: boolean
+  isFactureView: boolean
 }
 
 export interface Order {
@@ -53,6 +56,9 @@ export const currentOrderEmptyState = {
   isPersonalSelected: false,
   personalSelectDocument: "",
   personalSelectName: "",
+  isModalPreview: false,
+  isModalFacture: false,
+  isFactureView: false,
 }
 
 export const OrdersEmptyState = {

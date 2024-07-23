@@ -168,6 +168,37 @@ const ModifyProduct = () => {
                   select
                   fullWidth
                   size="small"
+                  label="Estatus"
+                  required
+                  defaultValue={product.product_status}
+                  inputProps={register("product_status", {
+                    required: "Seleccione un estatus",
+                  })}
+                >
+                  <MenuItem value={0}>Inactivo</MenuItem>
+                  <MenuItem value={1}>Activo</MenuItem>
+                </TextField>
+
+                {errors.product_status && errors.product_status.message && (
+                  <Typography
+                    color="error"
+                    align="center"
+                    variant="overline"
+                  >
+                    Seleccione un estatus
+                  </Typography>
+                )}
+              </FormControl>
+
+              <FormControl
+                fullWidth
+                size="small"
+                margin="dense"
+              >
+                <TextField
+                  select
+                  fullWidth
+                  size="small"
                   label="Categoría"
                   required
                   defaultValue={product.product_category}

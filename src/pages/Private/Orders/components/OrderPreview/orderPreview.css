@@ -1,0 +1,30 @@
+.table {
+  width: 100%;
+  border: 1px solid var(--primary);
+  color: #6c757d;
+}
+
+.table_thead {
+  vertical-align: bottom;
+}
+
+.table_thead_tr {
+  background-color: var(--primary);
+  color: white;
+  border-bottom: 1px solid;
+  border-color: var(--secondary);
+}
+
+.table > tbody > tr:nth-of-type(odd) {
+  background-color: var(--grey);
+  border-bottom: 1px solid;
+  border-color: var(--secondary);
+}
+
+.table_tbody_tr_td_right {
+  text-align: right;
+}
+
+.table_tbody_tr_td_left {
+  text-align: left;
+}

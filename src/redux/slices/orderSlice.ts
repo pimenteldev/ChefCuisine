@@ -7,6 +7,8 @@ import {
 } from "@/models/orders"
 import { ProductInOrder } from "@/models/products"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { produce } from "immer"
+import { UpdateNewListItems } from "../hooks/useFunctionsStore"
 
 export const orderKey = "order"
 
@@ -16,101 +18,51 @@ export const orderSlice = createSlice({
   reducers: {
     setInitialDataOrder: (state, action: PayloadAction<OrdersApi>) => {
       const { payload } = action
-      const {
-        categories,
-        items,
-        items_categories,
-        orders,
-        personal,
-        products,
-        role,
-        settings,
-        tables,
-        units,
-      } = payload || {}
+      const { items, orders } = payload || {}
 
       const filteredOrders =
-        orders?.flatMap((order) => order.order_list_inventary || []) || []
+        orders?.flatMap(function (order) {
+          return order.order_list_inventary || []
+        }) || []
 
-      const list = state.currentOrder.products || []
-      let newListItems = items || []
+      let newListItems = [...items]
+      const list = [...state.currentOrder.products] || []
 
-      filteredOrders.forEach((product) => {
-        const countItemsInProduct = product?.product_items?.length || 0
-        const productCount = product?.product_count || 1
-        for (let i = 0; i < countItemsInProduct; i++) {
-          newListItems = newListItems.map((li) => {
-            if (li?.item_id === product?.product_items?.[i]?.item_id) {
-              return {
-                ...li,
-                item_count:
-                  li.item_count -
-                  (product?.product_items?.[i]?.item_count || 0) * productCount,
-              }
-            }
-
-            return li
-          })
-        }
-      })
-
-      list.forEach((product) => {
-        const countItemsInProduct = product?.product_items?.length || 0
-        const productCount = product?.product_count || 1
-
-        for (let i = 0; i < countItemsInProduct; i++) {
-          newListItems = newListItems.map((li) => {
-            return li?.item_id === product?.product_items?.[i]?.item_id
-              ? {
-                  ...li,
-                  item_count:
-                    li.item_count -
-                    (product?.product_items?.[i]?.item_count || 0) *
-                      productCount,
-                }
-              : li
-          })
-        }
-      })
+      newListItems = UpdateNewListItems(newListItems, filteredOrders, list, 1)
 
       return {
         ...state,
-        categories,
+        ...payload,
         items: newListItems,
-        items_categories,
-        orders,
-        personal,
-        products,
-        role,
-        settings,
-        tables,
-        units,
       }
     },
     addToOrder: (state, action) => {
       const { product_items, product_id } = action.payload
-      const productIndex = state.currentOrder.products.findIndex(
-        (product) => product.product_id === product_id
-      )
-      if (productIndex !== -1) {
-        state.currentOrder.products[productIndex].product_count++
-      } else {
-        state.currentOrder.products.push({
-          ...action.payload,
-          product_count: 1,
-        })
-      }
 
-      //UPDATE ITEMS IN STATE
-      for (let index = 0; index < product_items.length; index++) {
-        const element = product_items[index]
-        let itemCurrent = state.items.findIndex(
-          (i) => i.item_id === element.item_id
+      return produce(state, (draftState) => {
+        const productIndex = draftState.currentOrder.products.findIndex(
+          (product) => product.product_id === product_id
         )
-        state.items[itemCurrent].item_count = parserDecimals(
-          state.items[itemCurrent].item_count - element.item_count
-        )
-      }
+
+        if (productIndex !== -1) {
+          draftState.currentOrder.products[productIndex].product_count++
+        } else {
+          draftState.currentOrder.products.push({
+            ...action.payload,
+            product_count: 1,
+          })
+        }
+
+        for (let index = 0; index < product_items.length; index++) {
+          const element = product_items[index]
+          const itemCurrent = draftState.items.findIndex(
+            (i) => i.item_id === element.item_id
+          )
+          draftState.items[itemCurrent].item_count = parserDecimals(
+            draftState.items[itemCurrent].item_count - element.item_count
+          )
+        }
+      })
     },
     incrementQuantity: (state, action) => {
       const { product_items, product_id } = action.payload
@@ -200,6 +152,10 @@ export const orderSlice = createSlice({
       state.currentOrder.personalSelectName = personal_name
     },
 
+    toggleModalPreview: (state) => {
+      state.currentOrder.isModalPreview = !state.currentOrder.isModalPreview
+    },
+
     addOrderToCurrentOrder: (state, action: PayloadAction<Order>) => {
       const {
         order_id,
@@ -238,11 +194,17 @@ export const orderSlice = createSlice({
       state.currentOrder.personalSelectName = personalInfo.personal_name
       state.currentOrder.products = productsInOrder
     },
-    clearCurrentOrder: (state, action: PayloadAction<Order>) => {
+    cleanCurrentOrder: (state, action: PayloadAction<Order>) => {
       state.currentOrder = currentOrderEmptyState
     },
     cleanProductsInCurrentOrder: (state, action) => {
       state.currentOrder.products = []
+    },
+    removeProductInCurrentOrder: (state, action) => {
+      const productToRemove = action.payload
+      state.currentOrder.products = state.currentOrder.products.filter(
+        (product) => product.product_id !== productToRemove.product_id
+      )
     },
   },
 })
@@ -256,8 +218,10 @@ export const {
   addTableSelect,
   addPersonalSelect,
   addOrderToCurrentOrder,
-  clearCurrentOrder,
+  cleanCurrentOrder,
+  removeProductInCurrentOrder,
   cleanProductsInCurrentOrder,
+  toggleModalPreview,
 } = orderSlice.actions
 
 export default orderSlice.reducer

@@ -1,6 +1,5 @@
 import { FormControl, TextField } from "@mui/material"
 import { FieldErrors } from "react-hook-form"
-import { InputError } from "./styled-components/InputError"
 
 interface InputProps {
   register: any
@@ -30,9 +29,9 @@ export const CustomInput = ({
   const formValidation = (errors: FieldErrors, errorKey: string) => {
     return (
       errors[errorKey] && (
-        <InputError className="error-message">
+        <span className="inputError">
           <>{errors[errorKey]?.message}</>
-        </InputError>
+        </span>
       )
     )
   }

@@ -13,8 +13,6 @@ import { Roles } from "./models/roles"
 import HomeUser from "./pages/Private/HomeUser/HomeUser"
 import store from "./redux/store"
 import { PrivateRoutes, PublicRoutes } from "./routes/routes"
-import { LayoutContainer } from "./styled-components/layout"
-import Cart from "./pages/Private/Orders/components/Cart/Cart"
 
 const Login = lazy(() => import("./pages/Login/Login"))
 const Private = lazy(() => import("./pages/Private/Private"))
@@ -23,49 +21,50 @@ function App() {
   return (
     <Suspense fallback={<Spinner />}>
       <Provider store={store}>
-        <LayoutContainer>
-          <BrowserRouter>
-            <RoutesWithNotFound>
-              <Route
-                path="/"
-                element={<Navigate to={PrivateRoutes.PRIVATE} />}
-              />
-
-              <Route
-                path={PublicRoutes.LOGIN}
-                element={<Login />}
-              />
-
-              <Route element={<AuthGuard privateValidation={true} />}>
+        <main>
+          <article>
+            <BrowserRouter>
+              <RoutesWithNotFound>
                 <Route
-                  path={`${PrivateRoutes.PRIVATE}/*`}
-                  element={
-                    <>
-                      <Navbar />
-                      <Sidebar />
-                      <Private />
-                      <Cart />
-                    </>
-                  }
+                  path="/"
+                  element={<Navigate to={PrivateRoutes.PRIVATE} />}
                 />
-              </Route>
 
-              <Route element={<RolGuard rol={Roles.USER} />}>
                 <Route
-                  path={`${PrivateRoutes.PRIVATE}/${PrivateRoutes.HOMEUSER}`}
-                  element={
-                    <>
-                      <Navbar />
-                      <Sidebar />
-                      <HomeUser />
-                    </>
-                  }
+                  path={PublicRoutes.LOGIN}
+                  element={<Login />}
                 />
-              </Route>
-            </RoutesWithNotFound>
-          </BrowserRouter>
-          <CustomSnackBar></CustomSnackBar>
-        </LayoutContainer>
+
+                <Route element={<AuthGuard privateValidation={true} />}>
+                  <Route
+                    path={`${PrivateRoutes.PRIVATE}/*`}
+                    element={
+                      <>
+                        <Navbar />
+                        <Sidebar />
+                        <Private />
+                      </>
+                    }
+                  />
+                </Route>
+
+                <Route element={<RolGuard rol={Roles.USER} />}>
+                  <Route
+                    path={`${PrivateRoutes.PRIVATE}/${PrivateRoutes.HOMEUSER}`}
+                    element={
+                      <>
+                        <Navbar />
+                        <Sidebar />
+                        <HomeUser />
+                      </>
+                    }
+                  />
+                </Route>
+              </RoutesWithNotFound>
+            </BrowserRouter>
+            <CustomSnackBar></CustomSnackBar>
+          </article>
+        </main>
       </Provider>
     </Suspense>
   )

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 import { Subscription } from "rxjs"
 
 interface Props {
-  children: React.ReactNode
+  children: React.ReactNode | ""
 }
 
 export const dialogOpenSubject$ = new SubjectManager<boolean>()

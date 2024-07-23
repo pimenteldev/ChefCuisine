@@ -1,4 +1,3 @@
-import { CardTableGrid } from "@/pages/Private/Tables/styled-components/CardTable"
 import {
   Container,
   Alert,
@@ -8,6 +7,7 @@ import {
   Avatar,
   Typography,
   CardMedia,
+  Grid,
 } from "@mui/material"
 import useInitialGetData from "../../hooks/useSelectors"
 import StyledBadge from "@/components/StyledBadge/StyledBadge"
@@ -48,7 +48,10 @@ const SelectedTable = () => {
       >
         Selecciona una Mesa
       </Alert>
-      <CardTableGrid>
+      <Grid
+        container
+        columns={12}
+      >
         {tables?.length === 0 && <>No existen Mesas en el Sistema</>}
 
         {tables?.map((table) => {
@@ -64,79 +67,90 @@ const SelectedTable = () => {
           )
 
           return (
-            <Card
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
               sx={{
-                maxWidth: 345,
-                position: "relative",
-                cursor: "pointer",
+                p: "5px",
               }}
               key={table_id}
             >
-              <CardActionArea
-                onClick={() => handleAddTableSelect(table, orderActive[0])}
+              <Card
+                style={{
+                  cursor: "pointer",
+                }}
               >
-                <CardHeader
-                  sx={{
-                    height: 60,
-                    backgroundColor: "#f7f7f7",
-                    padding: "10px",
-                  }}
-                  avatar={
-                    personalInfo[0]?.personal_photo ? (
-                      <StyledBadge>
-                        <Avatar src="/staff.svg" />
-                      </StyledBadge>
-                    ) : (
-                      <Typography
-                        variant="overline"
-                        color="text.secondary"
-                      >
-                        Mesa Disponible
-                      </Typography>
-                    )
-                  }
-                  title={personalInfo[0]?.personal_name}
-                  subheader={personalInfo[0]?.personal_name && "Cuenta Activa"}
-                />
-                <div
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    backgroundColor: table_active ? "#10b981" : "#ffffff",
-                  }}
+                <CardActionArea
+                  onClick={() => handleAddTableSelect(table, orderActive[0])}
                 >
-                  <CardMedia
-                    component="img"
-                    height="194"
-                    image="/mesa.jpg"
-                    alt={table_name}
+                  <CardHeader
                     sx={{
-                      position: "relative",
-                      opacity: 0.3,
-                      zIndex: 9,
+                      height: 60,
+                      backgroundColor: "#f7f7f7",
+                      padding: "10px",
                     }}
+                    avatar={
+                      personalInfo[0]?.personal_photo ? (
+                        <StyledBadge>
+                          <Avatar src="/staff.svg" />
+                        </StyledBadge>
+                      ) : (
+                        <Typography
+                          variant="overline"
+                          color="text.secondary"
+                        >
+                          Mesa Disponible
+                        </Typography>
+                      )
+                    }
+                    title={personalInfo[0]?.personal_name}
+                    subheader={
+                      personalInfo[0]?.personal_name && "Cuenta Activa"
+                    }
                   />
-
-                  <Typography
-                    variant="h5"
-                    color={table_active ? "white" : "#4d4d4d"}
-                    sx={{
-                      position: "absolute",
-                      opacity: "1",
-                      fontWeight: "bold",
-                      zIndex: 99,
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      backgroundColor: table_active ? "#10b981" : "#ffffff",
                     }}
                   >
-                    {table_name}
-                  </Typography>
-                </div>
-              </CardActionArea>
-            </Card>
+                    <CardMedia
+                      component="img"
+                      height="194"
+                      image="/mesa.jpg"
+                      alt={table_name}
+                      sx={{
+                        position: "relative",
+                        opacity: 0.3,
+                        zIndex: 9,
+                      }}
+                    />
+
+                    <Typography
+                      variant="h5"
+                      color={table_active ? "white" : "#4d4d4d"}
+                      sx={{
+                        position: "absolute",
+                        opacity: "1",
+                        fontWeight: "bold",
+                        zIndex: 99,
+                      }}
+                    >
+                      {table_name}
+                    </Typography>
+                  </div>
+                </CardActionArea>
+              </Card>
+            </Grid>
           )
         })}
-      </CardTableGrid>
+      </Grid>
     </Container>
   )
 }

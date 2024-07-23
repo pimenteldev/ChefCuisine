@@ -1,32 +1,33 @@
-import React from "react"
-import useSelectors from "../../hooks/useSelectors"
 import { baseUrl } from "@/constants/utilitys"
-import { currencyPrice } from "@/helpers/currencyPrice"
 import {
+  Box,
   Card,
   CardActionArea,
-  Stack,
-  Chip,
-  CardMedia,
-  Typography,
   CardContent,
+  CardMedia,
+  Chip,
+  Stack,
+  Typography,
 } from "@mui/material"
+import useCartOrder from "../../hooks/useCartOrder"
+import { currencyPrice } from "@/helpers/currencyPrice"
+import "./productCard.css"
 
 const ProductCard = ({ product, colorCategory, minimumQuantity }) => {
-  const { handleSelectProduct } = useSelectors()
+  const { handleProductActions } = useCartOrder()
 
   return (
     <Card
-      sx={{ maxWidth: 345 }}
       key={product.product_id}
       style={{
         opacity: minimumQuantity <= 0 ? 0.5 : 1,
         cursor: minimumQuantity <= 0 ? "not-allowed" : "pointer",
       }}
+      className="card-product-order"
     >
       <CardActionArea
-        onClick={() => handleSelectProduct(product)}
-        disabled={true}
+        onClick={() => handleProductActions("addProduct", product)}
+        disabled={minimumQuantity <= 0 ? true : false}
       >
         <Stack
           direction="row"
@@ -35,13 +36,14 @@ const ProductCard = ({ product, colorCategory, minimumQuantity }) => {
           alignItems={"center"}
           style={{
             backgroundColor: colorCategory.category_color,
-            padding: "10px",
+            padding: "5px",
           }}
         >
           <Chip
             label={colorCategory.category_name}
             style={{
               color: "white",
+              fontSize: "12px",
             }}
           />
           <Chip
@@ -53,69 +55,54 @@ const ProductCard = ({ product, colorCategory, minimumQuantity }) => {
             }}
           />
         </Stack>
-
-        <CardMedia
-          component="img"
-          height="194"
-          image={baseUrl + product.product_photo}
-          alt={product.product_name}
-        />
-        <Stack
-          direction="column"
-          spacing={2}
+        <figure>
+          <CardMedia
+            component="img"
+            height="150"
+            image={baseUrl + product.product_photo}
+            alt={product.product_name}
+          />
+        </figure>
+        <Box
+          style={{
+            height: "35px",
+            position: "absolute",
+            marginTop: "-35px",
+            width: "100%",
+            padding: "0px 10px",
+            textAlign: "center",
+            backgroundColor: "var(--primary-color-transparent)",
+          }}
         >
           <Typography
             variant="h6"
             color="white"
-            style={{
-              position: "absolute",
-              marginTop: "-29px",
-              backgroundColor: "#10b981",
-              width: "100%",
-              textAlign: "center",
-            }}
+            fontWeight={"bold"}
             noWrap
+          >
+            Bs {currencyPrice.format(product.product_base_price)}
+          </Typography>
+        </Box>
+        <Box
+          style={{
+            height: "45px",
+            width: "100%",
+            padding: "10px 10px",
+            textAlign: "center",
+            backgroundColor: "var(--background-color-secondary)",
+            marginTop: "0px",
+          }}
+        >
+          <Typography
+            variant="button"
+            color="secundary"
+            fontWeight={"bold"}
+            noWrap
+            align="center"
           >
             {product.product_name}
           </Typography>
-        </Stack>
-
-        <CardContent>
-          <Stack
-            direction="column"
-            spacing={2}
-            justifyContent={"center"}
-            alignItems={"center"}
-          >
-            <Typography
-              variant="h6"
-              color="text.secondary"
-            >
-              {product.product_base_price}
-            </Typography>
-            {/* <ul>
-              {product.product_items.map((i) => (
-                <li key={i.item_id}>
-                  <>
-                    {i.item_id}
-                    {" - "}
-                  </>
-                  <>
-                    {i.item_name}
-                    {" - "}
-                  </>
-                  <>
-                    {i.item_count} {" - "}
-                  </>
-                  <>
-                    {i.item_count * minimumQuantity} {" - "}
-                  </>
-                  <>{minimumQuantity}</>
-                </li>
-              ))}
-            </ul> */}
-          </Stack>
-        </CardContent>
+        </Box>
       </CardActionArea>
     </Card>
   )

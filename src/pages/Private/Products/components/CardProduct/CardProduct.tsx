@@ -1,7 +1,6 @@
-import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog.component"
+import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog"
 import { baseUrl } from "@/constants/utilitys"
 import { Product } from "@/models/products"
-import { TruncateText } from "@/styled-components/truncateText"
 import { Alert, Badge } from "@mui/material"
 import { useProductsViewContext } from "../../contexts/ProductsView"
 import useSearchCategory from "../../hooks/useSearchCategory"
@@ -47,7 +46,7 @@ const CardProduct = ({ product }: CardProductInterface) => {
           />
         </CardProductFigure>
         <CardProductName>
-          <TruncateText>{product.product_name}</TruncateText>
+          <span className="truncateText">{product.product_name}</span>
         </CardProductName>
         <CardProductPriceAndIngredient>
           <CardProductIngredients>
