@@ -8,7 +8,7 @@ import {
 import { ProductInOrder } from "@/models/products"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { produce } from "immer"
-import { UpdateNewListItems } from "../hooks/useFunctionsStore"
+import { updateNewListItems } from "../hooks/useFunctionsStore"
 
 export const orderKey = "order"
 
@@ -28,7 +28,7 @@ export const orderSlice = createSlice({
       let newListItems = [...items]
       const list = [...state.currentOrder.products] || []
 
-      newListItems = UpdateNewListItems(newListItems, filteredOrders, list, 1)
+      newListItems = updateNewListItems(newListItems, filteredOrders, list, 1)
 
       return {
         ...state,

@@ -159,18 +159,14 @@ const OrderPreview: React.FC<OrderPreviewInterface> = () => {
                     >
                       {product_name}
                     </td>
-                    <td>Bs {currencyPrice.format(product_base_price)}</td>
+                    <td>{currencyPrice.format(product_base_price)}</td>
                     <td>
-                      Bs{" "}
                       {currencyPrice.format(
                         (product_base_price * percent_iva) / 100 +
                           product_base_price
                       )}
                     </td>
-                    <td>
-                      Bs {currencyPrice.format(priceIvaInclude)}
-                      {/* {parseFloat(price_iva * i.product_count).toFixed(2)} */}
-                    </td>
+                    <td>{currencyPrice.format(priceIvaInclude)}</td>
                   </TableRow>
                 )
               }
@@ -227,7 +223,7 @@ const OrderPreview: React.FC<OrderPreviewInterface> = () => {
                   textAlign: "right",
                 }}
               >
-                Bs {currencyPrice.format(subTotalPrice)}
+                {currencyPrice.format(subTotalPrice)}
               </th>
             </tr>
             <tr>
@@ -253,7 +249,7 @@ const OrderPreview: React.FC<OrderPreviewInterface> = () => {
                   textAlign: "right",
                 }}
               >
-                Bs {currencyPrice.format(totalPrice)}
+                {currencyPrice.format(totalPrice)}
               </th>
             </tr>
             <tr>
