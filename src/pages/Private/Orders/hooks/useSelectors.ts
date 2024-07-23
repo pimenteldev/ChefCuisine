@@ -1,14 +1,9 @@
 import { AppStore } from "@/redux/models/store"
 import { useDispatch, useSelector } from "react-redux"
 import getAllOrders from "../services/getAllOrders"
-
-import { ProductInOrder } from "@/models/products"
-import {
-  addToOrder,
-  incrementQuantity,
-  setInitialDataOrder,
-  clearCurrentOrder,
-} from "@/redux/slices/orderSlice"
+import { roundDecimals } from "@/helpers/math"
+import { setInitialDataOrder } from "@/redux/slices/orderSlice"
+import { useMemo } from "react"
 
 const useSelectors = () => {
   const dispatch = useDispatch()
@@ -33,6 +28,7 @@ const useSelectors = () => {
     tableSelectName,
     isPersonalSelected,
     personalSelectName,
+    isModalPreview,
   } = currentOrder
 
   const dispatchGetData = async () => {
@@ -45,33 +41,26 @@ const useSelectors = () => {
       })
   }
 
-  const handleSelectProduct = (selectedProduct: ProductInOrder) => {
-    const isProductAlreadyInOrder = currentOrder.products.some(
-      (product) => product.product_id === selectedProduct.product_id
-    )
-
-    if (!isProductAlreadyInOrder) {
-      dispatch(addToOrder(selectedProduct))
-    } else {
-      dispatch(incrementQuantity(selectedProduct))
-    }
-  }
-
   const countProductsInOrder = currentOrder.products.reduce(
     (acumulador, { product_count }) => acumulador + product_count,
     0
   )
 
-  const handleClearOrder = () => {
-    dispatch(clearCurrentOrder())
-  }
-
-  
+  const itemsById = useMemo(() => {
+    return items.reduce(
+      (map, item) => ({
+        ...map,
+        [item.item_id]: roundDecimals(item.item_count, 2),
+      }),
+      {}
+    )
+  }, [items])
 
   return {
     categories,
     currentOrder,
     items,
+    itemsById,
     items_categories,
     orders,
     personal,
@@ -84,10 +73,9 @@ const useSelectors = () => {
     tableSelectName,
     isPersonalSelected,
     personalSelectName,
+    isModalPreview,
     dispatchGetData,
-    handleSelectProduct,
     countProductsInOrder,
-    handleClearOrder,
     state,
   }
 }

@@ -16,3 +16,20 @@ export const COLORS = {
   danger: "#dc3545",
   success: "#198754",
 }
+
+export const DEFAULT_LANGUAGE = "es-VE"
+export const FORMATO_FACTURA_CLIENTE = "FACTURA"
+export const MESES = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
+]

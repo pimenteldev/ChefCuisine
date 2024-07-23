@@ -1,0 +1,24 @@
+.card-product-order {
+  align-items: flex-start;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 0.1rem hsla(0, 0%, 0%, 0.112);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-start;
+  position: relative;
+  width: 100%;
+
+  & button > figure {
+    overflow: hidden;
+  }
+  & button > figure > img {
+    object-fit: cover;
+    transition: all 0.25s ease;
+    width: 100%;
+  }
+  &:hover > button > figure > img {
+    transform: scale(1.1);
+  }
+}

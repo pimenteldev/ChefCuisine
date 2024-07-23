@@ -1,4 +1,4 @@
-import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog.component"
+import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog"
 import { AppStore } from "@/redux/models/store"
 import { AlertColor } from "@mui/material"
 import { useEffect, useState } from "react"
@@ -95,7 +95,7 @@ function useModifyProduct() {
       product_name: data.product_name,
       product_photo: data.product_photo,
       product_photo_thumb: data.product_id,
-      product_status: 1,
+      product_status: data.product_status,
     }
 
     const productFormatedForApi = {

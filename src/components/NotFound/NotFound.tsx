@@ -1,16 +1,14 @@
 import { Box, Button, Container, Typography } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import React from "react"
-import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
 import { PrivateRoutes } from "@/routes/routes"
-export interface NotFoundInterface {}
 
-const NotFound: React.FC<NotFoundInterface> = () => {
+const NotFound = () => {
   const navigate = useNavigate()
 
   return (
-    <NotFoundStyle>
+    <>
       <Box
         component="main"
         sx={{
@@ -69,10 +67,8 @@ const NotFound: React.FC<NotFoundInterface> = () => {
           </Box>
         </Container>
       </Box>
-    </NotFoundStyle>
+    </>
   )
 }
-
-export const NotFoundStyle = styled.div``
 
 export default NotFound

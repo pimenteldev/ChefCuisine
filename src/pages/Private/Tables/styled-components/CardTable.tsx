@@ -64,8 +64,8 @@ export const CardTableStatusOn = styled.span`
   color: ${COLORS.background};
   position: absolute;
   padding: 0.2rem 0.5rem;
-  top: 0px;
-  right: 20px;
+  top: -15px;
+  right: 15px;
   font-weight: 800;
   border-radius: 5px;
   opacity: 1;

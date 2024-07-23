@@ -1,4 +1,8 @@
 import { APP_NAME } from "@/constants/utilitys"
+import { cartOpenSubject$ } from "@/pages/Private/Orders/components/Cart/Cart"
+import useSelectors from "@/pages/Private/Orders/hooks/useSelectors"
+import { PrivateRoutes } from "@/routes/routes"
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
 import {
   AppBar,
   Avatar,
@@ -10,19 +14,11 @@ import {
   Typography,
 } from "@mui/material"
 import React from "react"
+import { useLocation } from "react-router-dom"
 import Logout from "../Logout/Logout"
 import { sidebarOpenSubject$ } from "../Sidebar/Sidebar"
-import { Menu } from "./styled-component/Menu"
 import logo from "/icon.png"
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
-import { cartOpenSubject$ } from "@/pages/Private/Orders/components/Cart/Cart"
-import { useSelector } from "react-redux"
-import { AppStore } from "@/redux/models/store"
-import { useLocation } from "react-router-dom"
-import { PrivateRoutes } from "@/routes/routes"
-import useSelectors from "@/pages/Private/Orders/hooks/useSelectors"
-
-export interface NavbarInterface {}
+import { Menu } from "./Menu/Menu"
 
 export const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -33,7 +29,7 @@ export const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   },
 }))
 
-const Navbar: React.FC<NavbarInterface> = () => {
+const Navbar = () => {
   const {
     products,
     isTableSelected,
@@ -99,7 +95,7 @@ const Navbar: React.FC<NavbarInterface> = () => {
                 color="secondary"
                 aria-label="Menu"
                 sx={{
-                  mr: { xs: 0, sm: 1 },
+                  mr: "-5px",
                 }}
               >
                 <StyledBadge

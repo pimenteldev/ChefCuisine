@@ -19,6 +19,10 @@ import { StyledBadge } from "@/components/Navbar/Navbar"
 export const cartOpenSubject$ = new SubjectManager<boolean>()
 export const cartCloseSubject$ = new SubjectManager<boolean>()
 
+export const handleExitCartSidebar = () => {
+  cartCloseSubject$.setSubject = false
+}
+
 function Cart() {
   const { countProductsInOrder } = useSelectors()
 
@@ -42,10 +46,6 @@ function Cart() {
     setOpen(false)
   }
 
-  const handleExit = () => {
-    cartCloseSubject$.setSubject = false
-  }
-
   const content = (
     <Box
       sx={{
@@ -57,7 +57,7 @@ function Cart() {
       <Box>
         <Box sx={{ p: 1 }}>
           <Button
-            onClick={() => handleExit()}
+            onClick={() => handleExitCartSidebar()}
             size="medium"
             color="primary"
             variant="outlined"
@@ -120,8 +120,8 @@ function Cart() {
         },
       }}
       variant="temporary"
-      onClose={() => handleExit()}
-      onOpen={() => handleExit()}
+      onClose={() => handleExitCartSidebar()}
+      onOpen={() => handleExitCartSidebar()}
     >
       {content}
     </SwipeableDrawer>

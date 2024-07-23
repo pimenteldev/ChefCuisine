@@ -10,7 +10,7 @@ import {
   CardTableFigureImg,
 } from "../../styled-components/CardTable"
 import mesa from "/mesa.jpg"
-import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog.component"
+import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog"
 
 interface CardTableInterface {
   table: Table

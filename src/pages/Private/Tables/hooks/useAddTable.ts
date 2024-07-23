@@ -1,4 +1,4 @@
-import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog.component"
+import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog"
 import { snackbarOpenSubject$ } from "@/components/CustomSnackBar/CustomSnackBar"
 import { AlertColor } from "@mui/material"
 import { useForm } from "react-hook-form"

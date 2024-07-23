@@ -1,4 +1,4 @@
-import CustomDialog from "@/components/CustomDialog/CustomDialog.component"
+import CustomDialog from "@/components/CustomDialog/CustomDialog"
 import { useTablesViewContext } from "../../contexts/TablesView"
 import AddTable from "../AddTable/AddTable"
 import ModifyTable from "../ModifyTable/ModifyTable"

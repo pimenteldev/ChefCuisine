@@ -1,43 +1,43 @@
 import { baseUrl } from "@/constants/utilitys"
 import React from "react"
-
+import { currencyPrice, currencyPriceDolar } from "@/helpers/currencyPrice"
 import { AppStore } from "@/redux/models/store"
 import Add from "@mui/icons-material/Add"
-import Remove from "@mui/icons-material/Remove"
 import DeleteIcon from "@mui/icons-material/Delete"
+import Remove from "@mui/icons-material/Remove"
 import {
   Alert,
   Avatar,
   Box,
   Button,
   Divider,
-  Grid,
   IconButton,
   List,
   ListItem,
   ListItemAvatar,
-  ListItemText,
   Paper,
   Stack,
   Typography,
 } from "@mui/material"
 import { useSelector } from "react-redux"
 import useCartOrder from "../../hooks/useCartOrder"
-import { currencyPrice, currencyPriceDolar } from "@/helpers/currencyPrice"
+import { useOrderViewContext } from "../../Context/ContextProvider"
+import { dialogOpenSubject$ } from "@/components/CustomDialog/CustomDialog"
 
 const CartContent = () => {
-  const orders = useSelector((store: AppStore) => store.orders)
-  const { currentOrder } = orders
+  const { currentOrder, settings } = useSelector(
+    (store: AppStore) => store.orders
+  )
+  const { percent_iva, price_dollar } = settings
   const { products } = currentOrder
 
-  const {
-    calculateTotalPrice,
-    calculateSubTotalPrice,
-    handleCleanProductsInOrder,
-    handleIncrement,
-    handleDecrement,
-    calculateTotalPriceDolar,
-  } = useCartOrder()
+  const { handleProductActions, calculatePrices } = useCartOrder()
+
+  const { subTotalPrice, totalPrice, totalPriceDolar } = calculatePrices(
+    products,
+    percent_iva,
+    price_dollar
+  )
 
   return (
     <List
@@ -56,7 +56,7 @@ const CartContent = () => {
           variant="outlined"
           startIcon={<DeleteIcon />}
           color="error"
-          onClick={handleCleanProductsInOrder}
+          onClick={() => handleProductActions("cleanProducts")}
           style={{
             width: "100%",
           }}
@@ -68,92 +68,114 @@ const CartContent = () => {
         products.map((product) => (
           <React.Fragment key={product.product_id}>
             <ListItem
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-              alignItems="flex-start"
+              style={{
+                position: "relative",
+                maxWidth: 360,
+                padding: 0,
+                marginTop: "5px",
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "flex-start",
+                justifyContent: "center",
+              }}
             >
-              <ListItemAvatar>
+              <IconButton
+                aria-label="delete"
+                color="error"
+                size="small"
+                classes={{ root: "button" }}
+                onClick={() => handleProductActions("removeProduct", product)}
+                style={{
+                  position: "absolute",
+                  right: "0px",
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
+
+              <ListItemAvatar style={{ marginTop: "5px" }}>
                 <Avatar
                   alt={product.product_name}
                   src={baseUrl + product.product_photo}
                 />
               </ListItemAvatar>
+
               <Box
                 style={{
                   width: "100%",
-                  padding: "5px",
+                  padding: "0px",
                 }}
+                className="truncateText"
               >
                 <Typography
                   sx={{ display: "inline" }}
-                  component="h6"
-                  variant="inherit"
-                  color="text.primary"
+                  component="span"
+                  variant="subtitle1"
                 >
                   <strong>{product.product_name}</strong>
                 </Typography>
-                <Stack>
+                <Stack style={{ marginTop: "-10px" }}>
                   <Typography
                     sx={{ display: "inline" }}
                     component="span"
-                    variant="inherit"
-                    color="text.primary"
+                    variant="overline"
+                    color="GrayText"
                   >
-                    <small>P/Unitario:</small> {product.product_base_price}
+                    <small>Precio:</small> Bs{" "}
+                    {currencyPrice.format(product.product_base_price)}
                   </Typography>
-                  {/* <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="inherit"
-                    color="text.primary"
+                </Stack>
+                <Stack
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginLeft: "-25px",
+                    marginTop: "-10px",
+                  }}
+                >
+                  <IconButton
+                    aria-label="decrement"
+                    color="primary"
+                    classes={{ root: "button" }}
+                    onClick={() =>
+                      handleProductActions("decrementProduct", product)
+                    }
                   >
-                    <small>Total:</small>{" "}
-                    {product.product_count * product.product_base_price}
-                  </Typography> */}
-                  <Stack
+                    <Remove />
+                  </IconButton>
+
+                  <Paper
+                    elevation={0}
                     style={{
-                      padding: "10px 0px",
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginLeft: "-30px",
+                      backgroundColor: "rgba(16, 185, 129, 0.04)",
+                      padding: "5px 10px",
+                      color: "#10b981",
+                      margin: "0px 5px",
                     }}
                   >
-                    <IconButton
-                      aria-label="delete"
-                      color="primary"
-                      classes={{ root: "button" }}
-                      onClick={() => handleDecrement(product)}
-                    >
-                      <Remove />
-                    </IconButton>
-
-                    <Paper
-                      elevation={0}
-                      style={{
-                        backgroundColor: "rgba(16, 185, 129, 0.04)",
-                        padding: "5px 10px",
-                        color: "#10b981",
-                        margin: "0px 5px",
-                      }}
-                    >
-                      <strong>{product.product_count}</strong>
-                    </Paper>
-                    <IconButton
-                      aria-label="delete"
-                      color="primary"
-                      classes={{ root: "button" }}
-                      onClick={() => handleIncrement(product)}
-                    >
-                      <Add />
-                    </IconButton>
-                  </Stack>
+                    <strong>{product.product_count}</strong>
+                  </Paper>
+                  <IconButton
+                    aria-label="increment"
+                    color="primary"
+                    classes={{ root: "button" }}
+                    onClick={() =>
+                      handleProductActions("incrementProduct", product)
+                    }
+                  >
+                    <Add />
+                  </IconButton>
                 </Stack>
               </Box>
             </ListItem>
             <Divider
               variant="fullWidth"
               component="li"
+              style={{ marginBottom: "5px" }}
             />
           </React.Fragment>
         ))}
@@ -192,7 +214,7 @@ const CartContent = () => {
               color="GrayText"
               fontSize="18px"
             >
-              Bs {currencyPrice.format(calculateSubTotalPrice())}
+              Bs {currencyPrice.format(subTotalPrice)}
             </Typography>{" "}
           </Paper>
         </ListItem>
@@ -223,7 +245,7 @@ const CartContent = () => {
               fontWeight="bold"
               fontSize="10px"
             >
-              Total
+              Total({percent_iva})
             </Typography>
             <Typography
               component="span"
@@ -233,7 +255,7 @@ const CartContent = () => {
               }}
               fontSize="18px"
             >
-              Bs {currencyPrice.format(calculateTotalPrice())}
+              Bs {currencyPrice.format(totalPrice)}
             </Typography>{" "}
           </Paper>
         </ListItem>
@@ -274,9 +296,25 @@ const CartContent = () => {
               }}
               fontSize="18px"
             >
-              {currencyPriceDolar.format(calculateTotalPriceDolar())}
+              {currencyPriceDolar.format(totalPriceDolar)}
             </Typography>{" "}
           </Paper>
+        </ListItem>
+        <ListItem>
+          <Button
+            aria-label="delete"
+            color="primary"
+            variant="contained"
+            size="small"
+            classes={{ root: "button" }}
+            onClick={() => handleProductActions("toggleModalPreview")}
+            style={{
+              marginTop: "5px",
+              width: "100%",
+            }}
+          >
+            Previsualizar Orden
+          </Button>
         </ListItem>
       </Stack>
     </List>

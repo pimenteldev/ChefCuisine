@@ -1,4 +1,4 @@
-import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog.component"
+import { dialogCloseSubject$ } from "@/components/CustomDialog/CustomDialog"
 import { AppStore } from "@/redux/models/store"
 import { AlertColor } from "@mui/material"
 import { useState } from "react"
