@@ -43,13 +43,13 @@ function useLogin() {
             },
           }
         : !values.user_psw
-        ? {
-            user_psw: {
-              type: "required",
-              message: "El campo Contraseña es Requerido",
-            },
-          }
-        : {},
+          ? {
+              user_psw: {
+                type: "required",
+                message: "El campo Contraseña es Requerido",
+              },
+            }
+          : {},
     }
   }
 
@@ -69,7 +69,7 @@ function useLogin() {
     try {
       authService(data).then((response) => {
         response.userId
-          ? handleSnackBar(`Bienvenido al Sistema Phoenix`, "success")
+          ? handleSnackBar(`Bienvenido al Sistema Chef Cuisine`, "success")
           : handleSnackBar(`Usuario o Contraseña Inválidos`, "error")
         dispatch(createUser(response))
       })

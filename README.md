@@ -1,4 +1,3 @@
-
   ![OIG4 PTDtOJI8J8-removebg-preview](https://github.com/user-attachments/assets/8b22dc21-3763-4eb4-a388-76d897a0d8c2)
 
 # Chef Cuisine
@@ -30,3 +29,4 @@ Para el desarrollo de este sistema, hemos utilizado las siguientes tecnologías 
 - **StoryBook**: Para el desarrollo y prueba de componentes de UI de manera aislada.
 
 El sistema está diseñado para ser intuitivo y fácil de usar, permitiendo a los administradores de restaurantes centrarse en lo que realmente importa: ofrecer una experiencia excepcional a sus clientes.
+
