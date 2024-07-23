@@ -186,7 +186,7 @@ function Sidebar() {
           color="grey.500"
           variant="body2"
         >
-          Phoenix APP
+          Chef Cuisine
         </Typography>
         <Box
           sx={{

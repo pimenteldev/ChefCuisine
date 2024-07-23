@@ -5,7 +5,7 @@ const Spinner = () => {
     <div className="spinner">
       <img
         src={logo}
-        alt="Phoenix"
+        alt="Chef Cuisine"
         className={"spinImg"}
       />
       <div className={"spin"}>

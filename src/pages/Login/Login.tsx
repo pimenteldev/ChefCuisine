@@ -14,7 +14,7 @@ const Login = () => {
         <figure>
           <img
             src={logo}
-            alt="LogoPhoenixAPP"
+            alt="Chef Cuisine APP"
             role="img"
           />
         </figure>
