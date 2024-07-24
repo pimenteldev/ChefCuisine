@@ -20,15 +20,46 @@ export const orderSlice = createSlice({
       const { payload } = action
       const { items, orders } = payload || {}
 
-      const filteredOrders =
-        orders?.flatMap(function (order) {
-          return order.order_list_inventary || []
-        }) || []
+      const filteredOrders = orders.flatMap(function (order) {
+        return order.order_list_inventary
+      })
+
+      const transformToProducts = filteredOrders.flatMap((prod) => {
+        const { product } = prod
+        const {
+          product_id,
+          product_base_price,
+          product_category,
+          product_name,
+          product_description,
+          product_items,
+          product_photo,
+          product_photo_thumb,
+          product_status,
+        } = product
+        return {
+          product_id: product_id,
+          product_name: product_name,
+          product_description: product_description,
+          product_base_price: product_base_price,
+          product_category: product_category,
+          product_items: product_items,
+          product_photo: product_photo,
+          product_photo_thumb: product_photo_thumb,
+          product_status: product_status,
+          product_count: prod.product_count,
+        }
+      }) as ProductInOrder[]
 
       let newListItems = [...items]
-      const list = [...state.currentOrder.products] || []
-
-      newListItems = updateNewListItems(newListItems, filteredOrders, list, 1)
+      const list = [...state.currentOrder.products] as ProductInOrder[]
+      console.log(transformToProducts)
+      newListItems = updateNewListItems(
+        newListItems,
+        transformToProducts,
+        list,
+        1
+      )
 
       return {
         ...state,
@@ -36,7 +67,7 @@ export const orderSlice = createSlice({
         items: newListItems,
       }
     },
-    addToOrder: (state, action) => {
+    addToOrder: (state, action: PayloadAction<ProductInOrder>) => {
       const { product_items, product_id } = action.payload
 
       return produce(state, (draftState) => {
@@ -64,7 +95,7 @@ export const orderSlice = createSlice({
         }
       })
     },
-    incrementQuantity: (state, action) => {
+    incrementQuantity: (state, action: PayloadAction<ProductInOrder>) => {
       const { product_items, product_id } = action.payload
       const productIndex = state.currentOrder.products.findIndex(
         (product) => product.product_id === product_id
@@ -84,7 +115,7 @@ export const orderSlice = createSlice({
         }
       }
     },
-    decrementQuantity: (state, action) => {
+    decrementQuantity: (state, action: PayloadAction<ProductInOrder>) => {
       const { product_items, product_id } = action.payload
       const productIndex = state.currentOrder.products.findIndex(
         (product) => product.product_id === product_id
@@ -107,7 +138,7 @@ export const orderSlice = createSlice({
         }
       }
     },
-    removeItem: (state, action) => {
+    removeItem: (state, action: PayloadAction<ProductInOrder>) => {
       const { product_items, product_id } = action.payload
       const index = state.currentOrder.products.findIndex(
         (item) => item.product_id === product_id
@@ -127,7 +158,6 @@ export const orderSlice = createSlice({
         }
       }
     },
-
     addTableSelect: (
       state,
       action: PayloadAction<{ table_id: number; table_name: string }>
@@ -151,11 +181,9 @@ export const orderSlice = createSlice({
       state.currentOrder.personalSelectDocument = personal_document
       state.currentOrder.personalSelectName = personal_name
     },
-
     toggleModalPreview: (state) => {
       state.currentOrder.isModalPreview = !state.currentOrder.isModalPreview
     },
-
     addOrderToCurrentOrder: (state, action: PayloadAction<Order>) => {
       const {
         order_id,
@@ -194,7 +222,7 @@ export const orderSlice = createSlice({
       state.currentOrder.personalSelectName = personalInfo.personal_name
       state.currentOrder.products = productsInOrder
     },
-    cleanCurrentOrder: (state, action: PayloadAction<Order>) => {
+    cleanCurrentOrder: (state) => {
       state.currentOrder = currentOrderEmptyState
     },
     cleanProductsInCurrentOrder: (state, action) => {

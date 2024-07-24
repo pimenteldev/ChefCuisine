@@ -29,12 +29,10 @@ function App() {
                   path="/"
                   element={<Navigate to={PrivateRoutes.PRIVATE} />}
                 />
-
                 <Route
                   path={PublicRoutes.LOGIN}
                   element={<Login />}
                 />
-
                 <Route element={<AuthGuard privateValidation={true} />}>
                   <Route
                     path={`${PrivateRoutes.PRIVATE}/*`}
@@ -47,7 +45,6 @@ function App() {
                     }
                   />
                 </Route>
-
                 <Route element={<RolGuard rol={Roles.USER} />}>
                   <Route
                     path={`${PrivateRoutes.PRIVATE}/${PrivateRoutes.HOMEUSER}`}
@@ -62,7 +59,7 @@ function App() {
                 </Route>
               </RoutesWithNotFound>
             </BrowserRouter>
-            <CustomSnackBar></CustomSnackBar>
+            <CustomSnackBar />
           </article>
         </main>
       </Provider>
