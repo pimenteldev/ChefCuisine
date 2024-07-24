@@ -2,6 +2,7 @@ import { setDataInProducts } from "@/redux/slices/productsSlice"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import getAllProducts from "../services/getAllProducts"
+import { ProductsApi } from "@/models/products"
 
 function useGetAllProducts() {
   const dispatch = useDispatch()

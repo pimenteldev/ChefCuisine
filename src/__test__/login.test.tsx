@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom"
 import { cleanup, fireEvent, render, screen } from "@testing-library/react"
 import Login from "@/pages/Login/Login"
 import store from "@/redux/store"
+import { jest } from "@jest/globals"
 
 const LoginMock = () => {
   return (

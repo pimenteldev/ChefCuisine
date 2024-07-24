@@ -89,21 +89,14 @@ const SelectedPersonal = () => {
                       title={personal_name}
                       subheader={personal_alias}
                     />
-                    <div
-                      style={{
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <CardMedia
-                        component="img"
-                        height="194"
-                        image={baseUrl + personal_photo}
-                        alt={personal_alias}
-                      />
-                    </div>
+
+                    <CardMedia
+                      component="img"
+                      height="194"
+                      image={baseUrl + personal_photo}
+                      alt={personal_alias}
+                      style={{ objectFit: "cover" }}
+                    />
                   </CardActionArea>
                 </Card>
               </Grid>

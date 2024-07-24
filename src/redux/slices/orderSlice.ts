@@ -8,7 +8,7 @@ import {
 import { ProductInOrder } from "@/models/products"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { produce } from "immer"
-import { updateNewListItems } from "../hooks/useFunctionsStore"
+import { UpdateNewListItems } from "../hooks/useFunctionsStore"
 
 export const orderKey = "order"
 
@@ -53,8 +53,7 @@ export const orderSlice = createSlice({
 
       let newListItems = [...items]
       const list = [...state.currentOrder.products] as ProductInOrder[]
-      console.log(transformToProducts)
-      newListItems = updateNewListItems(
+      newListItems = UpdateNewListItems(
         newListItems,
         transformToProducts,
         list,
@@ -225,7 +224,7 @@ export const orderSlice = createSlice({
     cleanCurrentOrder: (state) => {
       state.currentOrder = currentOrderEmptyState
     },
-    cleanProductsInCurrentOrder: (state, action) => {
+    cleanProductsInCurrentOrder: (state) => {
       state.currentOrder.products = []
     },
     removeProductInCurrentOrder: (state, action) => {

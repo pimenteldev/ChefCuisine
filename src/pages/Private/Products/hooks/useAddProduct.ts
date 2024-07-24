@@ -11,7 +11,7 @@ import useGetAllProducts from "./useGetAllProducts"
 
 function useAddProduct() {
   const [listItems, setListItems] = useState<Item[]>([])
-  const [file, setFile] = useState()
+  const [file, setFile] = useState<File | undefined>(undefined)
   const { items, items_categories, categories, units } = useSelector(
     (store: AppStore) => store.products
   )

@@ -5,8 +5,15 @@ import { roundDecimals } from "@/helpers/math"
 import { setInitialDataOrder } from "@/redux/slices/orderSlice"
 import { useMemo } from "react"
 
+export interface ItemsById {
+  [itemId: string]: number
+}
+
 const useSelectors = () => {
   const dispatch = useDispatch()
+
+  const selectOrders = (state: AppStore) => state.orders
+  const ordersSelector = useSelector(selectOrders)
 
   const {
     categories,
@@ -20,9 +27,7 @@ const useSelectors = () => {
     settings,
     tables,
     units,
-  } = useSelector((state: AppStore) => state.orders)
-  const state = useSelector((state: AppStore) => state)
-
+  } = ordersSelector
   const {
     isTableSelected,
     tableSelectName,
@@ -46,15 +51,13 @@ const useSelectors = () => {
     0
   )
 
-  const itemsById = useMemo(() => {
-    return items.reduce(
-      (map, item) => ({
-        ...map,
-        [item.item_id]: roundDecimals(item.item_count, 2),
-      }),
-      {}
-    )
-  }, [items])
+  const itemsById: ItemsById = items.reduce(
+    (map, item) => ({
+      ...map,
+      [item.item_id]: roundDecimals(item.item_count, 2),
+    }),
+    {}
+  )
 
   return {
     categories,
@@ -76,7 +79,6 @@ const useSelectors = () => {
     isModalPreview,
     dispatchGetData,
     countProductsInOrder,
-    state,
   }
 }
 

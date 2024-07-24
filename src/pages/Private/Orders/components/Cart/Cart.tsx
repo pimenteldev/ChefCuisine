@@ -14,7 +14,7 @@ import { useEffect, useState } from "react"
 import { Subscription } from "rxjs"
 import CartContent from "../CartContent/CartContent"
 import useSelectors from "../../hooks/useSelectors"
-import { StyledBadge } from "@/components/Navbar/Navbar"
+import { StyledBadgeCart } from "@/components/StyledBadgeCart/StyledBadgeCart"
 
 export const cartOpenSubject$ = new SubjectManager<boolean>()
 export const cartCloseSubject$ = new SubjectManager<boolean>()
@@ -83,12 +83,12 @@ function Cart() {
               alignItems: "center",
             }}
           >
-            <StyledBadge
+            <StyledBadgeCart
               badgeContent={countProductsInOrder}
               color="secondary"
             >
               <ShoppingCartIcon fontSize="large" />
-            </StyledBadge>
+            </StyledBadgeCart>
           </Container>
           <Typography
             variant="overline"

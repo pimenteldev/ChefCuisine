@@ -1,8 +1,12 @@
 import { render, screen } from "@testing-library/react"
+import "@testing-library/jest-dom/extend-expect"
+import "@testing-library/jest-dom/jest-globals"
+import "@testing-library/jest-dom"
 import userEvent from "@testing-library/user-event"
 import { Provider } from "react-redux"
 import ProductsDash from "@/pages/Private/Orders/components/ProductsDash/ProductsDash"
 import { mockStore } from "@/redux/store"
+const { expect, describe, it } = require("@jest/globals")
 
 const mockedProducts = [
   {
