@@ -36,7 +36,7 @@ const useSelectors = () => {
       .then((json) => {
         dispatch(setInitialDataOrder(json))
       })
-      .catch((err) => {
+      .catch((err: string) => {
         console.log(err)
       })
   }

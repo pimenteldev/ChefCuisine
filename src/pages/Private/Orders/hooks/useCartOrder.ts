@@ -41,7 +41,7 @@ const useCartOrder = () => {
 
   const handleProductActions = (
     action: ProductAction,
-    product?: ProductInOrder
+    product: ProductInOrder
   ) => {
     switch (action) {
       case "addProduct":
@@ -95,7 +95,7 @@ const useCartOrder = () => {
     const subTotalPrice = priceTotal
     const totalPrice = (priceTotal * percent_iva) / 100 + priceTotal
     const totalPriceDolar = totalPrice / price_dollar
-    console.log(totalPrice, price_dollar)
+
     return {
       subTotalPrice,
       totalPrice,
@@ -103,7 +103,7 @@ const useCartOrder = () => {
     }
   }
 
-  const filterProducts = (products) => {
+  const filterProducts = (products: ProductInOrder[]) => {
     if (filter.category === 0) {
       return products.filter((product) => {
         return product.product_status === 1

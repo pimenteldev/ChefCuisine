@@ -13,7 +13,7 @@ function useGetAllTables() {
       .then((json) => {
         dispatch(setDataInTable(json))
       })
-      .catch((err) => {
+      .catch((err: string) => {
         console.log(err)
       })
       .finally(() => setLoading(false))

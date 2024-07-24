@@ -48,7 +48,7 @@ export interface OrderListInventory {
 }
 
 export const currentOrderEmptyState = {
-  products: [],
+  products: [] as ProductInOrder[],
   orderId: "",
   isTableSelected: false,
   tableSelectId: 0,
@@ -62,16 +62,16 @@ export const currentOrderEmptyState = {
 }
 
 export const OrdersEmptyState = {
-  products: [],
-  categories: [],
-  items: [],
-  items_categories: [],
-  units: [],
-  role: [],
-  personal: [],
-  tables: [],
+  products: [] as ProductInOrder[],
+  categories: [] as Category[],
+  items: [] as Item[],
+  items_categories: [] as Category[],
+  units: [] as Unit[],
+  role: [] as Role[],
+  personal: [] as Personal[],
+  tables: [] as Table[],
   settings: settingEmptyStat,
-  orders: [],
+  orders: [] as Order[],
   currentOrder: currentOrderEmptyState,
 }
 

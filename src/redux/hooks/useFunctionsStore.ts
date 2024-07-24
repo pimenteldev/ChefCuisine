@@ -1,6 +1,13 @@
-export function updateNewListItems(newListItems, orders, list, productCount) {
+import { Item, ProductInOrder } from "@/models/products"
+
+export function updateNewListItems(
+  newListItems: Item[],
+  filteredOrders: ProductInOrder[],
+  list: ProductInOrder[],
+  productCount: number
+) {
   // Función para actualizar los elementos de la lista
-  function updateListItems(products) {
+  function updateListItems(products: ProductInOrder[]) {
     products.forEach((product) => {
       product?.product_items?.forEach((productItem) => {
         newListItems.forEach((listItem, index) => {
@@ -18,7 +25,7 @@ export function updateNewListItems(newListItems, orders, list, productCount) {
   }
 
   // Actualizar newListItems con los pedidos
-  updateListItems(orders)
+  updateListItems(filteredOrders)
 
   // Actualizar newListItems con la lista
   updateListItems(list)
