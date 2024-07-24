@@ -18,16 +18,7 @@ import Logout from "../Logout/Logout"
 import { sidebarOpenSubject$ } from "../Sidebar/Sidebar"
 import { Menu } from "./Menu/Menu"
 import logo from "/logo.svg"
-
-export const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
-  "& .MuiBadge-badge": {
-    right: -3,
-    top: 13,
-    border: `2px solid ${theme.palette.primary.main}`,
-    padding: "0 4px",
-    color: theme.palette.primary.main,
-  },
-}))
+import { StyledBadgeCart } from "../StyledBadgeCart/StyledBadgeCart"
 
 const Navbar = () => {
   const {
@@ -96,12 +87,12 @@ const Navbar = () => {
                   mr: "-5px",
                 }}
               >
-                <StyledBadge
+                <StyledBadgeCart
                   badgeContent={countProductsInOrder}
                   color="secondary"
                 >
                   <ShoppingCartIcon />
-                </StyledBadge>
+                </StyledBadgeCart>
               </IconButton>
               <IconButton aria-label="cart"></IconButton>
             </div>

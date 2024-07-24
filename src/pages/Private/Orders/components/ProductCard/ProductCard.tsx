@@ -12,8 +12,19 @@ import {
 import useCartOrder from "../../hooks/useCartOrder"
 import { currencyPrice } from "@/helpers/currencyPrice"
 import "./productCard.css"
+import { Category, Product } from "@/models/products"
 
-const ProductCard = ({ product, colorCategory, minimumQuantity }) => {
+interface Props {
+  product: Product
+  colorCategory: Category
+  minimumQuantity: number
+}
+
+const ProductCard: React.FC<Props> = ({
+  product,
+  colorCategory,
+  minimumQuantity,
+}: Props) => {
   const { handleProductActions } = useCartOrder()
 
   return (

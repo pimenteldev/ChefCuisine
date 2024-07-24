@@ -1,6 +1,6 @@
 import { Item, ProductInOrder } from "@/models/products"
 
-export function updateNewListItems(
+export function UpdateNewListItems(
   newListItems: Item[],
   filteredOrders: ProductInOrder[],
   list: ProductInOrder[],

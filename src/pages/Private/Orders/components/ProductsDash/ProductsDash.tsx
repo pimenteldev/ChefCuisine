@@ -4,13 +4,14 @@ import { roundDecimals } from "@/helpers/math"
 import { useMemo, useState } from "react"
 import useCartOrder from "../../hooks/useCartOrder"
 import ProductCard from "../ProductCard/ProductCard"
+import { Item, ProductInOrder } from "@/models/products"
 
 const ProductsDash = () => {
   const { categories, itemsById, products } = useSelectors()
   const [productsList] = useState(products || [])
   const { filterProducts } = useCartOrder()
 
-  const productsFiltered = filterProducts(productsList)
+  const productsFiltered = filterProducts(productsList) as ProductInOrder[]
 
   return (
     <Grid
@@ -21,15 +22,14 @@ const ProductsDash = () => {
         <Alert severity="info">No existen Productos en el Sistema</Alert>
       )}
 
-      {productsFiltered?.map((product) => {
-        const product_items_disponibles = product.product_items.map(
+      {productsFiltered?.map((product: ProductInOrder) => {
+        const product_items_disponibles: number[] = product.product_items.map(
           (product_item) =>
             roundDecimals(
               itemsById[product_item.item_id] / product_item.item_count,
               2
             )
         )
-
         const minimumQuantity = product_items_disponibles.reduce(
           (minimoActual, item) => Math.min(minimoActual, item),
           Infinity

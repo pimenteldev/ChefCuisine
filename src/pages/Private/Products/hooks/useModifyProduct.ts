@@ -83,19 +83,30 @@ function useModifyProduct() {
     )
   }
 
-  const onSubmit = async (data: any) => {
-    const formData = new FormData()
-    const newIdProduct = crypto.randomUUID()
+  type FormData = Omit<Product, "product_items"> & {
+    product_items?: Item[]
+  }
+
+  const onSubmit = async (data: FormData) => {
+    const {
+      product_base_price,
+      product_category,
+      product_description,
+      product_name,
+      product_photo,
+      product_status,
+    } = data
+
     const productModify: Product = {
       product_id: product.product_id,
-      product_base_price: data.product_base_price,
-      product_category: data.product_category,
-      product_description: data.product_description,
+      product_base_price,
+      product_category,
+      product_description,
       product_items: listItems,
-      product_name: data.product_name,
-      product_photo: data.product_photo,
-      product_photo_thumb: data.product_id,
-      product_status: data.product_status,
+      product_name,
+      product_photo,
+      product_photo_thumb: product.product_id,
+      product_status,
     }
 
     const productFormatedForApi = {
@@ -103,47 +114,49 @@ function useModifyProduct() {
       product_items: JSON.stringify(productModify.product_items),
     }
 
+    const formData = new FormData()
+
     formData.append("file", file || "")
-    formData.append("photo", newIdProduct)
+    formData.append("photo", crypto.randomUUID())
     formData.append("photo_prev", product.product_photo)
     formData.append("location", "productos")
     formData.append("product", JSON.stringify(productFormatedForApi))
     formData.append("method", "PUT")
 
-    await ModifyProductService(formData)
-      .then((json) => {
-        if (json.modify === true) {
-          handleSnackBar(`Has Modificado un Producto`, "success")
-          handleClick()
-          callToEndPointsAndDispatchs()
-        } else {
-          handleSnackBar(`${json.message}`, "error")
-        }
-      })
-      .catch((err) => {
-        handleSnackBar(`Ups, algo salió mal.`, "error")
-        console.error(err)
-      })
+    try {
+      const response = await ModifyProductService(formData)
+
+      if (response.modify === true) {
+        handleSnackBar(`Has Modificado un Producto`, "success")
+        handleClick()
+        callToEndPointsAndDispatchs()
+      } else {
+        handleSnackBar(`${response.message}`, "error")
+      }
+    } catch (err) {
+      handleSnackBar(`Ups, algo salió mal.`, "error")
+      console.error(err)
+    }
   }
   //FALTA SEPARAR LA LOGICA AL SERVICIO
   const handleClickDelete = async (
     product_id: string,
     product_photo: string
   ) => {
-    await removeProduct(product_id, product_photo)
-      .then((json) => {
-        if (json.delete === true) {
-          handleSnackBar(`Has Eliminado un Producto`, "success")
-          handleClick()
-          callToEndPointsAndDispatchs()
-        } else {
-          handleSnackBar(`${json.message}`, "error")
-        }
-      })
-      .catch((err) => {
-        handleSnackBar(`Ups, algo salió mal.`, "error")
-        console.error(err)
-      })
+    try {
+      const response = await removeProduct(product_id, product_photo)
+
+      if (response.delete) {
+        handleSnackBar(`Has Eliminado un Producto`, "success")
+        handleClick()
+        callToEndPointsAndDispatchs()
+      } else {
+        handleSnackBar(`${response.message}`, "error")
+      }
+    } catch (err) {
+      handleSnackBar(`Ups, algo salió mal.`, "error")
+      console.error(err)
+    }
   }
 
   return {

@@ -41,7 +41,7 @@ const useCartOrder = () => {
 
   const handleProductActions = (
     action: ProductAction,
-    product: ProductInOrder
+    product?: ProductInOrder
   ) => {
     switch (action) {
       case "addProduct":
@@ -62,7 +62,7 @@ const useCartOrder = () => {
         dispatch(removeProductInCurrentOrder(product))
         break
       case "cleanProducts":
-        dispatch(cleanProductsInCurrentOrder(product))
+        dispatch(cleanProductsInCurrentOrder())
         break
       case "cleanOrder":
         dispatch(cleanCurrentOrder())

@@ -32,7 +32,6 @@ const CustomSnackBar = () => {
   }, [])
 
   const handleClickOpen = ({ open, message, severity }: AlertProps) => {
-    console.log(message, severity)
     setState({ open, message, severity })
   }
 

@@ -10,7 +10,6 @@ import {
   Grid,
 } from "@mui/material"
 import useInitialGetData from "../../hooks/useSelectors"
-import StyledBadge from "@/components/StyledBadge/StyledBadge"
 import { useDispatch } from "react-redux"
 import {
   addTableSelect,
@@ -18,6 +17,7 @@ import {
 } from "@/redux/slices/orderSlice"
 import { Table } from "@/models/tables"
 import { Order } from "@/models/orders"
+import { StyledBadge } from "@/components/StyledBadge/StyledBadge"
 
 const SelectedTable = () => {
   const { tables, orders, personal } = useInitialGetData()
@@ -94,7 +94,14 @@ const SelectedTable = () => {
                     }}
                     avatar={
                       personalInfo[0]?.personal_photo ? (
-                        <StyledBadge>
+                        <StyledBadge
+                          overlap="circular"
+                          anchorOrigin={{
+                            vertical: "bottom",
+                            horizontal: "right",
+                          }}
+                          variant="dot"
+                        >
                           <Avatar src="/staff.svg" />
                         </StyledBadge>
                       ) : (
@@ -147,6 +154,7 @@ const SelectedTable = () => {
                         opacity: 0.3,
                         zIndex: 9,
                       }}
+                      style={{ objectFit: "cover" }}
                     />
 
                     <Typography
